@@ -1,0 +1,4 @@
+1. Apa semuanya sabtu minggu libur?
+2. Jika ada lembur sabtu minggu, angka 1 menit gajinya ambil dari mana? dari gaji full / prorate?
+3. Lembur tidak memperhitungkan 8 jam kerja? jadi jika dia lebih dari jadwal langsung dapat overtime?
+4. 
