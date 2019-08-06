@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.16, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: hris
+-- Host: 127.0.0.1    Database: hris
 -- ------------------------------------------------------
--- Server version	5.7.22
+-- Server version	5.5.5-10.1.9-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
- SET NAMES utf8 ;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,7 +21,7 @@
 
 DROP TABLE IF EXISTS `lk_accesscontrol`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lk_accesscontrol` (
   `accessID` varchar(10) NOT NULL,
   `description` varchar(50) NOT NULL,
@@ -47,7 +47,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `lk_calendar`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lk_calendar` (
   `date` date NOT NULL,
   PRIMARY KEY (`date`)
@@ -70,7 +70,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `lk_currency`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lk_currency` (
   `currencyID` varchar(5) NOT NULL,
   `currencyName` varchar(50) NOT NULL,
@@ -96,7 +96,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `lk_education`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lk_education` (
   `educationId` int(11) NOT NULL AUTO_INCREMENT,
   `educationDescription` varchar(50) DEFAULT NULL,
@@ -120,7 +120,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `lk_filteraccess`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lk_filteraccess` (
   `accessID` varchar(10) NOT NULL,
   `insertAcc` bit(1) NOT NULL,
@@ -138,7 +138,7 @@ CREATE TABLE `lk_filteraccess` (
 
 LOCK TABLES `lk_filteraccess` WRITE;
 /*!40000 ALTER TABLE `lk_filteraccess` DISABLE KEYS */;
-INSERT INTO `lk_filteraccess` VALUES ('A',_binary '',_binary '',_binary '',_binary '',_binary ''),('A.1',_binary '',_binary '',_binary '',_binary '',_binary ''),('A.2',_binary '',_binary '',_binary '',_binary '',_binary ''),('A.3',_binary '',_binary '',_binary '',_binary '',_binary ''),('A.4',_binary '',_binary '',_binary '',_binary '',_binary ''),('B',_binary '',_binary '',_binary '',_binary '',_binary ''),('B.1',_binary '',_binary '',_binary '',_binary '',_binary ''),('B.10',_binary '',_binary '',_binary '',_binary '',_binary ''),('B.2',_binary '',_binary '',_binary '',_binary '',_binary ''),('B.3',_binary '',_binary '',_binary '',_binary '',_binary ''),('B.7',_binary '',_binary '',_binary '',_binary '',_binary ''),('B.8',_binary '',_binary '',_binary '',_binary '',_binary ''),('B.9',_binary '',_binary '',_binary '',_binary '',_binary ''),('C',_binary '',_binary '',_binary '',_binary '',_binary ''),('C.1',_binary '',_binary '',_binary '',_binary '',_binary ''),('C.2',_binary '',_binary '',_binary '',_binary '',_binary ''),('C.3',_binary '',_binary '',_binary '',_binary '',_binary ''),('C.4',_binary '',_binary '',_binary '',_binary '',_binary ''),('C.5',_binary '',_binary '',_binary '',_binary '',_binary ''),('C.6',_binary '',_binary '',_binary '',_binary '',_binary ''),('C.7',_binary '',_binary '',_binary '',_binary '',_binary ''),('C.8',_binary '',_binary '',_binary '',_binary '',_binary ''),('C.9',_binary '',_binary '',_binary '',_binary '',_binary ''),('D',_binary '',_binary '',_binary '',_binary '',_binary ''),('D.1',_binary '',_binary '',_binary '',_binary '',_binary ''),('E',_binary '',_binary '',_binary '',_binary '',_binary ''),('E.1',_binary '',_binary '',_binary '',_binary '',_binary ''),('E.2',_binary '',_binary '',_binary '',_binary '',_binary ''),('Y',_binary '',_binary '',_binary '',_binary '',_binary ''),('Y.1',_binary '',_binary '',_binary '',_binary '',_binary ''),('Y.2',_binary '',_binary '',_binary '',_binary '',_binary ''),('Y.3',_binary '',_binary '',_binary '',_binary '',_binary ''),('Y.4',_binary '',_binary '',_binary '',_binary '',_binary ''),('Y.5',_binary '',_binary '',_binary '',_binary '',_binary ''),('Y.6',_binary '',_binary '',_binary '',_binary '',_binary ''),('Y.7',_binary '',_binary '',_binary '',_binary '',_binary ''),('Y.8',_binary '',_binary '',_binary '',_binary '',_binary ''),('Z',_binary '',_binary '',_binary '',_binary '',_binary ''),('Z.1',_binary '',_binary '',_binary '',_binary '',_binary ''),('Z.2',_binary '',_binary '',_binary '',_binary '',_binary ''),('Z.3',_binary '',_binary '',_binary '',_binary '',_binary '');
+INSERT INTO `lk_filteraccess` VALUES ('A','','','','',''),('A.1','','','','',''),('A.2','','','','',''),('A.3','','','','',''),('A.4','','','','',''),('B','','','','',''),('B.1','','','','',''),('B.10','','','','',''),('B.2','','','','',''),('B.3','','','','',''),('B.7','','','','',''),('B.8','','','','',''),('B.9','','','','',''),('C','','','','',''),('C.1','','','','',''),('C.2','','','','',''),('C.3','','','','',''),('C.4','','','','',''),('C.5','','','','',''),('C.6','','','','',''),('C.7','','','','',''),('C.8','','','','',''),('C.9','','','','',''),('D','','','','',''),('D.1','','','','',''),('E','','','','',''),('E.1','','','','',''),('E.2','','','','',''),('Y','','','','',''),('Y.1','','','','',''),('Y.2','','','','',''),('Y.3','','','','',''),('Y.4','','','','',''),('Y.5','','','','',''),('Y.6','','','','',''),('Y.7','','','','',''),('Y.8','','','','',''),('Z','','','','',''),('Z.1','','','','',''),('Z.2','','','','',''),('Z.3','','','','','');
 /*!40000 ALTER TABLE `lk_filteraccess` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,7 +148,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `lk_gender`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lk_gender` (
   `id` int(11) NOT NULL,
   `description` varchar(45) DEFAULT NULL,
@@ -172,7 +172,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `lk_leave`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lk_leave` (
   `leaveId` int(11) NOT NULL AUTO_INCREMENT,
   `leaveName` varchar(45) DEFAULT NULL,
@@ -196,7 +196,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `lk_taxarticle`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lk_taxarticle` (
   `articleId` varchar(50) NOT NULL,
   `articleDesc` varchar(300) DEFAULT NULL,
@@ -220,7 +220,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `lk_time`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lk_time` (
   `timeID` int(11) NOT NULL AUTO_INCREMENT,
   `unit` varchar(50) DEFAULT NULL,
@@ -245,7 +245,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `lk_topupamount`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lk_topupamount` (
   `topupAmountID` int(11) NOT NULL AUTO_INCREMENT,
   `amount` decimal(18,2) DEFAULT NULL,
@@ -269,7 +269,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `lk_userrole`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lk_userrole` (
   `userRoleID` int(11) NOT NULL AUTO_INCREMENT,
   `userRole` varchar(100) NOT NULL DEFAULT '',
@@ -288,7 +288,7 @@ CREATE TABLE `lk_userrole` (
 
 LOCK TABLES `lk_userrole` WRITE;
 /*!40000 ALTER TABLE `lk_userrole` DISABLE KEYS */;
-INSERT INTO `lk_userrole` VALUES (1,'ADMIN',_binary '','SYSTEM','2016-01-01 00:00:00','admin','2019-07-20 07:39:08'),(8,'HRD',_binary '\0','admin','2016-03-23 14:35:02','','0000-00-00 00:00:00'),(36,'Asas',_binary '\0','admin','2016-03-24 13:21:37','','0000-00-00 00:00:00'),(37,'SUPERVISOR',_binary '\0','admin','2016-03-24 13:23:22','','0000-00-00 00:00:00'),(38,'SUPERTADMIN',_binary '\0','admin','2016-03-24 13:27:23','','0000-00-00 00:00:00'),(40,'HO',_binary '\0','admin','2016-03-24 13:35:05','','0000-00-00 00:00:00'),(48,'HNB',_binary '\0','admin','2016-03-24 16:29:21','admin','2016-03-24 16:44:25'),(49,'ADM',_binary '\0','admin','2016-03-24 16:44:53','admin','2016-03-24 16:50:51'),(50,'SUPERVISOR',_binary '','admin','2016-03-24 17:11:45','admin','2016-03-28 09:31:50');
+INSERT INTO `lk_userrole` VALUES (1,'ADMIN','','SYSTEM','2016-01-01 00:00:00','admin','2019-07-20 07:39:08'),(8,'HRD','\0','admin','2016-03-23 14:35:02','','0000-00-00 00:00:00'),(36,'Asas','\0','admin','2016-03-24 13:21:37','','0000-00-00 00:00:00'),(37,'SUPERVISOR','\0','admin','2016-03-24 13:23:22','','0000-00-00 00:00:00'),(38,'SUPERTADMIN','\0','admin','2016-03-24 13:27:23','','0000-00-00 00:00:00'),(40,'HO','\0','admin','2016-03-24 13:35:05','','0000-00-00 00:00:00'),(48,'HNB','\0','admin','2016-03-24 16:29:21','admin','2016-03-24 16:44:25'),(49,'ADM','\0','admin','2016-03-24 16:44:53','admin','2016-03-24 16:50:51'),(50,'SUPERVISOR','','admin','2016-03-24 17:11:45','admin','2016-03-28 09:31:50');
 /*!40000 ALTER TABLE `lk_userrole` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -298,7 +298,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_alert`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_alert` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) DEFAULT NULL,
@@ -323,7 +323,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_attendanceholiday`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_attendanceholiday` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `date` date DEFAULT NULL,
@@ -352,7 +352,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_attendanceovertime`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_attendanceovertime` (
   `overtimeId` varchar(20) NOT NULL,
   `rate1` decimal(18,2) DEFAULT NULL,
@@ -383,7 +383,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_attendanceshift`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_attendanceshift` (
   `shiftCode` varchar(50) NOT NULL,
   `start` time DEFAULT NULL,
@@ -404,7 +404,7 @@ CREATE TABLE `ms_attendanceshift` (
 
 LOCK TABLES `ms_attendanceshift` WRITE;
 /*!40000 ALTER TABLE `ms_attendanceshift` DISABLE KEYS */;
-INSERT INTO `ms_attendanceshift` VALUES ('KANTOR PUSAT','08:30:00','18:00:00',0,'admin','2019-07-24 00:50:07','admin','2019-07-24 00:51:15',_binary ''),('PABRIK','08:00:00','17:00:00',0,'admin','2019-07-24 00:34:06','admin','2019-07-24 00:46:26',_binary '');
+INSERT INTO `ms_attendanceshift` VALUES ('KANTOR PUSAT','08:30:00','18:00:00',0,'admin','2019-07-24 00:50:07','admin','2019-07-24 00:51:15',''),('PABRIK','08:00:00','17:00:00',0,'admin','2019-07-24 00:34:06','admin','2019-07-24 00:46:26','');
 /*!40000 ALTER TABLE `ms_attendanceshift` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -414,7 +414,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_attendancewcalcactualdetail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_attendancewcalcactualdetail` (
   `id` varchar(20) DEFAULT NULL,
   `period` varchar(45) DEFAULT NULL,
@@ -441,7 +441,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_attendancewcalcactualhead`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_attendancewcalcactualhead` (
   `id` varchar(20) NOT NULL,
   `period` varchar(45) DEFAULT NULL,
@@ -470,7 +470,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_attendancewcalcdet`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_attendancewcalcdet` (
   `id` varchar(20) DEFAULT NULL,
   `period` varchar(15) DEFAULT NULL,
@@ -496,7 +496,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_attendancewcalchead`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_attendancewcalchead` (
   `id` varchar(20) NOT NULL,
   `period` varchar(11) DEFAULT NULL,
@@ -525,7 +525,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_bank`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_bank` (
   `bankId` varchar(50) NOT NULL,
   `bankDesc` varchar(50) DEFAULT NULL,
@@ -544,7 +544,7 @@ CREATE TABLE `ms_bank` (
 
 LOCK TABLES `ms_bank` WRITE;
 /*!40000 ALTER TABLE `ms_bank` DISABLE KEYS */;
-INSERT INTO `ms_bank` VALUES ('BCA','BANK CENTRAL ASIA','admin','2016-08-23 14:28:13','admin','2016-09-01 13:49:03',_binary ''),('BNI','BANK NASIONAL INDONESIA','admin','2016-09-02 08:23:56',NULL,NULL,_binary ''),('BNIS','BNI SYARIAH','admin','2017-02-01 09:50:06',NULL,NULL,_binary ''),('BRI','BANK RAKYAT INDONESIA','admin','2016-08-12 13:51:54',NULL,NULL,_binary ''),('CIMB','CIMB NIAGA','admin','2017-02-01 09:49:26',NULL,NULL,_binary ''),('IDX','BANK INDEX','admin','2016-12-05 15:05:03',NULL,NULL,_binary ''),('MAS','BANK MAS','admin','2016-10-06 11:17:12',NULL,NULL,_binary ''),('NOBU','BANK NOBU','admin','2016-12-05 15:03:51',NULL,NULL,_binary '');
+INSERT INTO `ms_bank` VALUES ('BCA','BANK CENTRAL ASIA','admin','2016-08-23 14:28:13','admin','2016-09-01 13:49:03',''),('BNI','BANK NASIONAL INDONESIA','admin','2016-09-02 08:23:56',NULL,NULL,''),('BNIS','BNI SYARIAH','admin','2017-02-01 09:50:06',NULL,NULL,''),('BRI','BANK RAKYAT INDONESIA','admin','2016-08-12 13:51:54',NULL,NULL,''),('CIMB','CIMB NIAGA','admin','2017-02-01 09:49:26',NULL,NULL,''),('IDX','BANK INDEX','admin','2016-12-05 15:05:03',NULL,NULL,''),('MAS','BANK MAS','admin','2016-10-06 11:17:12',NULL,NULL,''),('NOBU','BANK NOBU','admin','2016-12-05 15:03:51',NULL,NULL,'');
 /*!40000 ALTER TABLE `ms_bank` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -554,7 +554,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_company`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_company` (
   `companyID` int(11) NOT NULL,
   `companyName` varchar(100) NOT NULL,
@@ -580,7 +580,7 @@ CREATE TABLE `ms_company` (
 
 LOCK TABLES `ms_company` WRITE;
 /*!40000 ALTER TABLE `ms_company` DISABLE KEYS */;
-INSERT INTO `ms_company` VALUES (1,'MAJU EXPRESS','GADING SERPONG','W-DAY','1','2019/01',1,30,_binary '\0',_binary '','admin',NULL,'admin','2019-07-30 15:57:53');
+INSERT INTO `ms_company` VALUES (1,'MAJU EXPRESS','GADING SERPONG','W-DAY','1','2019/01',1,30,'\0','','admin',NULL,'admin','2019-07-30 15:57:53');
 /*!40000 ALTER TABLE `ms_company` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -590,7 +590,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_loan`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_loan` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nik` varchar(45) DEFAULT NULL,
@@ -615,7 +615,7 @@ CREATE TABLE `ms_loan` (
 
 LOCK TABLES `ms_loan` WRITE;
 /*!40000 ALTER TABLE `ms_loan` DISABLE KEYS */;
-INSERT INTO `ms_loan` VALUES (1,'1','2017/01',1000000.00,5,500000.00,100000.00,'','admin','2016-09-19 09:08:54','admin','2016-09-21 10:39:00',_binary '\0'),(2,'1','2016/01',8000000.00,8,0.00,1000000.00,'','admin','2016-10-03 10:07:34',NULL,NULL,_binary '\0');
+INSERT INTO `ms_loan` VALUES (1,'1','2017/01',1000000.00,5,500000.00,100000.00,'','admin','2016-09-19 09:08:54','admin','2016-09-21 10:39:00','\0'),(2,'1','2016/01',8000000.00,8,0.00,1000000.00,'','admin','2016-10-03 10:07:34',NULL,NULL,'\0');
 /*!40000 ALTER TABLE `ms_loan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -625,7 +625,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_location`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_location` (
   `locationID` int(11) NOT NULL AUTO_INCREMENT,
   `locationCode` varchar(20) DEFAULT NULL,
@@ -647,7 +647,7 @@ CREATE TABLE `ms_location` (
 
 LOCK TABLES `ms_location` WRITE;
 /*!40000 ALTER TABLE `ms_location` DISABLE KEYS */;
-INSERT INTO `ms_location` VALUES (1,'','Tangerang','Jalan Boulevard Gading Serpong Blok B No. 8','02187248572',_binary '','SYSTEM','2015-12-10 10:00:00','admin','2015-12-10 10:39:07'),(2,'','Jakarta','Jalan Boulevard Gading Serpong Blok B No. 8','02187248572',_binary '','SYSTEM','2015-12-10 10:00:00','admin','2015-12-10 10:39:07');
+INSERT INTO `ms_location` VALUES (1,'','Tangerang','Jalan Boulevard Gading Serpong Blok B No. 8','02187248572','','SYSTEM','2015-12-10 10:00:00','admin','2015-12-10 10:39:07'),(2,'','Jakarta','Jalan Boulevard Gading Serpong Blok B No. 8','02187248572','','SYSTEM','2015-12-10 10:00:00','admin','2015-12-10 10:39:07');
 /*!40000 ALTER TABLE `ms_location` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -657,7 +657,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_medicalincome`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_medicalincome` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nik` varchar(45) DEFAULT NULL,
@@ -683,7 +683,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_medicalincomedetail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_medicalincomedetail` (
   `id` int(11) DEFAULT NULL,
   `claimDate` date DEFAULT NULL,
@@ -715,7 +715,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_medicaltype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_medicaltype` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `typeDescription` varchar(50) DEFAULT NULL,
@@ -734,7 +734,7 @@ CREATE TABLE `ms_medicaltype` (
 
 LOCK TABLES `ms_medicaltype` WRITE;
 /*!40000 ALTER TABLE `ms_medicaltype` DISABLE KEYS */;
-INSERT INTO `ms_medicaltype` VALUES (1,'Opening Balance','admin','2016-09-20 08:33:20',NULL,NULL,_binary ''),(2,'Rawat Inap','admin','2016-09-19 12:23:22',NULL,NULL,_binary ''),(3,'Rawat Jalan','admin','2016-09-19 12:23:29',NULL,NULL,_binary ''),(4,'Gigi Umum','admin','2016-09-29 11:29:12','admin','2016-09-29 11:29:21',_binary ''),(5,'Gigi Khusus','admin','2016-09-29 11:29:28',NULL,NULL,_binary '');
+INSERT INTO `ms_medicaltype` VALUES (1,'Opening Balance','admin','2016-09-20 08:33:20',NULL,NULL,''),(2,'Rawat Inap','admin','2016-09-19 12:23:22',NULL,NULL,''),(3,'Rawat Jalan','admin','2016-09-19 12:23:29',NULL,NULL,''),(4,'Gigi Umum','admin','2016-09-29 11:29:12','admin','2016-09-29 11:29:21',''),(5,'Gigi Khusus','admin','2016-09-29 11:29:28',NULL,NULL,'');
 /*!40000 ALTER TABLE `ms_medicaltype` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -744,7 +744,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_payrollcomponent`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_payrollcomponent` (
   `payrollCode` varchar(20) NOT NULL,
   `type` varchar(45) DEFAULT NULL,
@@ -767,7 +767,7 @@ CREATE TABLE `ms_payrollcomponent` (
 
 LOCK TABLES `ms_payrollcomponent` WRITE;
 /*!40000 ALTER TABLE `ms_payrollcomponent` DISABLE KEYS */;
-INSERT INTO `ms_payrollcomponent` VALUES ('A01','1','2','SALARY','','Article01','admin','2016-06-14 09:22:54',NULL,NULL,_binary ''),('A02','1','2','TRANSPORTASI','','Article01','admin','2016-06-15 10:17:40','admin','2016-08-25 10:48:05',_binary ''),('A03','1','2','UANG MAKAN','','Article01','admin','2016-06-15 10:23:44','admin','2016-09-21 09:22:08',_binary ''),('A04','1','2','UANG DRIVER','','','admin','2016-06-15 10:33:52','admin','2016-09-21 11:25:01',_binary ''),('B02','2','2','TUNJANGAN HARI RAYA','','Article07','admin','2016-06-15 13:14:36','admin','2016-09-22 13:59:05',_binary ''),('D01','2','1','HUTANG','',NULL,'admin','2016-06-14 09:23:21','admin','2016-06-14 09:23:41',_binary ''),('JHTCom','3','1','JHT Company','','','','0000-00-00 00:00:00','','0000-00-00 00:00:00',_binary ''),('JHTEmp','3','1','JHT Employee','','Article10','','0000-00-00 00:00:00','','0000-00-00 00:00:00',_binary ''),('JKKCom','3','1','JKK Company','','Article05','','0000-00-00 00:00:00','','0000-00-00 00:00:00',_binary ''),('JKKEmp','3','1','JKK Employee','','','','0000-00-00 00:00:00','','0000-00-00 00:00:00',_binary ''),('JKMCom','3','1','JKM Company','','Article05','','0000-00-00 00:00:00','','0000-00-00 00:00:00',_binary ''),('JKMEmp','3','1','JKM Employee','','','','0000-00-00 00:00:00','','0000-00-00 00:00:00',_binary ''),('JPKCom','3','1','JPK Company','','Article05','','0000-00-00 00:00:00','','0000-00-00 00:00:00',_binary ''),('JPKEmp','3','1','JPK Employee','','Article10','','0000-00-00 00:00:00','','0000-00-00 00:00:00',_binary ''),('JPNCom','3','1','JPN Company','','','','0000-00-00 00:00:00','','0000-00-00 00:00:00',_binary ''),('JPNEmp','3','1','JPN Employee','','','','0000-00-00 00:00:00','','0000-00-00 00:00:00',_binary '');
+INSERT INTO `ms_payrollcomponent` VALUES ('A01','1','2','SALARY','','Article01','admin','2016-06-14 09:22:54',NULL,NULL,''),('A02','1','2','TRANSPORTASI','','Article01','admin','2016-06-15 10:17:40','admin','2016-08-25 10:48:05',''),('A03','1','2','UANG MAKAN','','Article01','admin','2016-06-15 10:23:44','admin','2016-09-21 09:22:08',''),('A04','1','2','UANG DRIVER','','','admin','2016-06-15 10:33:52','admin','2016-09-21 11:25:01',''),('B02','2','2','TUNJANGAN HARI RAYA','','Article07','admin','2016-06-15 13:14:36','admin','2016-09-22 13:59:05',''),('D01','2','1','HUTANG','',NULL,'admin','2016-06-14 09:23:21','admin','2016-06-14 09:23:41',''),('JHTCom','3','1','JHT Company','','','','0000-00-00 00:00:00','','0000-00-00 00:00:00',''),('JHTEmp','3','1','JHT Employee','','Article10','','0000-00-00 00:00:00','','0000-00-00 00:00:00',''),('JKKCom','3','1','JKK Company','','Article05','','0000-00-00 00:00:00','','0000-00-00 00:00:00',''),('JKKEmp','3','1','JKK Employee','','','','0000-00-00 00:00:00','','0000-00-00 00:00:00',''),('JKMCom','3','1','JKM Company','','Article05','','0000-00-00 00:00:00','','0000-00-00 00:00:00',''),('JKMEmp','3','1','JKM Employee','','','','0000-00-00 00:00:00','','0000-00-00 00:00:00',''),('JPKCom','3','1','JPK Company','','Article05','','0000-00-00 00:00:00','','0000-00-00 00:00:00',''),('JPKEmp','3','1','JPK Employee','','Article10','','0000-00-00 00:00:00','','0000-00-00 00:00:00',''),('JPNCom','3','1','JPN Company','','','','0000-00-00 00:00:00','','0000-00-00 00:00:00',''),('JPNEmp','3','1','JPN Employee','','','','0000-00-00 00:00:00','','0000-00-00 00:00:00','');
 /*!40000 ALTER TABLE `ms_payrollcomponent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -777,7 +777,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_payrollfix`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_payrollfix` (
   `nik` varchar(20) NOT NULL,
   PRIMARY KEY (`nik`)
@@ -800,7 +800,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_payrollfixdetail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_payrollfixdetail` (
   `nik` int(11) DEFAULT NULL,
   `payrollCode` varchar(10) DEFAULT NULL,
@@ -828,7 +828,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_payrollfunctionalexpenses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_payrollfunctionalexpenses` (
   `id` int(11) NOT NULL,
   `rate` decimal(18,2) DEFAULT NULL,
@@ -855,7 +855,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_payrollincome`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_payrollincome` (
   `nik` varchar(20) NOT NULL,
   PRIMARY KEY (`nik`)
@@ -878,7 +878,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_payrollincomedetail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_payrollincomedetail` (
   `nik` int(11) DEFAULT NULL,
   `payrollCode` varchar(45) DEFAULT NULL,
@@ -899,7 +899,7 @@ CREATE TABLE `ms_payrollincomedetail` (
 
 LOCK TABLES `ms_payrollincomedetail` WRITE;
 /*!40000 ALTER TABLE `ms_payrollincomedetail` DISABLE KEYS */;
-INSERT INTO `ms_payrollincomedetail` VALUES (1,'A01',20000000.00,'2016-01-01','2019-01-01','admin','2016-11-02',NULL,NULL,_binary '\0'),(1,'A01',30000000.00,'2016-01-01','2017-12-31','admin','2016-11-30',NULL,NULL,_binary '');
+INSERT INTO `ms_payrollincomedetail` VALUES (1,'A01',20000000.00,'2016-01-01','2022-12-31','admin','2016-11-02',NULL,NULL,'');
 /*!40000 ALTER TABLE `ms_payrollincomedetail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -909,7 +909,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_payrolljamsostek`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_payrolljamsostek` (
   `jamsostekCode` varchar(50) NOT NULL,
   `payrollCodeSource` varchar(20) DEFAULT NULL,
@@ -943,7 +943,7 @@ CREATE TABLE `ms_payrolljamsostek` (
 
 LOCK TABLES `ms_payrolljamsostek` WRITE;
 /*!40000 ALTER TABLE `ms_payrolljamsostek` DISABLE KEYS */;
-INSERT INTO `ms_payrolljamsostek` VALUES ('J01','A01',240.00,0.00,9000.00,300.00,0.00,9000.00,370.00,200.00,9000.00,400.00,100.00,9000.00,200.00,100.00,9000.00,'admin','2016-11-11 14:52:51','admin','2016-10-10 11:07:35',_binary '');
+INSERT INTO `ms_payrolljamsostek` VALUES ('J01','A01',240.00,0.00,9000.00,300.00,0.00,9000.00,370.00,200.00,9000.00,400.00,100.00,9000.00,200.00,100.00,9000.00,'admin','2016-11-11 14:52:51','admin','2016-10-10 11:07:35','');
 /*!40000 ALTER TABLE `ms_payrolljamsostek` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -953,7 +953,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_payrollnonfix`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_payrollnonfix` (
   `nik` varchar(20) NOT NULL,
   PRIMARY KEY (`nik`)
@@ -975,7 +975,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_payrollnonfixdetail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_payrollnonfixdetail` (
   `nik` varchar(20) DEFAULT NULL,
   `period` varchar(45) DEFAULT NULL,
@@ -1003,7 +1003,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_payrollprorate`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_payrollprorate` (
   `prorateId` varchar(50) NOT NULL,
   `type` varchar(50) DEFAULT NULL,
@@ -1032,7 +1032,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_payrollptkp`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_payrollptkp` (
   `id` int(11) NOT NULL,
   `ptkp` decimal(18,2) DEFAULT NULL,
@@ -1059,7 +1059,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_payrollsetting`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_payrollsetting` (
   `Id` int(11) NOT NULL,
   `companyName` varchar(20) DEFAULT NULL,
@@ -1085,7 +1085,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_payrolltaxbefore`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_payrolltaxbefore` (
   `id` varchar(45) NOT NULL,
   `nik` int(11) DEFAULT NULL,
@@ -1113,7 +1113,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_payrolltaxbeforedetail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_payrolltaxbeforedetail` (
   `id` varchar(20) DEFAULT NULL,
   `nomor` varchar(20) DEFAULT NULL,
@@ -1141,7 +1141,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_payrolltaxrate`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_payrolltaxrate` (
   `tieringCode` varchar(10) NOT NULL,
   `start` decimal(18,2) DEFAULT NULL,
@@ -1168,7 +1168,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_personnelcontract`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_personnelcontract` (
   `nik` int(11) DEFAULT NULL,
   `startWorking` date DEFAULT NULL,
@@ -1196,7 +1196,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_personneldepartment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_personneldepartment` (
   `departmentCode` int(11) NOT NULL AUTO_INCREMENT,
   `departmentDesc` varchar(50) DEFAULT NULL,
@@ -1218,7 +1218,7 @@ CREATE TABLE `ms_personneldepartment` (
 
 LOCK TABLES `ms_personneldepartment` WRITE;
 /*!40000 ALTER TABLE `ms_personneldepartment` DISABLE KEYS */;
-INSERT INTO `ms_personneldepartment` VALUES (1,'DEVELOPMENT','1',NULL,'CD-01','admin','2019-07-20 16:25:23',NULL,NULL,_binary '');
+INSERT INTO `ms_personneldepartment` VALUES (1,'DEVELOPMENT','1',NULL,'CD-01','admin','2019-07-20 16:25:23',NULL,NULL,'');
 /*!40000 ALTER TABLE `ms_personneldepartment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1228,7 +1228,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_personneldivision`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_personneldivision` (
   `divisionId` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(50) DEFAULT NULL,
@@ -1247,7 +1247,7 @@ CREATE TABLE `ms_personneldivision` (
 
 LOCK TABLES `ms_personneldivision` WRITE;
 /*!40000 ALTER TABLE `ms_personneldivision` DISABLE KEYS */;
-INSERT INTO `ms_personneldivision` VALUES (1,'IT','admin','2019-07-20 16:25:08',NULL,NULL,_binary '');
+INSERT INTO `ms_personneldivision` VALUES (1,'IT','admin','2019-07-20 16:25:08',NULL,NULL,'');
 /*!40000 ALTER TABLE `ms_personneldivision` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1257,7 +1257,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_personnelfamily`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_personnelfamily` (
   `id` int(11) DEFAULT NULL,
   `firstName` varchar(30) DEFAULT NULL,
@@ -1284,7 +1284,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_personnelhead`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_personnelhead` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `employeeNo` varchar(50) DEFAULT NULL,
@@ -1347,7 +1347,7 @@ CREATE TABLE `ms_personnelhead` (
 
 LOCK TABLES `ms_personnelhead` WRITE;
 /*!40000 ALTER TABLE `ms_personnelhead` DISABLE KEYS */;
-INSERT INTO `ms_personnelhead` VALUES (1,'201701012003','CHARLIE','SETIONO','CHARLIE SETIONO','BOGOR','2019-04-09','GAMA 17 NO 14 RT.002 RW.008 KEC. KARAWACI','TANGERANG','+62-877-71161657','CHARLIE_EVOLUTION15@YAHOO.COM','1','7','SYSTEM INFORMATION','1','0',NULL,'J01','1','1','00.000.000.0-000.000','123456789','1122334455','2','BCA','TANGERANG KOTA','888331124','IDR','','FIRSTNAME','LASTNAME','WIFE','+11-111-111111111','+22-222-22222222','CHARLIE SETIONO','GAMA 17 NO 14 RT.002 RW.008 KEC. KARAWACI TANGERANG',NULL,'1','INDONESIA','CD-01','3','KANTOR PUSAT','KANTOR PUSAT','admin','2019-07-31 15:46:21',NULL,NULL,_binary '',NULL,NULL,NULL);
+INSERT INTO `ms_personnelhead` VALUES (1,'201701012003','CHARLIE','SETIONO','CHARLIE SETIONO','BOGOR','2019-04-09','GAMA 17 NO 14 RT.002 RW.008 KEC. KARAWACI','TANGERANG','+62-877-71161657','CHARLIE_EVOLUTION15@YAHOO.COM','1','7','SYSTEM INFORMATION','1','0',NULL,'J01','1','1','00.000.000.0-000.000','123456789','1122334455','2','BCA','TANGERANG KOTA','888331124','IDR','','FIRSTNAME','LASTNAME','WIFE','+11-111-111111111','+22-222-22222222','CHARLIE SETIONO','GAMA 17 NO 14 RT.002 RW.008 KEC. KARAWACI TANGERANG',NULL,'1','INDONESIA','CD-01','1','KANTOR PUSAT','KANTOR PUSAT','admin','2019-08-03 13:31:08',NULL,NULL,'',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `ms_personnelhead` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1357,7 +1357,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_personnelposition`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_personnelposition` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `positionDescription` varchar(100) DEFAULT NULL,
@@ -1377,7 +1377,7 @@ CREATE TABLE `ms_personnelposition` (
 
 LOCK TABLES `ms_personnelposition` WRITE;
 /*!40000 ALTER TABLE `ms_personnelposition` DISABLE KEYS */;
-INSERT INTO `ms_personnelposition` VALUES (1,'DEVELOPER MANAGER','','admin','2019-07-20 16:26:30',NULL,NULL,_binary '');
+INSERT INTO `ms_personnelposition` VALUES (1,'DEVELOPER MANAGER','','admin','2019-07-20 16:26:30',NULL,NULL,'');
 /*!40000 ALTER TABLE `ms_personnelposition` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1387,7 +1387,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_setting`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_setting` (
   `key1` varchar(100) NOT NULL,
   `key2` varchar(100) DEFAULT NULL,
@@ -1412,7 +1412,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_taxlocation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_taxlocation` (
   `id` varchar(50) NOT NULL,
   `npwpNo` varchar(50) DEFAULT NULL,
@@ -1455,7 +1455,7 @@ CREATE TABLE `ms_taxlocation` (
 
 LOCK TABLES `ms_taxlocation` WRITE;
 /*!40000 ALTER TABLE `ms_taxlocation` DISABLE KEYS */;
-INSERT INTO `ms_taxlocation` VALUES ('KP TIGARAKSA','00.000.000.0-000.000','PASAR KEMIS','POS TANGERANG','TANGERANG',NULL,'+00-000-0000000000','','JOKO','PRESIDENT DIRECTOR','','','','','','','','','','','','','','','','','admin','2019-07-20 16:28:42',NULL,NULL,_binary '');
+INSERT INTO `ms_taxlocation` VALUES ('KP TIGARAKSA','00.000.000.0-000.000','PASAR KEMIS','POS TANGERANG','TANGERANG',NULL,'+00-000-0000000000','','JOKO','PRESIDENT DIRECTOR','','','','','','','','','','','','','','','','','admin','2019-07-20 16:28:42',NULL,NULL,'');
 /*!40000 ALTER TABLE `ms_taxlocation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1465,7 +1465,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_user` (
   `username` varchar(50) NOT NULL DEFAULT '',
   `fullName` varchar(200) NOT NULL,
@@ -1492,7 +1492,7 @@ CREATE TABLE `ms_user` (
 
 LOCK TABLES `ms_user` WRITE;
 /*!40000 ALTER TABLE `ms_user` DISABLE KEYS */;
-INSERT INTO `ms_user` VALUES ('admin','Administrator','deb384376e3da17fb354a0b697a89c51','QpZ25sb8Vn-B3nDOY2WuvO8s9-Okm9Hk19cqW5OyXWU6v',1,1,'easyb_web',1,_binary '','admin','2015-08-04 12:21:49','admin','2016-01-18 09:05:03');
+INSERT INTO `ms_user` VALUES ('admin','Administrator','deb384376e3da17fb354a0b697a89c51','QpZ25sb8Vn-B3nDOY2WuvO8s9-Okm9Hk19cqW5OyXWU6v',1,1,'easyb_web',1,'','admin','2015-08-04 12:21:49','admin','2016-01-18 09:05:03');
 /*!40000 ALTER TABLE `ms_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1502,7 +1502,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ms_useraccess`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `ms_useraccess` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `userRoleID` int(11) NOT NULL,
@@ -1524,7 +1524,7 @@ CREATE TABLE `ms_useraccess` (
 
 LOCK TABLES `ms_useraccess` WRITE;
 /*!40000 ALTER TABLE `ms_useraccess` DISABLE KEYS */;
-INSERT INTO `ms_useraccess` VALUES (352,1,'Z.1',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(353,1,'B',_binary '\0',_binary '\0',_binary '\0',_binary '\0',_binary '\0',_binary '\0'),(354,1,'Y.1',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(355,1,'Y.2',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(356,1,'Y.7',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(357,1,'Y.6',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(358,1,'C.6',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(359,1,'B.3',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(360,1,'C.7',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(361,1,'C.8',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(362,1,'C.4',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(363,1,'B.9',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(364,1,'B.10',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(365,1,'D',_binary '\0',_binary '\0',_binary '\0',_binary '\0',_binary '\0',_binary '\0'),(366,1,'D.1',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(367,1,'Y',_binary '\0',_binary '\0',_binary '\0',_binary '\0',_binary '\0',_binary '\0'),(368,1,'E',_binary '\0',_binary '\0',_binary '\0',_binary '\0',_binary '\0',_binary '\0'),(369,1,'E.2',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(370,1,'E.1',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(371,1,'B.2',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(372,1,'C',_binary '\0',_binary '\0',_binary '\0',_binary '\0',_binary '\0',_binary '\0'),(373,1,'C.1',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(374,1,'C.9',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(375,1,'Z.2',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(376,1,'A',_binary '\0',_binary '\0',_binary '\0',_binary '\0',_binary '\0',_binary '\0'),(377,1,'Y.8',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(378,1,'A.1',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(379,1,'C.5',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(380,1,'C.3',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(381,1,'Z',_binary '\0',_binary '\0',_binary '\0',_binary '\0',_binary '\0',_binary '\0'),(382,1,'B.1',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(383,1,'Y.5',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(384,1,'Z.3',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(385,1,'C.2',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(386,1,'Y.3',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(387,1,'Y.4',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(388,1,'B.7',_binary '',_binary '',_binary '',_binary '',_binary '',_binary ''),(389,1,'B.8',_binary '',_binary '',_binary '',_binary '',_binary '',_binary '');
+INSERT INTO `ms_useraccess` VALUES (352,1,'Z.1','','','','','',''),(353,1,'B','\0','\0','\0','\0','\0','\0'),(354,1,'Y.1','','','','','',''),(355,1,'Y.2','','','','','',''),(356,1,'Y.7','','','','','',''),(357,1,'Y.6','','','','','',''),(358,1,'C.6','','','','','',''),(359,1,'B.3','','','','','',''),(360,1,'C.7','','','','','',''),(361,1,'C.8','','','','','',''),(362,1,'C.4','','','','','',''),(363,1,'B.9','','','','','',''),(364,1,'B.10','','','','','',''),(365,1,'D','\0','\0','\0','\0','\0','\0'),(366,1,'D.1','','','','','',''),(367,1,'Y','\0','\0','\0','\0','\0','\0'),(368,1,'E','\0','\0','\0','\0','\0','\0'),(369,1,'E.2','','','','','',''),(370,1,'E.1','','','','','',''),(371,1,'B.2','','','','','',''),(372,1,'C','\0','\0','\0','\0','\0','\0'),(373,1,'C.1','','','','','',''),(374,1,'C.9','','','','','',''),(375,1,'Z.2','','','','','',''),(376,1,'A','\0','\0','\0','\0','\0','\0'),(377,1,'Y.8','','','','','',''),(378,1,'A.1','','','','','',''),(379,1,'C.5','','','','','',''),(380,1,'C.3','','','','','',''),(381,1,'Z','\0','\0','\0','\0','\0','\0'),(382,1,'B.1','','','','','',''),(383,1,'Y.5','','','','','',''),(384,1,'Z.3','','','','','',''),(385,1,'C.2','','','','','',''),(386,1,'Y.3','','','','','',''),(387,1,'Y.4','','','','','',''),(388,1,'B.7','','','','','',''),(389,1,'B.8','','','','','','');
 /*!40000 ALTER TABLE `ms_useraccess` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1534,7 +1534,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tr_companybalance`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tr_companybalance` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `companyID` int(11) NOT NULL,
@@ -1559,7 +1559,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tr_confirmationtopup`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tr_confirmationtopup` (
   `confirmationID` int(11) NOT NULL AUTO_INCREMENT,
   `confirmationDate` datetime NOT NULL,
@@ -1588,7 +1588,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tr_leave`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tr_leave` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `employeeId` int(11) DEFAULT NULL,
@@ -1620,7 +1620,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tr_loanproc`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tr_loanproc` (
   `id` int(11) NOT NULL,
   `paymentPeriod` varchar(20) DEFAULT NULL,
@@ -1643,7 +1643,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tr_payroll`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tr_payroll` (
   `period` varchar(20) DEFAULT NULL,
   `nik` varchar(45) DEFAULT NULL,
@@ -1667,7 +1667,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tr_payrollproc`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tr_payrollproc` (
   `period` varchar(45) NOT NULL,
   `status` varchar(45) DEFAULT NULL,
@@ -1690,7 +1690,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tr_payrolltaxfinalproc`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tr_payrolltaxfinalproc` (
   `period` varchar(8) DEFAULT NULL,
   `sequance` varchar(45) DEFAULT NULL,
@@ -1741,7 +1741,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tr_payrolltaxincome`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tr_payrolltaxincome` (
   `period` varchar(8) DEFAULT NULL,
   `nik` varchar(20) DEFAULT NULL,
@@ -1773,7 +1773,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tr_payrolltaxmonthlyproc`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tr_payrolltaxmonthlyproc` (
   `period` varchar(8) DEFAULT NULL,
   `sequance` varchar(45) DEFAULT NULL,
@@ -1824,7 +1824,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tr_payrolltaxmonthlyprocdummy`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tr_payrolltaxmonthlyprocdummy` (
   `period` varchar(8) DEFAULT NULL,
   `sequance` varchar(45) DEFAULT NULL,
@@ -1875,7 +1875,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tr_topup`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tr_topup` (
   `topupID` int(11) NOT NULL AUTO_INCREMENT,
   `topupDate` datetime NOT NULL,
@@ -1909,7 +1909,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tr_transactionlog`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tr_transactionlog` (
   `transactionLogID` int(11) NOT NULL AUTO_INCREMENT,
   `transactionLogDate` datetime NOT NULL,
@@ -1936,7 +1936,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tr_working`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tr_working` (
   `nik` varchar(10) DEFAULT NULL,
   `period` varchar(20) DEFAULT NULL,
@@ -1951,7 +1951,6 @@ CREATE TABLE `tr_working` (
 
 LOCK TABLES `tr_working` WRITE;
 /*!40000 ALTER TABLE `tr_working` DISABLE KEYS */;
-INSERT INTO `tr_working` VALUES ('1','2019/01',22,21);
 /*!40000 ALTER TABLE `tr_working` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1961,7 +1960,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tr_workingtime`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tr_workingtime` (
   `nik` int(11) DEFAULT NULL,
   `date` date DEFAULT NULL,
@@ -1986,7 +1985,7 @@ CREATE TABLE `tr_workingtime` (
 
 LOCK TABLES `tr_workingtime` WRITE;
 /*!40000 ALTER TABLE `tr_workingtime` DISABLE KEYS */;
-INSERT INTO `tr_workingtime` VALUES (1,'2019-01-01','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00','09:30:00','09:30:00','00:00:00',0,0,0,0),(1,'2019-01-02','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00','09:30:00','09:30:00','00:00:00',0,0,0,0),(1,'2019-01-03','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00','09:30:00','09:30:00','00:00:00',0,0,0,0),(1,'2019-01-04','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00','09:30:00','09:30:00','00:00:00',0,0,0,0),(1,'2019-01-07','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00','09:30:00','09:30:00','00:00:00',0,0,0,0),(1,'2019-01-08','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00','09:30:00','09:30:00','00:00:00',0,0,0,0),(1,'2019-01-09','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00','09:30:00','09:30:00','00:00:00',0,0,0,0),(1,'2019-01-10','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00','09:30:00','09:30:00','00:00:00',0,0,0,0),(1,'2019-01-11','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00','09:30:00','09:30:00','00:00:00',0,0,0,0),(1,'2019-01-14','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00','09:30:00','09:30:00','00:00:00',0,0,0,0),(1,'2019-01-15','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00','09:30:00','09:30:00','00:00:00',0,0,0,0),(1,'2019-01-16','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00','09:30:00','09:30:00','00:00:00',0,0,0,0),(1,'2019-01-17','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00','09:30:00','09:30:00','00:00:00',0,0,0,0),(1,'2019-01-18','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00','09:30:00','09:30:00','00:00:00',0,0,0,0),(1,'2019-01-21','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00','09:30:00','09:30:00','00:00:00',0,0,0,0),(1,'2019-01-22','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00','09:30:00','09:30:00','00:00:00',0,0,0,0),(1,'2019-01-23','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00','09:30:00','09:30:00','00:00:00',0,0,0,0),(1,'2019-01-24','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00','09:30:00','09:30:00','00:00:00',0,0,0,0),(1,'2019-01-25','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00','09:30:00','09:30:00','00:00:00',0,0,0,0),(1,'2019-01-28','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00','09:30:00','09:30:00','00:00:00',0,0,0,0),(1,'2019-01-29','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00','09:30:00','09:30:00','00:00:00',0,0,0,0);
+INSERT INTO `tr_workingtime` VALUES (1,'2019-01-01','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00',NULL,NULL,NULL,0,0,0,0),(1,'2019-01-02','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00',NULL,NULL,NULL,0,0,0,0),(1,'2019-01-03','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00',NULL,NULL,NULL,0,0,0,0),(1,'2019-01-04','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00',NULL,NULL,NULL,0,0,0,0),(1,'2019-01-07','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00',NULL,NULL,NULL,0,0,0,0),(1,'2019-01-08','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00',NULL,NULL,NULL,0,0,0,0),(1,'2019-01-09','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00',NULL,NULL,NULL,0,0,0,0),(1,'2019-01-10','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00',NULL,NULL,NULL,0,0,0,0),(1,'2019-01-11','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00',NULL,NULL,NULL,0,0,0,0),(1,'2019-01-14','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00',NULL,NULL,NULL,0,0,0,0),(1,'2019-01-15','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00',NULL,NULL,NULL,0,0,0,0),(1,'2019-01-16','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00',NULL,NULL,NULL,0,0,0,0),(1,'2019-01-17','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00',NULL,NULL,NULL,0,0,0,0),(1,'2019-01-18','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00',NULL,NULL,NULL,0,0,0,0),(1,'2019-01-21','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00',NULL,NULL,NULL,0,0,0,0),(1,'2019-01-22','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00',NULL,NULL,NULL,0,0,0,0),(1,'2019-01-23','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00',NULL,NULL,NULL,0,0,0,0),(1,'2019-01-24','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00',NULL,NULL,NULL,0,0,0,0),(1,'2019-01-25','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00',NULL,NULL,NULL,0,0,0,0),(1,'2019-01-28','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00',NULL,NULL,NULL,0,0,0,0),(1,'2019-01-29','08:30:00','18:00:00','KANTOR PUSAT','08:30:00','18:00:00',NULL,NULL,NULL,0,0,0,0);
 /*!40000 ALTER TABLE `tr_workingtime` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1996,7 +1995,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `tr_workingtimecalc`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tr_workingtimecalc` (
   `period` varchar(10) DEFAULT NULL,
   `nik` varchar(45) DEFAULT NULL,
@@ -2024,7 +2023,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `vr_crosstab`;
 /*!50001 DROP VIEW IF EXISTS `vr_crosstab`*/;
 SET @saved_cs_client     = @@character_set_client;
-SET character_set_client = utf8mb4;
+SET character_set_client = utf8;
 /*!50001 CREATE VIEW `vr_crosstab` AS SELECT 
  1 AS `period`,
  1 AS `NIK`,
@@ -2049,12 +2048,525 @@ SET character_set_client = utf8mb4;
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping events for database 'hris'
---
-
---
 -- Dumping routines for database 'hris'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `spa_overtimecalc` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spa_overtimecalc`()
+BEGIN
+	
+	select 
+    TIMESTAMPDIFF(MINUTE,c.end,b.outTime),
+    e.rate1,
+    TIMESTAMPDIFF(MINUTE,c.end,b.outTime) * e.rate1 'lembur' 
+    from ms_attendancewcalcdet a
+	join ms_attendancewcalcactualdetail b on a.date = b.date
+	join ms_attendanceshift c on c.shiftCode = a.shiftCode
+	join ms_personnelhead d on d.id = b.nik
+	join ms_attendanceovertime e on e.overtimeId = d.overtimeId;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `spr_payrollCalculationdummy` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spr_payrollCalculationdummy`(IN `periodDate` VARCHAR(10))
+BEGIN
+
+DELETE FROM tr_payrolltaxmonthlyprocdummy
+WHERE period = periodDate;
+
+INSERT tr_payrolltaxmonthlyprocdummy 
+SELECT 
+period,
+sequance,
+nik,
+npwp,
+T01,
+T02,
+T03,
+T04,
+T05,
+T06,
+T07,
+0,
+T10,
+0,
+0,
+0,
+0,
+0,
+0,
+ptkp,
+0,
+0,
+0,
+0,
+0,
+0,
+0,
+0,
+0,
+0,
+0
+FROM tr_payrolltaxmonthlyproc
+Where Period = periodDate;
+
+
+CALL spr_taxcalctiering(periodDate,2);
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `spr_prorateCalc` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spr_prorateCalc`()
+BEGIN
+
+
+Select b.type INTO @setting from ms_company a
+JOIN ms_payrollprorate b on b.prorateid = a.prorateSetting;
+
+SELECT b.day INTO @Day FROM ms_company a
+JOIN ms_payrollprorate b ON b.prorateid = a.prorateSetting;
+
+IF @setting = 1 THEN 
+	SELECT @Day INTO @dayCalc;
+ELSEIF @setting = 2 THEN 
+	SELECT ''  ;
+ELSEIF @setting = 3 THEN 
+	SELECT DAY(LAST_DAY(CURDATE())) INTO @dayCalc;
+END IF;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `spr_taxcalctiering` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spr_taxcalctiering`(IN `periodDate` VARCHAR(10), `mode` VARCHAR(5))
+BEGIN
+DECLARE NotMatch INT DEFAULT 1;
+DECLARE Count INT DEFAULT 0;
+
+DECLARE T02Temp DECIMAL(18,2);
+DECLARE sumT07 DECIMAL(18,2);
+DECLARE curNik varchar(20);
+DECLARE done INT DEFAULT 0;
+
+DECLARE tableName VARCHAR(60);
+
+
+WHILE NotMatch > 0 DO 
+
+
+/* --------------- DECLARE NAMA TABLE ------------------*/
+IF mode = 1 THEN
+	SET tableName = 'tr_payrolltaxmonthlyproc';
+ELSE
+	SET tableName = 'tr_payrolltaxmonthlyprocdummy';
+END If;
+/* -----------------------END----------------------------*/
+
+
+
+
+/* ------------------------------------------ INITIAL INPUT ----------------------------------------------*/
+
+SELECT taxSetting INTO @taxSetting 
+FROM ms_company
+where companyid = 1;
+
+Select rate,maxAmount into @FERate, @FEMaxAmount from ms_payrollfunctionalexpenses
+where id = 1;
+
+
+SELECT ptkp,rate INTO @ptkp,@rate FROM ms_payrollptkp;
+
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN ms_personnelhead b on b.id = a.nik
+SET NPWP = 
+CASE WHEN b.npwpNo = '' THEN
+0
+ELSE
+1
+END;
+
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN ms_personnelhead b on b.id = a.nik
+SET PTKP = (b.depENDent * @rate ) + @ptkp
+WHERE period = periodDate;
+
+Select end,npwpRate,NonNpwpRate into @endT1, @npwpRateT1,@nonNpwpRateT1 from ms_payrolltaxrate where tieringcode = 'T1';
+Select end,npwpRate,NonNpwpRate into @endT2, @npwpRateT2,@nonNpwpRateT2 from ms_payrolltaxrate where tieringcode = 'T2';
+Select end,npwpRate,NonNpwpRate into @endT3, @npwpRateT3,@nonNpwpRateT3 from ms_payrolltaxrate where tieringcode = 'T3';
+Select end,npwpRate,NonNpwpRate into @endT4, @npwpRateT4,@nonNpwpRateT4 from ms_payrolltaxrate where tieringcode = 'T4';
+
+
+
+/* ------------------- SET PREV TAX --------------------*/
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN (SELECT nik,sum(pphAmount) amount FROM tr_payrolltaxmonthlyproc WHERE period  < periodDate and LEFT(period,4) = LEFT(periodDate,4) group by nik) b on b.nik = a.nik
+SET prevTaxPaid = b.amount
+WHERE period = periodDate;
+
+/* ------------------ SET WORK MONTH--------------------*/
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN 
+
+(SELECT nik,min(a.startDate) 'startDate',max(a.endDate) 'endDate' FROM ms_personnelcontract a
+Group By Nik) b on b.nik = a.nik
+SET workmonth = 
+
+CASE WHEN year(b.startDate) =  Left(periodDate,4) THEN
+	CASE WHEN  periodDate = concat(year(b.endDate),'/',DATE_FORMAT(b.endDate,'%m')) THEN
+		TIMESTAMPDIFF(MONTH, b.startDate, b.enddate) +1
+	ELSE
+		TIMESTAMPDIFF(MONTH, b.startDate, concat(LEFT(periodDate,4),'/12/01')) +1
+    END
+
+WHEN year(b.startDate) <  Left(periodDate,4) THEN
+    CASE WHEN  periodDate = concat(year(b.endDate),'/',DATE_FORMAT(b.endDate,'%m')) THEN
+		TIMESTAMPDIFF(MONTH,  concat(LEFT(periodDate,4),'/01/01'),b.endDate) +1
+    ELSE
+    	TIMESTAMPDIFF(MONTH,  concat(LEFT(periodDate,4),'/01/01'),concat(LEFT(periodDate,4),'/12/01')) +1
+	END
+END
+WHERE period = periodDate;
+
+/* ------------------- SET SEQUANCE --------------------*/
+
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN (
+SELECT nik,count(nik) as count FROM tr_payrolltaxmonthlyproc
+WHERE LEFT(period,4) = LEFT(periodDate,4)
+group by Nik
+) b on b.nik = a.nik
+SET 
+a.sequance = b.count - 1 
+WHERE period = periodDate;
+
+
+
+/* ------------------- SET PREV NETTO --------------------*/
+
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN (SELECT nik,sum(netto) amount FROM tr_payrolltaxmonthlyproc WHERE period  <= periodDate and LEFT(period,4) = LEFT(periodDate ,4)  group by nik) b on b.nik = a.nik
+SET prevNetto = b.amount
+WHERE period = periodDate  AND Count = 0;
+
+
+/* ------------------- SET PREV NETTO BJ --------------------*/
+
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN (SELECT nik,sum(nettoBJ) amount FROM tr_payrolltaxmonthlyproc WHERE period  <= periodDate and LEFT(period,4) = LEFT(periodDate,4)  group by nik) b on b.nik = a.nik
+SET prevNettoBJ = b.amount
+WHERE period = periodDate  AND Count = 0;
+
+/* ---------------------------------------------END-------------------------------------------------*/
+
+
+
+
+/* ---------------------------------------- CALCULATION -------------------------------------------*/
+
+
+/* ------------------- NETTO BJ --------------------*/
+
+UPDATE tr_payrolltaxmonthlyproc
+SET nettoBJ= floor(T01+T02+T03+T04+T05+T06)
+WHERE period = periodDate;
+
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN (
+SELECT nik,Sum(T07) as 'T07' FROM tr_payrolltaxmonthlyproc
+WHERE isFinal <> 1 AND LEFT(period,4) = LEFT(periodDate,4)
+group by Nik) b 
+on a.nik = b.nik
+SET NettoSumBJ= nettoBJ*(workmonth-sequance) + PrevNettoBJ + b.T07
+WHERE period = periodDate;
+
+/* ------------------- -NETTO-----------------------*/
+
+UPDATE tr_payrolltaxmonthlyproc
+SET netto= floor(T01+T02+T03+T04+T05+T06)-(T10)
+WHERE period = periodDate;
+
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN (
+SELECT nik,Sum(T07) as 'T07' FROM tr_payrolltaxmonthlyproc
+WHERE isFinal <> 1 AND LEFT(period,4) = LEFT(periodDate,4)
+group by Nik) b 
+on a.nik = b.nik
+SET NettoSum= Netto*(workmonth-sequance) + PrevNetto+b.T07
+WHERE period = periodDate;
+
+/* ---------------------BIAYA JABATAN-----------------------*/
+UPDATE tr_payrolltaxmonthlyproc
+SET 
+biayajabatan = 
+CASE WHEN NettoSumBJ * @FERate/100>@FEMaxAmount 
+THEN 
+(@FEMaxAmount/12)* workmonth
+ELSE 
+NettoSumBJ * @FERate/100 
+END
+WHERE period = periodDate AND Isfinal = 0;
+
+/* ------------------------PKP--------------------------*/
+UPDATE tr_payrolltaxmonthlyproc
+SET PKP=floor((Nettosum-PTKP-BiayaJabatan)/1000)*1000  
+WHERE period = periodDate;
+
+
+/* START GROOS UP */
+
+UPDATE tr_payrolltaxmonthlyproc
+SET T02 = 
+CASE WHEN npwp = 1 THEN
+	CASE 
+		WHEN PKP <= 47500000 
+		THEN
+			FLOOR(((PKP - 0 )* 5 / 95 + 0)/WorkMonth)
+		WHEN PKP > 47500000 
+		THEN
+			FLOOR(((PKP - 47500000) * 15 / 85 + 2500000) / WorkMonth)
+		WHEN PKP > 217500000 THEN
+			FLOOR(((PKP -217500000) * 25/75 + 32500000) / WorkMonth)
+		WHEN PKP > 405000000 THEN
+		FLOOR(((PKP -405000000) * 30/70 + 95000000) / WorkMonth)
+	END
+
+WHEN npwp = 0 THEN
+	CASE 
+		WHEN PKP <= 47000000 
+		THEN
+			FLOOR(((PKP - 0 )* 6 / 94 + 0)/WorkMonth)
+		WHEN PKP > 47000000 
+		THEN
+			FLOOR(((PKP - 47000000) * 18 / 82 + 3000000) / WorkMonth)
+		WHEN PKP > 211000000 THEN
+			FLOOR(((PKP -211000000) * 30/70 + 39000000) / WorkMonth)
+		WHEN PKP > 386000000 THEN
+		FLOOR(((PKP -386000000) * 36/64 + 114000000) / WorkMonth)
+	END
+END
+
+WHERE period = periodDate AND T02 = 0 AND nik IN (select id from ms_personnelhead where taxSetting = 3);
+
+
+/*
+UPDATE tr_payrolltaxmonthlyproc
+SET T02 =  0
+WHERE period = periodDate AND T02 < 0;
+*/
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN (
+SELECT nik,sum(T02) as 'T02' from tr_payrolltaxmonthlyproc
+WHERE isFinal <> 1 AND LEFT(period,4) = LEFT(periodDate,4)
+group by Nik
+) b on b.nik = a.nik
+SET 
+a.t02 = a.t02 + b.t02
+WHERE isFinal = 12 AND a.nik IN (select id from ms_personnelhead where taxSetting = 3) AND period = periodDate;
+
+/* Update */
+
+
+/* ------------------- NETTO BJ --------------------*/
+
+UPDATE tr_payrolltaxmonthlyproc
+SET nettoBJ= floor(T01+T02+T03+T04+T05+T06)
+WHERE period = periodDate;
+
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN (
+SELECT nik,Sum(T07) as 'T07' FROM tr_payrolltaxmonthlyproc
+WHERE isFinal <> 1 AND LEFT(period,4) = LEFT(periodDate,4)
+group by Nik) b 
+on a.nik = b.nik
+SET NettoSumBJ= nettoBJ*(workmonth-sequance) + PrevNettoBJ + b.T07
+WHERE a.nik IN (select id from ms_personnelhead where taxSetting = 3) AND period = periodDate;
+
+
+
+Select rate,maxAmount into @FERate, @FEMaxAmount from ms_payrollfunctionalexpenses
+where id = 1;
+
+
+/* ---------------------BIAYA JABATAN-----------------------*/
+
+UPDATE tr_payrolltaxmonthlyproc
+SET 
+biayajabatan = 
+CASE WHEN NettoSumBJ * @FERate/100>@FEMaxAmount 
+THEN 
+(@FEMaxAmount/12)* workmonth
+ELSE 
+NettoSumBJ * @FERate/100 
+END
+WHERE nik IN (select id from ms_personnelhead where taxSetting = 3) AND period = periodDate AND Isfinal = 0;
+
+
+/* ---------------------NETTO-----------------------*/
+
+UPDATE tr_payrolltaxmonthlyproc
+SET netto= floor(T01+T02+T03+T04+T05+T06)-(T10)
+WHERE nik IN (select id from ms_personnelhead where taxSetting = 3) AND period = periodDate;
+
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN (
+SELECT nik,Sum(T07) as 'T07' FROM tr_payrolltaxmonthlyproc
+WHERE isFinal <> 1 AND LEFT(period,4) = LEFT(periodDate,4)
+group by Nik) b 
+on a.nik = b.nik
+SET NettoSum= Netto*(workmonth-sequance) + PrevNetto+b.T07
+WHERE a.nik IN (select id from ms_personnelhead where taxSetting = 3) AND period = periodDate;
+
+/* ------------------------PKP--------------------------*/
+
+UPDATE tr_payrolltaxmonthlyproc
+SET PKP=floor((Nettosum-PTKP-BiayaJabatan)/1000)*1000  
+WHERE nik IN (select id from ms_personnelhead where taxSetting = 3) AND period = periodDate;
+
+
+/* --------------------------------  END GROOS UP --------------------------------------*/
+
+
+
+
+
+/* ---------------------------------------- TIERING -------------------------------------------*/
+
+/* ------------------- -TIERING 1-----------------------*/
+
+UPDATE tr_payrolltaxmonthlyproc
+SET PKP1=
+CASE 
+WHEN PKP>=  @endT1 
+THEN 
+@endT1 
+ELSE 
+PKP 
+END
+WHERE PKP>=0 AND period = periodDate;
+
+/* ------------------- -TIERING 2-----------------------*/
+UPDATE tr_payrolltaxmonthlyproc
+SET PKP2=
+CASE 
+WHEN PKP-(PKP1)>=@endT2 
+THEN 
+@endT2 
+ELSE 
+PKP-(PKP1) 
+END
+WHERE PKP>=PKP1 AND period =  periodDate;
+
+/* ------------------- -TIERING 3-----------------------*/
+UPDATE tr_payrolltaxmonthlyproc
+SET PKP3=
+CASE WHEN PKP-(PKP1+PKP2)>=@endT3 
+THEN 
+@endT3 
+ELSE PKP-(PKP1+PKP2) 
+END
+WHERE PKP>=PKP1+PKP2 AND period = periodDate;
+
+/* ------------------- -TIERING 4-----------------------*/
+UPDATE tr_payrolltaxmonthlyproc
+SET PKP4=PKP - (PKP1+PKP2+PKP3) 
+WHERE PKP>=PKP1+PKP2+PKP3;
+
+/* ----------------------PPH CALC-----------------------*/
+UPDATE tr_payrolltaxmonthlyproc
+SET  PPHCalc=
+CASE WHEN npwp = 1 THEN
+FLOOR((((PKP1*@npwpRateT1)+(PKP2*@npwpRateT2)+(PKP3*@npwpRateT3)+(PKP4*@npwpRateT4))/100))
+ELSE
+FLOOR((((PKP1*@nonNpwpRateT1)+(PKP2*@nonNpwpRateT2)+(PKP3*@nonNpwpRateT3)+(PKP4*@nonNpwpRateT4))/100))
+END
+WHERE period = periodDate;
+
+/* ----------------------PPH AMOUNT-----------------------*/
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN ms_personnelhead b on b.id = a.nik
+SET  pphAmount= 
+CASE WHEN isFinal = 1 THEN
+FLOOR(PPHCalc - prevTaxPaid)
+ELSE
+FLOOR((PPHCalc - prevTaxPaid) / (workmonth-sequance))
+END
+WHERE period = periodDate;
+
+
+-- IF @TaxSETting <> 3 THEN
+-- SET NotMatch = 0;
+-- ELSE
+
+SELECT COUNT(*) INTO @notMatch FROM tr_payrolltaxmonthlyproc 
+WHERE T02<>PPhAmount AND IsFinal = 0 AND nik IN (select id from ms_personnelhead where taxSetting = 3);
+
+IF @notMatch = 0 or @notMatch Is Null  THEN
+	SET NotMatch =  0;
+	ELSE
+SET NotMatch = @notMatch ;
+
+	UPDATE tr_payrolltaxmonthlyproc  
+	SET T02=PPhAmount,PPhAmount=0 
+	WHERE T02<>PPhAmount AND IsFinal = 0 AND nik IN (select id from ms_personnelhead where taxSetting = 3);
+END IF;
+    
+-- END IF;
+
+Set Count = Count + 1;
+
+END WHILE;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `spa_generateschedule` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -2100,34 +2612,6 @@ JOIN lk_calendar c ON c.date NOT IN (
 ) AND c.date between CONCAT(DATE_FORMAT(NOW(),'%Y/%m'),'-01') AND LAST_DAY(NOW())
 AND weekday(c.date) NOT IN (5,6);
 
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `spa_overtimecalc` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `spa_overtimecalc`()
-BEGIN
-	
-	select 
-    TIMESTAMPDIFF(MINUTE,c.end,b.outTime),
-    e.rate1,
-    TIMESTAMPDIFF(MINUTE,c.end,b.outTime) * e.rate1 'lembur' 
-    from ms_attendancewcalcdet a
-	join ms_attendancewcalcactualdetail b on a.date = b.date
-	join ms_attendanceshift c on c.shiftCode = a.shiftCode
-	join ms_personnelhead d on d.id = b.nik
-	join ms_attendanceovertime e on e.overtimeId = d.overtimeId;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -2374,30 +2858,31 @@ DELIMITER ;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `spr_insertPayrollComponent`(IN `periodDate` VARCHAR(10))
 BEGIN
 
 
 INSERT INTO tr_payroll
-SELECT periodDate,nik,payrollcode,amount FROM ms_payrollincomedetail a
-WHERE flagActive = 1 
+SELECT periodDate,a.nik,a.payrollcode,a.amount FROM ms_payrollincomedetail a
+WHERE a.flagActive = 1 
 AND  REPLACE(CONCAT(periodDate , "-01"),'/','-')  BETWEEN startDate AND endDate
 AND a.NIK In 
 (Select z.nik from ms_personnelcontract z
-where concat(periodDate,'/01')  between startDate AND endDate);
+where (concat(periodDate,'/01')  between startDate AND endDate) OR (z.status = 5));
 
-INSERT INTO tr_payroll
-SELECT period,a.nik,'D03',floor((1/173*amount) * total) FROM tr_workingtimecalc a
-JOIN ms_payrollincomedetail b on a.nik = b.nik AND b.payrollcode = 'A01' and b.flagActive = 1
-AND a.NIK In 
-(Select z.nik from ms_personnelcontract z
-where concat(periodDate,'/01')  between startDate AND endDate);
+
+-- INSERT INTO tr_payroll
+-- SELECT period,a.nik,'D03',floor((1/173*amount) * total) FROM tr_workingtimecalc a
+-- JOIN ms_payrollincomedetail b on a.nik = b.nik AND b.payrollcode = 'A01' and b.flagActive = 1
+-- AND a.NIK In 
+-- (Select z.nik from ms_personnelcontract z
+-- where concat(periodDate,'/01')  between startDate AND endDate);
 
 UPDATE tr_payroll a
 JOIN tr_working b on a.nik  = b.nik AND a.period = b.period
@@ -2405,6 +2890,189 @@ SET amount =
 ((actual/schedule)*amount)
 WHERE payrollcode in ('A01');
 
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `spr_payrollCalculation` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spr_payrollCalculation`(IN `periodDate` VARCHAR(10))
+BEGIN
+
+
+DELETE FROM tr_payroll
+WHERE period = periodDate;
+
+DELETE FROM tr_payrolltaxincome
+WHERE period = periodDate;
+
+DELETE FROM tr_payrolltaxmonthlyproc
+WHERE period = periodDate;
+
+
+DELETE FROM tr_workingtimecalc
+WHERE period = periodDate;
+
+DELETE FROM tr_working
+WHERE period = periodDate;
+
+DELETE FROM tr_loanproc
+WHERE paymentPeriod = periodDate;
+
+
+CALL spa_workingcalcdate(periodDate);
+-- CALL spa_workingcalctime (periodDate);
+-- CALL spl_loanProcess(periodDate);
+CALL spr_insertPayrollComponent(periodDate);
+CALL spr_jamsostekcacl(periodDate);
+CALL spr_taxcalcIncome(periodDate);
+CALL spr_taxcalctiering(periodDate,1);
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `spr_taxcalcIncome` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spr_taxcalcIncome`(IN `periodDate` VARCHAR(10))
+BEGIN
+ 
+INSERT INTO tr_payrolltaxincome
+SELECT a.period,a.nik,c.dependent,
+Sum(CASE b.articleId WHEN 'Article01' THEN Amount ELSE 0 End) 'T01',
+Sum(CASE b.articleId WHEN 'Article03' THEN Amount ELSE 0 End) 'T03',
+Sum(CASE b.articleId WHEN 'Article04' THEN Amount ELSE 0 End) 'T04',
+Sum(CASE b.articleId WHEN 'Article05' THEN Amount ELSE 0 End) 'T05',
+Sum(CASE b.articleId WHEN 'Article06' THEN Amount ELSE 0 End) 'T06',
+Sum(CASE b.articleId WHEN 'Article07' THEN Amount ELSE 0 End) 'T07',
+Sum(CASE b.articleId WHEN 'Article10' THEN Amount ELSE 0 End) 'T10',
+0 'NettoBefore',
+0 'PPhBefore'
+FROM tr_payroll a
+JOIN ms_payrollcomponent b on a.payrollcode = b.payrollcode
+JOIN ms_personnelhead c on c.id = a.nik
+WHERE period = periodDate
+AND a.NIK In 
+(Select z.nik from ms_personnelcontract z
+where concat(periodDate,'/01')  between startDate AND endDate)
+group by a.nik, a.period;
+
+
+INSERT INTO tr_payrolltaxmonthlyproc
+SELECT a.period,0,a.nik,0,
+Sum(CASE b.articleId WHEN 'Article01' THEN Amount ELSE 0 End) 'T01',
+0 'T02',
+Sum(CASE b.articleId WHEN 'Article03' THEN Amount ELSE 0 End) 'T03',
+Sum(CASE b.articleId WHEN 'Article04' THEN Amount ELSE 0 End) 'T04',
+Sum(CASE b.articleId WHEN 'Article05' THEN Amount ELSE 0 End) 'T05',
+Sum(CASE b.articleId WHEN 'Article06' THEN Amount ELSE 0 End) 'T06',
+Sum(CASE b.articleId WHEN 'Article07' THEN Amount ELSE 0 End) 'T07',
+0 'BiayaJabatan',
+Sum(CASE b.articleId WHEN 'Article10' THEN Amount ELSE 0 End) 'T10',
+0,0,0,0,
+0,
+0,0,0,0,0,0,0,0,0,0,0,0,0
+FROM tr_payroll a
+JOIN ms_payrollcomponent b on a.payrollcode = b.payrollcode
+WHERE period = periodDate
+AND a.NIK In 
+(Select z.nik from ms_personnelcontract z
+where concat(periodDate,'/01')  between startDate AND endDate)
+group by a.nik, a.period;
+
+
+
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN (
+Select b.nik,b.year,sum(netto) 'Netto', sum(taxPaid) 'TaxPaid'  from ms_payrolltaxbeforedetail a
+JOIN ms_payrolltaxbefore b on a.id = b.id
+Group By b.nik,b.year) b
+on b.nik = a.nik
+SET prevnetto = b.netto,
+prevTaxPaid = b.taxpaid
+Where sequance = 0;
+
+
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `spu_alert` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_alert`(IN `mode` VARCHAR(10))
+BEGIN
+
+DECLARE Curquery varchar(99);
+DECLARE Curtitle varchar(99);
+DECLARE CurAll varchar(9999) DEFAULT '';
+DECLARE count INT DEFAULT 0;
+DECLARE done INT DEFAULT 0;
+
+DECLARE cur CURSOR FOR 
+SELECT title,query FROM ms_alert;
+
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+OPEN cur;
+startLoop: LOOP
+FETCH cur INTO Curtitle,Curquery;
+
+	IF done = 1 THEN
+		LEAVE startLoop;
+	END IF;
+	
+    IF count = 0 THEN
+		SET CurAll =  Curquery;
+    ELSE
+		SET CurAll =  CONCAT(CurAll,' UNION ALL ', Curquery);
+	END IF;
+	
+    SET count = count + 1;
+
+	END LOOP;
+CLOSE cur;
+
+IF mode = 1 THEN
+	SET @query = CurAll;
+	PREPARE stmt FROM @query;
+	EXECUTE stmt;
+	DEALLOCATE PREPARE stmt;
+ELSEIF mode = 2 THEN
+	OPEN cur;
+	select FOUND_ROWS() ;
+END IF;
 
 
 END ;;
@@ -2603,829 +3271,6 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `spr_payrollCalculation` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `spr_payrollCalculation`(IN `periodDate` VARCHAR(10))
-BEGIN
-
-
-DELETE FROM tr_payroll
-WHERE period = periodDate;
-
-DELETE FROM tr_payrolltaxincome
-WHERE period = periodDate;
-
-DELETE FROM tr_payrolltaxmonthlyproc
-WHERE period = periodDate;
-
-
-DELETE FROM tr_workingtimecalc
-WHERE period = periodDate;
-
-DELETE FROM tr_working
-WHERE period = periodDate;
-
-DELETE FROM tr_loanproc
-WHERE paymentPeriod = periodDate;
-
-
-CALL spa_workingcalcdate(periodDate);
-CALL spa_workingcalctime (periodDate);
-CALL spl_loanProcess(periodDate);
-CALL spr_insertPayrollComponent(periodDate);
-CALL spr_jamsostekcacl(periodDate);
-CALL spr_taxcalcIncome(periodDate);
-CALL spr_taxcalctiering(periodDate,1);
-
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `spr_payrollCalculationdummy` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `spr_payrollCalculationdummy`(IN `periodDate` VARCHAR(10))
-BEGIN
-
-DELETE FROM tr_payrolltaxmonthlyprocdummy
-WHERE period = periodDate;
-
-INSERT tr_payrolltaxmonthlyprocdummy 
-SELECT 
-period,
-sequance,
-nik,
-npwp,
-T01,
-T02,
-T03,
-T04,
-T05,
-T06,
-T07,
-0,
-T10,
-0,
-0,
-0,
-0,
-0,
-0,
-ptkp,
-0,
-0,
-0,
-0,
-0,
-0,
-0,
-0,
-0,
-0,
-0
-FROM tr_payrolltaxmonthlyproc
-Where Period = periodDate;
-
-
-CALL spr_taxcalctiering(periodDate,2);
-
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `spr_prorateCalc` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `spr_prorateCalc`()
-BEGIN
-
-
-Select b.type INTO @setting from ms_company a
-JOIN ms_payrollprorate b on b.prorateid = a.prorateSetting;
-
-SELECT b.day INTO @Day FROM ms_company a
-JOIN ms_payrollprorate b ON b.prorateid = a.prorateSetting;
-
-IF @setting = 1 THEN 
-	SELECT @Day INTO @dayCalc;
-ELSEIF @setting = 2 THEN 
-	SELECT ''  ;
-ELSEIF @setting = 3 THEN 
-	SELECT DAY(LAST_DAY(CURDATE())) INTO @dayCalc;
-END IF;
-
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `spr_taxcalcIncome` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `spr_taxcalcIncome`(IN `periodDate` VARCHAR(10))
-BEGIN
- 
-INSERT INTO tr_payrolltaxincome
-SELECT a.period,a.nik,c.dependent,
-Sum(CASE b.articleId WHEN 'Article01' THEN Amount ELSE 0 End) 'T01',
-Sum(CASE b.articleId WHEN 'Article03' THEN Amount ELSE 0 End) 'T03',
-Sum(CASE b.articleId WHEN 'Article04' THEN Amount ELSE 0 End) 'T04',
-Sum(CASE b.articleId WHEN 'Article05' THEN Amount ELSE 0 End) 'T05',
-Sum(CASE b.articleId WHEN 'Article06' THEN Amount ELSE 0 End) 'T06',
-Sum(CASE b.articleId WHEN 'Article07' THEN Amount ELSE 0 End) 'T07',
-Sum(CASE b.articleId WHEN 'Article10' THEN Amount ELSE 0 End) 'T10',
-0 'NettoBefore',
-0 'PPhBefore'
-FROM tr_payroll a
-JOIN ms_payrollcomponent b on a.payrollcode = b.payrollcode
-JOIN ms_personnelhead c on c.id = a.nik
-WHERE period = periodDate
-AND a.NIK In 
-(Select z.nik from ms_personnelcontract z
-where concat(periodDate,'/01')  between startDate AND endDate)
-group by a.nik, a.period;
-
-
-INSERT INTO tr_payrolltaxmonthlyproc
-SELECT a.period,0,a.nik,0,
-Sum(CASE b.articleId WHEN 'Article01' THEN Amount ELSE 0 End) 'T01',
-0 'T02',
-Sum(CASE b.articleId WHEN 'Article03' THEN Amount ELSE 0 End) 'T03',
-Sum(CASE b.articleId WHEN 'Article04' THEN Amount ELSE 0 End) 'T04',
-Sum(CASE b.articleId WHEN 'Article05' THEN Amount ELSE 0 End) 'T05',
-Sum(CASE b.articleId WHEN 'Article06' THEN Amount ELSE 0 End) 'T06',
-Sum(CASE b.articleId WHEN 'Article07' THEN Amount ELSE 0 End) 'T07',
-0 'BiayaJabatan',
-Sum(CASE b.articleId WHEN 'Article10' THEN Amount ELSE 0 End) 'T10',
-0,0,0,0,
-0,
-0,0,0,0,0,0,0,0,0,0,0,0,0
-FROM tr_payroll a
-JOIN ms_payrollcomponent b on a.payrollcode = b.payrollcode
-WHERE period = periodDate
-AND a.NIK In 
-(Select z.nik from ms_personnelcontract z
-where concat(periodDate,'/01')  between startDate AND endDate)
-group by a.nik, a.period;
-
-
-
-UPDATE tr_payrolltaxmonthlyproc a
-JOIN (
-Select b.nik,b.year,sum(netto) 'Netto', sum(taxPaid) 'TaxPaid'  from ms_payrolltaxbeforedetail a
-JOIN ms_payrolltaxbefore b on a.id = b.id
-Group By b.nik,b.year) b
-on b.nik = a.nik
-SET prevnetto = b.netto,
-prevTaxPaid = b.taxpaid
-Where sequance = 0;
-
-
-
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `spr_taxcalctiering` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `spr_taxcalctiering`(IN `periodDate` VARCHAR(10), `mode` VARCHAR(5))
-BEGIN
-DECLARE NotMatch INT DEFAULT 1;
-DECLARE Count INT DEFAULT 0;
-
-DECLARE T02Temp DECIMAL(18,2);
-DECLARE sumT07 DECIMAL(18,2);
-DECLARE curNik varchar(20);
-DECLARE done INT DEFAULT 0;
-
-DECLARE tableName VARCHAR(60);
-
-
-/* CURSOR AWAL */
-DECLARE cur CURSOR FOR 
-SELECT nik,Sum(T07) 'T07' FROM tr_payrolltaxmonthlyproc
-WHERE isFinal <> 1 AND LEFT(period,4) = LEFT(periodDate,4)
-group by Nik;
-
-DECLARE cur1 CURSOR FOR 
-SELECT nik,Sum(T07) 'T07' FROM tr_payrolltaxmonthlyprocdummy
-WHERE isFinal <> 1 AND LEFT(period,4) = LEFT(periodDate,4)
-group by Nik;
-
-DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
-
-WHILE NotMatch > 0 DO 
-
-
-/* --------------- DECLARE NAMA TABLE ------------------*/
-IF mode = 1 THEN
-	SET tableName = 'tr_payrolltaxmonthlyproc';
-ELSE
-	SET tableName = 'tr_payrolltaxmonthlyprocdummy';
-END If;
-
-/* -----------------------END----------------------------*/
-
-
-
-
-/* ------------------------------------------ INITIAL INPUT ----------------------------------------------*/
-
-SELECT taxSetting INTO @taxSetting 
-FROM ms_company
-where companyid = 1;
-
-Select rate,maxAmount into @FERate, @FEMaxAmount from ms_payrollfunctionalexpenses
-where id = 1;
-
-
-SELECT ptkp,rate INTO @ptkp,@rate FROM ms_payrollptkp;
-
-SET @SQL = CONCAT('
-UPDATE ', tableName ,' a
-JOIN ms_personnelhead b on b.id = a.nik
-SET NPWP = 
-CASE WHEN b.npwpNo = '''' THEN
-0
-ELSE
-1
-END');
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-SET @SQL = CONCAT('
-UPDATE ', tableName ,' a
-JOIN ms_personnelhead b on b.id = a.nik
-SET PTKP = (b.depENDent * @rate ) + @ptkp
-WHERE period = "',periodDate,'"');
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-
-Select end,npwpRate,NonNpwpRate into @endT1, @npwpRateT1,@nonNpwpRateT1 from ms_payrolltaxrate where tieringcode = 'T1';
-Select end,npwpRate,NonNpwpRate into @endT2, @npwpRateT2,@nonNpwpRateT2 from ms_payrolltaxrate where tieringcode = 'T2';
-Select end,npwpRate,NonNpwpRate into @endT3, @npwpRateT3,@nonNpwpRateT3 from ms_payrolltaxrate where tieringcode = 'T3';
-Select end,npwpRate,NonNpwpRate into @endT4, @npwpRateT4,@nonNpwpRateT4 from ms_payrolltaxrate where tieringcode = 'T4';
-
-
-
-/* ------------------- SET PREV TAX --------------------*/
-SET @SQL = CONCAT(
-'UPDATE ', tableName ,' a
-JOIN (SELECT nik,sum(pphAmount) amount FROM ', tableName , ' WHERE period  < "',periodDate,'" and LEFT(period,4) = ',LEFT(periodDate,4) ,' group by nik) b on b.nik = a.nik
-SET prevTaxPaid = b.amount
-WHERE period ="',periodDate,'"');
-
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-
-/* ------------------ SET WORK MONTH--------------------*/
-UPDATE tr_payrolltaxmonthlyproc a
-JOIN 
-
-(SELECT nik,min(a.startDate) 'startDate',max(a.endDate) 'endDate' FROM ms_personnelcontract a
-Group By Nik) b on b.nik = a.nik
-SET workmonth = 
-
-CASE WHEN year(b.startDate) =  Left(periodDate,4) THEN
-	CASE WHEN  periodDate = concat(year(b.endDate),'/',DATE_FORMAT(b.endDate,'%m')) THEN
-		TIMESTAMPDIFF(MONTH, b.startDate, b.enddate) +1
-	ELSE
-		TIMESTAMPDIFF(MONTH, b.startDate, concat(LEFT(periodDate,4),'/12/01')) +1
-    END
-
-WHEN year(b.startDate) <  Left(periodDate,4) THEN
-    CASE WHEN  periodDate = concat(year(b.endDate),'/',DATE_FORMAT(b.endDate,'%m')) THEN
-		TIMESTAMPDIFF(MONTH,  concat(LEFT(periodDate,4),'/01/01'),b.endDate) +1
-    ELSE
-    	TIMESTAMPDIFF(MONTH,  concat(LEFT(periodDate,4),'/01/01'),concat(LEFT(periodDate,4),'/12/01')) +1
-	END
-END
-WHERE period = periodDate;
-
-/* ------------------- SET SEQUANCE --------------------*/
-
-SET @SQL = CONCAT('
-UPDATE ',tableName,' a
-JOIN (
-SELECT nik,count(nik) as "count" FROM ',tableName,'
-WHERE LEFT(period,4) = ',LEFT(periodDate,4),'
-group by Nik
-) b on b.nik = a.nik
-SET 
-a.sequance = b.count - 1 
-WHERE period = "',periodDate,'"');
-
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-
-
-
-/* ------------------- SET PREV NETTO --------------------*/
-
-SET @SQL = CONCAT('
-UPDATE ',tableName, ' a
-JOIN (SELECT nik,sum(netto) amount FROM ', tableName, ' WHERE period  <= "',periodDate,'" and LEFT(period,4) = LEFT("',periodDate,'" ,4)  group by nik) b on b.nik = a.nik
-SET prevNetto = b.amount
-WHERE period = "',periodDate,'"  AND ',Count = 0);
-
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-
-/* ------------------- SET PREV NETTO BJ --------------------*/
-
-SET @SQL = CONCAT('
-UPDATE ',tableName ,' a
-JOIN (SELECT nik,sum(nettoBJ) amount FROM ', tableName, ' WHERE period  <= "',periodDate,'" and LEFT(period,4) = LEFT("',periodDate,'",4)  group by nik) b on b.nik = a.nik
-SET prevNettoBJ = b.amount
-WHERE period = "',periodDate,'"  AND ',Count = 0);
-
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-
-/* ---------------------------------------------END-------------------------------------------------*/
-
-
-
-
-/* ---------------------------------------- CALCULATION -------------------------------------------*/
-
-
-/* ------------------- NETTO BJ --------------------*/
-
-SET @SQL = CONCAT('
-UPDATE ', tableName ,'
-SET nettoBJ= floor(T01+T02+T03+T04+T05+T06)
-WHERE period = "',periodDate,'"');
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-SET @SQL = CONCAT('
-UPDATE ', tableName ,' a
-JOIN (
-SELECT nik,Sum(T07) as "T07" FROM tr_payrolltaxmonthlyproc
-WHERE isFinal <> 1 AND LEFT(period,4) = LEFT("',periodDate,'",4)
-group by Nik) b 
-on a.nik = b.nik
-SET NettoSumBJ= nettoBJ*(workmonth-sequance) + PrevNettoBJ + b.T07
-WHERE period = "',periodDate,'"');
-
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-/* ------------------- -NETTO-----------------------*/
-
-SET @SQL = CONCAT('
-UPDATE ', tableName ,'
-SET netto= floor(T01+T02+T03+T04+T05+T06)-(T10)
-WHERE period = "',periodDate,'"');
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-
-
-SET @SQL = CONCAT('
-UPDATE ', tableName ,' a
-JOIN (
-SELECT nik,Sum(T07) as "T07" FROM tr_payrolltaxmonthlyproc
-WHERE isFinal <> 1 AND LEFT(period,4) = LEFT("',periodDate,'",4)
-group by Nik) b 
-on a.nik = b.nik
-SET NettoSum= Netto*(workmonth-sequance) + PrevNetto+b.T07
-WHERE period = "',periodDate,'"');
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-
-/* ---------------------BIAYA JABATAN-----------------------*/
-SET @SQL = CONCAT('
-UPDATE ', tableName ,'
-SET 
-biayajabatan = 
-CASE WHEN NettoSumBJ * @FERate/100>@FEMaxAmount 
-THEN 
-(@FEMaxAmount/12)* workmonth
-ELSE 
-NettoSumBJ * @FERate/100 
-END
-WHERE period = "',periodDate,'" AND Isfinal = 0');
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-
-/* ------------------------PKP--------------------------*/
-SET @SQL = CONCAT('
-UPDATE ', tableName ,'
-SET PKP=floor((Nettosum-PTKP-BiayaJabatan)/1000)*1000  
-WHERE period = "',periodDate,'"');
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-
-
-
-/* START GROOS UP */
-
-SET @SQL = CONCAT('
-UPDATE ', tableName ,'
-SET T02 = 
-CASE WHEN npwp = 1 THEN
-	CASE 
-		WHEN PKP <= 47500000 
-		THEN
-			FLOOR(((PKP - 0 )* 5 / 95 + 0)/WorkMonth)
-		WHEN PKP > 47500000 
-		THEN
-			FLOOR(((PKP - 47500000) * 15 / 85 + 2500000) / WorkMonth)
-		WHEN PKP > 217500000 THEN
-			FLOOR(((PKP -217500000) * 25/75 + 32500000) / WorkMonth)
-		WHEN PKP > 405000000 THEN
-		FLOOR(((PKP -405000000) * 30/70 + 95000000) / WorkMonth)
-	END
-
-WHEN npwp = 0 THEN
-	CASE 
-		WHEN PKP <= 47000000 
-		THEN
-			FLOOR(((PKP - 0 )* 6 / 94 + 0)/WorkMonth)
-		WHEN PKP > 47000000 
-		THEN
-			FLOOR(((PKP - 47000000) * 18 / 82 + 3000000) / WorkMonth)
-		WHEN PKP > 211000000 THEN
-			FLOOR(((PKP -211000000) * 30/70 + 39000000) / WorkMonth)
-		WHEN PKP > 386000000 THEN
-		FLOOR(((PKP -386000000) * 36/64 + 114000000) / WorkMonth)
-	END
-END
-
-WHERE period = "',periodDate,'" AND T02 = 0 AND nik IN (select id from ms_personnelhead where taxSetting = 3)');
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-
-
-/*
-UPDATE tr_payrolltaxmonthlyproc
-SET T02 =  0
-WHERE period = periodDate AND T02 < 0;
-*/
-SET @SQL = CONCAT('
-UPDATE ', tableName ,' a
-JOIN (
-SELECT nik,sum(T02) as "T02" from tr_payrolltaxmonthlyproc
-WHERE isFinal <> 1 AND LEFT(period,4) = LEFT(periodDate,4)
-group by Nik
-) b on b.nik = a.nik
-SET 
-a.t02 = a.t02 + b.t02
-WHERE isFinal = 12 AND nik IN (select id from ms_personnelhead where taxSetting = 3) AND period = "',periodDate,'"');
-
-/* Update */
-
-
-/* ------------------- NETTO BJ --------------------*/
-
-SET @SQL = CONCAT('
-UPDATE ', tableName ,'
-SET nettoBJ= floor(T01+T02+T03+T04+T05+T06)
-WHERE period = "',periodDate,'"');
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-SET @SQL = CONCAT('
-UPDATE ', tableName ,' a
-JOIN (
-SELECT nik,Sum(T07) as "T07" FROM tr_payrolltaxmonthlyproc
-WHERE isFinal <> 1 AND LEFT(period,4) = LEFT("',periodDate,'",4)
-group by Nik) b 
-on a.nik = b.nik
-SET NettoSumBJ= nettoBJ*(workmonth-sequance) + PrevNettoBJ + b.T07
-WHERE nik IN (select id from ms_personnelhead where taxSetting = 3) AND period = "',periodDate,'"');
-
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-
-
-Select rate,maxAmount into @FERate, @FEMaxAmount from ms_payrollfunctionalexpenses
-where id = 1;
-
-
-/* ---------------------BIAYA JABATAN-----------------------*/
-
-SET @SQL = CONCAT('
-UPDATE ', tableName ,'
-SET 
-biayajabatan = 
-CASE WHEN NettoSumBJ * @FERate/100>@FEMaxAmount 
-THEN 
-(@FEMaxAmount/12)* workmonth
-ELSE 
-NettoSumBJ * @FERate/100 
-END
-WHERE nik IN (select id from ms_personnelhead where taxSetting = 3) AND period = "',periodDate,'" AND Isfinal = 0');
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-
-
-/* ---------------------NETTO-----------------------*/
-
-SET @SQL = CONCAT('
-UPDATE ', tableName ,'
-SET netto= floor(T01+T02+T03+T04+T05+T06)-(T10)
-WHERE nik IN (select id from ms_personnelhead where taxSetting = 3) AND period = "',periodDate,'"');
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-
-
-SET @SQL = CONCAT('
-UPDATE ', tableName ,' a
-JOIN (
-SELECT nik,Sum(T07) as "T07" FROM tr_payrolltaxmonthlyproc
-WHERE isFinal <> 1 AND LEFT(period,4) = LEFT("',periodDate,'",4)
-group by Nik) b 
-on a.nik = b.nik
-SET NettoSum= Netto*(workmonth-sequance) + PrevNetto+b.T07
-WHERE nik IN (select id from ms_personnelhead where taxSetting = 3) AND period = "',periodDate,'"');
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-
-/* ------------------------PKP--------------------------*/
-
-SET @SQL = CONCAT('
-UPDATE ', tableName ,'
-SET PKP=floor((Nettosum-PTKP-BiayaJabatan)/1000)*1000  
-WHERE nik IN (select id from ms_personnelhead where taxSetting = 3) AND period = "',periodDate,'"');
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-/* --------------------------------  END GROOS UP --------------------------------------*/
-
-
-
-
-
-/* ---------------------------------------- TIERING -------------------------------------------*/
-
-/* ------------------- -TIERING 1-----------------------*/
-
-SET @SQL = CONCAT('
-UPDATE ', tableName ,'
-SET PKP1=
-CASE 
-WHEN PKP>=  @endT1 
-THEN 
-@endT1 
-ELSE 
-PKP 
-END
-WHERE PKP>=0 AND period = "',periodDate,'"');
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-
-/* ------------------- -TIERING 2-----------------------*/
-SET @SQL = CONCAT('
-UPDATE ', tableName ,'
-SET PKP2=
-CASE 
-WHEN PKP-(PKP1)>=@endT2 
-THEN 
-@endT2 
-ELSE 
-PKP-(PKP1) 
-END
-WHERE PKP>=PKP1 AND period =  "',periodDate,'"');
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-
-/* ------------------- -TIERING 3-----------------------*/
-SET @SQL = CONCAT('
-UPDATE ', tableName ,'
-SET PKP3=
-CASE WHEN PKP-(PKP1+PKP2)>=@endT3 
-THEN 
-@endT3 
-ELSE PKP-(PKP1+PKP2) 
-END
-WHERE PKP>=PKP1+PKP2 AND period = "',periodDate,'"');
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-
-/* ------------------- -TIERING 4-----------------------*/
-SET @SQL = CONCAT('
-UPDATE ', tableName ,'
-SET PKP4=PKP - (PKP1+PKP2+PKP3) 
-WHERE PKP>=PKP1+PKP2+PKP3');
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-
-/* ----------------------PPH CALC-----------------------*/
-SET @SQL = CONCAT('
-UPDATE ', tableName ,'
-SET  PPHCalc=
-CASE WHEN npwp = 1 THEN
-FLOOR((((PKP1*@npwpRateT1)+(PKP2*@npwpRateT2)+(PKP3*@npwpRateT3)+(PKP4*@npwpRateT4))/100))
-ELSE
-FLOOR((((PKP1*@nonNpwpRateT1)+(PKP2*@nonNpwpRateT2)+(PKP3*@nonNpwpRateT3)+(PKP4*@nonNpwpRateT4))/100))
-END
-WHERE period = "',periodDate,'"');
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-
-
-/* ----------------------PPH AMOUNT-----------------------*/
-SET @SQL = CONCAT('
-UPDATE ', tableName ,' a
-JOIN ms_personnelhead b on b.id = a.nik
-SET  pphAmount= 
-CASE WHEN isFinal = 1 THEN
-FLOOR(PPHCalc - prevTaxPaid)
-ELSE
-FLOOR((PPHCalc - prevTaxPaid) / (workmonth-sequance))
-END
-WHERE period = "',periodDate,'"');
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-
-
--- IF @TaxSETting <> 3 THEN
--- SET NotMatch = 0;
--- ELSE
-
-SET @SQL = CONCAT('
-SELECT COUNT(*) INTO @notMatch FROM ', tableName ,' 
-WHERE T02<>PPhAmount AND IsFinal = 0 AND nik IN (select id from ms_personnelhead where taxSetting = 3)');
-PREPARE stmt FROM @SQL;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-
-IF @notMatch = 0 or @notMatch Is Null  THEN
-	SET NotMatch =  0;
-	ELSE
-SET NotMatch = @notMatch ;
-
-	SET @SQL = CONCAT('
-	UPDATE ', tableName ,'  
-	SET T02=PPhAmount,PPhAmount=0 
-	WHERE T02<>PPhAmount AND IsFinal = 0 AND nik IN (select id from ms_personnelhead where taxSetting = 3)');
-	PREPARE stmt FROM @SQL;
-	EXECUTE stmt;
-	DEALLOCATE PREPARE stmt;        
-	
-END IF;
-    
--- END IF;
-
-Set Count = Count + 1;
-
-END WHILE;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
-/*!50003 DROP PROCEDURE IF EXISTS `spu_alert` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8mb4 */ ;
-/*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `spu_alert`(IN `mode` VARCHAR(10))
-BEGIN
-
-DECLARE Curquery varchar(99);
-DECLARE Curtitle varchar(99);
-DECLARE CurAll varchar(9999) DEFAULT '';
-DECLARE count INT DEFAULT 0;
-DECLARE done INT DEFAULT 0;
-
-DECLARE cur CURSOR FOR 
-SELECT title,query FROM ms_alert;
-
-DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
-OPEN cur;
-startLoop: LOOP
-FETCH cur INTO Curtitle,Curquery;
-
-	IF done = 1 THEN
-		LEAVE startLoop;
-	END IF;
-	
-    IF count = 0 THEN
-		SET CurAll =  Curquery;
-    ELSE
-		SET CurAll =  CONCAT(CurAll,' UNION ALL ', Curquery);
-	END IF;
-	
-    SET count = count + 1;
-
-	END LOOP;
-CLOSE cur;
-
-IF mode = 1 THEN
-	SET @query = CurAll;
-	PREPARE stmt FROM @query;
-	EXECUTE stmt;
-	DEALLOCATE PREPARE stmt;
-ELSEIF mode = 2 THEN
-	OPEN cur;
-	select FOUND_ROWS() ;
-END IF;
-
-
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Final view structure for view `vr_crosstab`
@@ -3454,4 +3299,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-08-03  9:57:56
+-- Dump completed on 2019-08-06  7:22:56
