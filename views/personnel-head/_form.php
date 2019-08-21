@@ -144,30 +144,26 @@ use app\models\MsAttendanceShift;
                                 <div class="panel-body">
 									<div class ="row">
 										<div class="col-md-6">
-											<?= $form->field($model, 'firstName')->textInput(['maxlength' => true, 'placeholder' => 'Enter First Name...']) ?>
+											<?= $form->field($model, 'fullName')->textInput(['maxlength' => true, 'placeholder' => 'Enter First Name...']) ?>
 										</div>
-										
-										<div class="col-md-6">
-											<?= $form->field($model, 'lastName')->textInput(['maxlength' => true, 'placeholder' => 'Enter Last Name...']) ?> 
-										</div>
-									</div>
-									
-									<div class ="row">
 
 										<div class="col-md-6">
 											 <?= $form->field($model, 'employeeNo')->textInput(['maxlength' => true, 'placeholder' => 'Enter Employee No']) ?>
 										</div>	
 										
+									</div>
+									
+									<div class ="row">
+
+									
 										<div class="col-md-6">
 											<?=
 												$form->field($model, 'gender')
 												->dropDownList(ArrayHelper::map(LkGender::find()
 													->orderBy('id')->all(), 'id', 'description'), ['prompt' => 'Select ' . $model->getAttributeLabel('gender')])
                                             ?>
-										</div>										
-									</div>									
-									
-									<div class ="row">
+										</div>	
+										
 										<div class="col-md-6">
 											<div class="row">
                                                 <div class="col-md-4">
@@ -181,6 +177,10 @@ use app\models\MsAttendanceShift;
                                             </div>
 										</div>
 
+									</div>									
+									
+									<div class ="row">
+										
 										<div class="col-md-6">
 											<div class="row">
 												<div class="col-md-6">
@@ -196,7 +196,11 @@ use app\models\MsAttendanceShift;
 												</div>	
 													
 											</div>
-										</div>										
+										</div>		
+										
+										<div class="col-md-6">
+											 <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => 'ex: admin.web.com']) ?>
+										</div>	
 									</div>									
 								
 									<div class ="row">
@@ -293,14 +297,21 @@ use app\models\MsAttendanceShift;
                                             <?php Pjax::end() ?>
 										</div>										
 									</div>	
-
-									<div class ="row">
+															
+									<div class="row">
+										<div class="col-md-6">
+											 <?= $form->field($model, 'idNo')->textInput(['maxlength' => true, 'placeholder' => 'ex: admin.web.com']) ?>
+										</div>	
 
 										<div class="col-md-6">
-											 <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => 'ex: admin.web.com']) ?>
+											<?=
+												$form->field($model, 'locationID')
+												->dropDownList(ArrayHelper::map(MsSetting::find()
+																->where('key1="Area"')->all(), 'value1', 'key2'), ['prompt' => 'Select ' . $model->getAttributeLabel('locationID')])
+											?>
 										</div>	
-																			
-									</div>									
+									</div>
+								
                                 </div>
                             </div>
                         </div> 

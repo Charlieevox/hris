@@ -34,7 +34,7 @@ class MsPersonnelHead extends \yii\db\ActiveRecord {
         return [
             [['firstName','gender','divisionId','departmentId','bankName','dependent','npwpNo'], 'required'],
             [['npwpNo'],'string','length' => [20,20]],
-			[['birthDate', 'createdDate', 'editedDate', 'phoneNo','joinPersonnelStatus','joinPersonnelPosition' ,'joinPersonnelfamily', 'joinPersonnelContract', 'taxId','imageKTP','imageNPWP','imagePhoto'], 'safe'],
+			[['birthDate', 'createdDate', 'editedDate', 'phoneNo','joinPersonnelStatus','joinPersonnelPosition' ,'joinPersonnelfamily', 'joinPersonnelContract', 'taxId','locationID','imageKTP','imageNPWP','imagePhoto'], 'safe'],
             [['flagActive'], 'boolean'],
             [['major','employeeNo','shiftCode','nationality','swiftCode', 'country', 'firstName', 'lastName', 'fullName', 'birthPlace', 'address', 'city', 'branch'], 'string', 'max' => 50],
             [['maritalStatus','prorateSetting','taxSetting','overtimeId'], 'string', 'max' => 20],
@@ -46,7 +46,7 @@ class MsPersonnelHead extends \yii\db\ActiveRecord {
             [['npwpAddress'], 'string', 'max' => 100],
             [['npwpName', 'education', 'divisionId', 'departmentId', 'createdBy', 'editedBy', 'ecFirstName', 'ecLastName', 'ecRelationShip', 'ecPhone1', 'ecPhone2'], 'string', 'max' => 45],
             [['empStatus', 'jamsostekParm','paymentMethod'], 'string', 'max' => 30],
-            [['npwpNo', 'bpjskNo', 'bpkstkNo', 'bankName', 'bankNo'], 'string', 'max' => 25],
+            [['idNo','npwpNo', 'bpjskNo', 'bpkstkNo', 'bankName', 'bankNo'], 'string', 'max' => 25],
             [['imageGalleryPhoto'], 'file', 'extensions'=>'jpg, gif, png'],
 			[['imageGalleryKTP','imageGalleryNPWP'], 'file', 'extensions'=>'jpg, gif, png, pdf'],
 			[['imageGalleryKTPMode','imageGalleryNPWPMode','imageGalleryPhotoMode'], 'safe'],
@@ -111,7 +111,9 @@ class MsPersonnelHead extends \yii\db\ActiveRecord {
             'imageGalleryPhoto'=> '',
 			'paymentMethod' => 'By',
             'swiftCode' => 'Swift Code',
-            'shiftCode' => 'Shift Code'
+            'shiftCode' => 'Shift Code',
+            'idNo' => 'Identity Number',
+            'locationID' => 'Location'
         ];
     }
 

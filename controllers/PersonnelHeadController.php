@@ -516,7 +516,7 @@ class PersonnelHeadController extends ControllerUAC {
         $model->createdBy = Yii::$app->user->identity->username;
         $model->createdDate = new Expression('NOW()');
         $model->flagActive = 1;
-        $model->fullName = $model->firstName . ' ' . $model->lastName;
+        // $model->fullName = $model->firstName . ' ' . $model->lastName;
 
         if (!$model->save()) {
             $transaction->rollBack();
