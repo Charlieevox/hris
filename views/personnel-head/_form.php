@@ -262,7 +262,7 @@ use app\models\MsAttendanceShift;
 
 										<div class="col-md-6">
 											<?php Pjax::begin(['id' => 'depdropdown']) ?>
-                                             <?=
+                                            <?=
                                                     $form->field($model, 'departmentId', [
                                                         'addon' => [
                                                             'append' => [
@@ -300,9 +300,28 @@ use app\models\MsAttendanceShift;
 															
 									<div class="row">
 										<div class="col-md-6">
+											<?=
+												$form->field($model, 'empStatus')
+												->dropDownList(ArrayHelper::map(MsSetting::find()
+																->where('key1="Status"')->all(), 'value1', 'key2'), ['prompt' => 'Select ' . $model->getAttributeLabel('empStatus')])
+											?>
+										</div>	
+
+										<div class="col-md-6">
+											<?=
+												$form->field($model, 'positionID')
+												->dropDownList(ArrayHelper::map(MsPersonnelPosition::find()
+																->where('flagActive="1"')->all(), 'id', 'positionDescription'), ['prompt' => 'Select ' . $model->getAttributeLabel('positionID')])
+											?>
+										</div>	
+									</div>
+
+									<div class="row">
+										<div class="col-md-6">
 											 <?= $form->field($model, 'idNo')->textInput(['maxlength' => true, 'placeholder' => 'ex: admin.web.com']) ?>
 										</div>	
 
+										
 										<div class="col-md-6">
 											<?=
 												$form->field($model, 'locationID')
@@ -310,8 +329,8 @@ use app\models\MsAttendanceShift;
 																->where('key1="Area"')->all(), 'value1', 'key2'), ['prompt' => 'Select ' . $model->getAttributeLabel('locationID')])
 											?>
 										</div>	
-									</div>
-								
+
+									</div>											
                                 </div>
                             </div>
                         </div> 
@@ -347,12 +366,10 @@ use app\models\MsAttendanceShift;
                                                     <table class="table table-bordered Contract-Detail-Table" style="border-collapse: inherit;">
                                                         <thead>
                                                             <tr>
-																<th style="width: 15%;">Start Working</th>
-                                                                <th style="width: 15%;">Start Date</th>
-                                                                <th style="width: 15%;">End Date</th>
-                                                                <th style="width: 18%;">Agreement No</th>
-																<th style="width: 20%;">Status</th>
-																<th style="width: 20%;"><span style='vertical-align: bottom;'>Position</span>
+																<th style="">Start Working</th>
+                                                                <th style="">Start Date</th>
+                                                                <th style="">End Date</th>
+                                                                <th style="">Agreement No</th>
 																<?=
 																Html::a('<i class="glyphicon glyphicon-plus"></i>', ['personnel-position/addbrowse'], [
 																	'type' => 'button',
@@ -372,9 +389,7 @@ use app\models\MsAttendanceShift;
                                                             <?= Html::hiddenInput('MsPersonnelHead[joinPersonnelContract][0][startContract]', '', ['class' => 'StartContract-hidden']) ?>
                                                             <?= Html::hiddenInput('MsPersonnelHead[joinPersonnelContract][0][endContract]', '', ['class' => 'EndContract-hidden']) ?>
                                                             <?= Html::hiddenInput('MsPersonnelHead[joinPersonnelContract][0][docNo]', '', ['class' => 'DocNo-hidden']) ?>
-															<?= Html::hiddenInput('MsPersonnelHead[joinPersonnelContract][0][status]', '', ['class' => 'status-hidden']) ?>
-															<?= Html::hiddenInput('MsPersonnelHead[joinPersonnelContract][0][position]', '', ['class' => 'position-hidden']) ?>
-                                                        </tbody>
+														</tbody>
 
                                                         <tfoot class="table-detail">
                                                             <tr>  
@@ -416,25 +431,7 @@ use app\models\MsAttendanceShift;
                                                                     ])
                                                                     ?>
                                                                 </td>   
-																<td class="td-input">
-																<?=
-																	Html ::dropDownList('status', '', ArrayHelper::map(MsSetting ::find()->where('key1="Status"')->all(), 'value1', 'key2'), 
-																		[
-																		'class' => 'form-control actionStatus', 
-																		'prompt' => 'Select Status'])
-																?>
-																</td>
-																
-																<td class="td-input">
-																	<?=
-																		Html ::dropDownList('position', '',ArrayHelper::map(MsPersonnelPosition::find()->where('flagActive="1"')
-                                                                            ->orderBy('positionDescription')->all(), 'id', 'positionDescription'), 
-																			[
-																			'class' => 'form-control actionPosition', 
-																			'prompt' => 'Select Position'])
-																	?>
-																</td>
-																
+																														
                                                                 <td class="td-input text-center">
                                                                     <?= Html::a('<i class="glyphicon glyphicon-plus">&nbsp;Add</i>', '#', ['class' => 'btn btn-primary btn-sm btnAdd']) ?>
                                                                 </td>
@@ -1260,26 +1257,12 @@ $(document).ready(function () {
         "   <td class='text-left'>" +
         "       <input type='' class='docNo form-control' name='MsPersonnelHead[joinPersonnelContract][{{Count}}][docNo]' value='{{docNo}}' > " +
         "   </td>" +
-		"   <td class='text-left'>" +
-		"		<div class=''>" +
-        "       	<select class='js-example-data-array-status' style='width: 100%;' class='status form-control' name='MsPersonnelHead[joinPersonnelContract][{{Count}}][status]' value='{{status}}'> " +
-		"				<option value='{{status}}' selected='selected'>{{actionstatusDescription}}</option> " +		
-		"			</select> " +
-		"		</div> "+
-        "   </td>" +
-		"   <td class='text-left'>" +
-		"		<div class=''>" +
-        "       	<select class='js-example-data-array-selected' style='width: 100%;'  class='status form-control' name='MsPersonnelHead[joinPersonnelContract][{{Count}}][position]' value='{{position}}'> " +
-		"				<option value='{{position}}' selected='selected'>{{actionPositionDescription}}</option> " +
-		"			</select> " +
-		"		</div> "+
-        "   </td>" +
         $deleteRow
         "</tr>";
 
         if (initValue2 != null) {
             initValue2.forEach(function(entry) {
-			addRow2(entry.startWorking.toString(),entry.startContract.toString(), entry.endContract.toString(),entry.docNo.toString(),entry.status.toString(),'',entry.position.toString(),'');
+			addRow2(entry.startWorking.toString(),entry.startContract.toString(), entry.endContract.toString(),entry.docNo.toString());
             });
         }
  
@@ -1302,13 +1285,11 @@ $(document).ready(function () {
             return false;
         }
         
-        addRow2(actionStartWorking,actionStartContract, actionEndContract,actionDocNo,actionStatus,actionStatusDescription,actionPosition,actionPositionDescription);
+        addRow2(actionStartWorking,actionStartContract, actionEndContract,actionDocNo);
             $('.actionStartContract').val('');
 			$('.actionStartWorking').val('');
             $('.actionEndContract').val('');
             $('.actionDocNo').val('');
-			$('.actionPosition').val('').trigger('change');
-			$('.actionStatus').val('').trigger('change');
 			
 			$(".js-example-data-array-status").select2({
 				//data: dataStatus,

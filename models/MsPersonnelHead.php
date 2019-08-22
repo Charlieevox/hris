@@ -50,7 +50,7 @@ class MsPersonnelHead extends \yii\db\ActiveRecord {
             [['imageGalleryPhoto'], 'file', 'extensions'=>'jpg, gif, png'],
 			[['imageGalleryKTP','imageGalleryNPWP'], 'file', 'extensions'=>'jpg, gif, png, pdf'],
 			[['imageGalleryKTPMode','imageGalleryNPWPMode','imageGalleryPhotoMode'], 'safe'],
-			[['fullName', 'position', 'divisionId', 'email', 'departmentId', 'phoneNo'], 'safe','on'=>'search'],
+			[['fullName', 'position', 'divisionId', 'email', 'departmentId', 'phoneNo','positionID'], 'safe','on'=>'search'],
 			
         ];
     }
@@ -113,7 +113,8 @@ class MsPersonnelHead extends \yii\db\ActiveRecord {
             'swiftCode' => 'Swift Code',
             'shiftCode' => 'Shift Code',
             'idNo' => 'Identity Number',
-            'locationID' => 'Location'
+            'locationID' => 'Location',
+            'positionID' => 'Position'
         ];
     }
 
@@ -232,8 +233,6 @@ class MsPersonnelHead extends \yii\db\ActiveRecord {
             $this->joinPersonnelContract[$j]["startContract"] = AppHelper::convertDateTimeFormat($joinPersonnelContractDetail->startDate, 'Y-m-d', 'd-m-Y');
             $this->joinPersonnelContract[$j]["endContract"] = AppHelper::convertDateTimeFormat($joinPersonnelContractDetail->endDate, 'Y-m-d', 'd-m-Y');
             $this->joinPersonnelContract[$j]["docNo"] = $joinPersonnelContractDetail->docNo;
-			$this->joinPersonnelContract[$j]["status"] = $joinPersonnelContractDetail->status;
-			$this->joinPersonnelContract[$j]["position"] = $joinPersonnelContractDetail->position;
             $j += 1;
         }
         

@@ -575,8 +575,6 @@ class PersonnelHeadController extends ControllerUAC {
             $PersonnelContractModel->startDate = AppHelper::convertDateTimeFormat($joinPersonnelContract['startContract'], 'd-m-Y', 'Y-m-d');
             $PersonnelContractModel->endDate = AppHelper::convertDateTimeFormat($joinPersonnelContract['endContract'], 'd-m-Y', 'Y-m-d');
             $PersonnelContractModel->docNo = $joinPersonnelContract['docNo'];
-		    $PersonnelContractModel->status = $joinPersonnelContract['status'];
-			$PersonnelContractModel->position = $joinPersonnelContract['position'];
 
 
             if (!$PersonnelContractModel->save()) {
