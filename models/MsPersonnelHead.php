@@ -187,16 +187,20 @@ class MsPersonnelHead extends \yii\db\ActiveRecord {
 	public function getEmpStatus() {
 		return $this->hasOne(MsSetting::className(), ['value1' => 'empStatus'])->where('key1="Status"');
     }
-	
-	public function getPositiondesc()
-    {
-        return $this->hasOne(MsPersonnelPosition::className(), ['id' => 'position'])
-					->viaTable('ms_personnelcontract', ['nik' => 'id'], function ($query) {
 
-				//$query->Andwhere('now() between ms_personnelcontract.startdate and ms_personnelcontract.enddate');
-				$query->groupBy('ms_personnelcontract.nik');
-        });
+    public function getPositiondesc() {
+		return $this->hasOne(MsPersonnelPosition::className(), ['id' => 'positionID']);
     }
+	
+	// public function getPositiondesc()
+    // {
+    //     return $this->hasOne(MsPersonnelPosition::className(), ['id' => 'position'])
+	// 				->viaTable('ms_personnelcontract', ['nik' => 'id'], function ($query) {
+
+	// 			//$query->Andwhere('now() between ms_personnelcontract.startdate and ms_personnelcontract.enddate');
+	// 			//$query->groupBy('ms_personnelcontract.nik');
+    //     });
+    // }
 
     public function afterFind() {
         parent::afterFind();
