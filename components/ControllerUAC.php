@@ -10,7 +10,7 @@ class ControllerUAC extends \yii\web\Controller{
 		$url = '/' . $action->controller->id;
 	    $connection = Yii::$app->db;
 	    $roleID = Yii::$app->user->identity->userRoleID;
-	    $sql = "    SELECT DISTINCT b.node
+	    $sql = "    SELECT DISTINCT a.accessID,b.node
 			FROM ms_useraccess a
 			JOIN lk_accesscontrol b ON a.accessID = b.accessID
 			JOIN 
