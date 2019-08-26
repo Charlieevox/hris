@@ -66,3 +66,15 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>
 
 </div>
+
+<div class="panel-footer">
+    <div class="pull-right">
+        <?=  Html::a('Download', ['download'], [
+                    'type' => 'button',
+                    'title' => 'Download Working Schedule',
+                    'class' => 'btn btn-default open-modal-btn'
+                ]) 
+        ?>
+    </div>
+    <div class="clearfix"></div>           
+</div>

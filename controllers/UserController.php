@@ -172,6 +172,7 @@ class UserController extends ControllerUAC
             ]);
         }
     }
+    
     public function actionBrowse()
     {
         $this->view->params['browse'] = true;
