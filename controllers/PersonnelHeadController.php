@@ -674,38 +674,38 @@ class PersonnelHeadController extends ControllerUAC {
                 ->setOrientation(\PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE)
                 ->setPaperSize(\PHPExcel_Worksheet_PageSetup::PAPERSIZE_FOLIO);
 
-        //HEADER
-        // $activeSheet->setCellValue('B1','employeeNo');
-        // $activeSheet->setCellValue('C1','fullName');
-        // $activeSheet->setCellValue('D1','gender');
-        // $activeSheet->setCellValue('E1','division');
-        // $activeSheet->setCellValue('F1','department');
-        // $activeSheet->setCellValue('G1','positionDescription');
-        // $activeSheet->setCellValue('H1','status');
-        // $activeSheet->setCellValue('I1','startDate');
-        // $activeSheet->setCellValue('J1','endDate');
-        // $activeSheet->setCellValue('K1','birthPlace');
-        // $activeSheet->setCellValue('L1','birthDate');
-        // $activeSheet->setCellValue('M1','address');
-        // $activeSheet->setCellValue('N1','city');
-        // $activeSheet->setCellValue('O1','idNo');
-        // $activeSheet->setCellValue('P1','npwpNo');
-        // $activeSheet->setCellValue('Q1','bpkstkNo');
-        // $activeSheet->setCellValue('R1','gender');
-        // $activeSheet->setCellValue('S1','maritalStatus');
-        // $activeSheet->setCellValue('T1','education');
-        // $activeSheet->setCellValue('U1','major');
-        // $activeSheet->setCellValue('V1','TaxParm');
-        // $activeSheet->setCellValue('W1','jamsostekParm');
-        // $activeSheet->setCellValue('X1','bankName');
-        // $activeSheet->setCellValue('Y1','branch');
-        // $activeSheet->setCellValue('Z1','bankNo');
-        // $activeSheet->setCellValue('AA1','npwpName');
-        // $activeSheet->setCellValue('AB1','npwpAddress');
-        // $activeSheet->setCellValue('AC1','TaxLocation');
-        // $activeSheet->setCellValue('AD1','prorateSetting');
-        // $activeSheet->setCellValue('AE1','overtimeId');
-        // $activeSheet->setCellValue('AF1','shiftCode');
+        HEADER
+        $activeSheet->setCellValue('B1','employeeNo');
+        $activeSheet->setCellValue('C1','fullName');
+        $activeSheet->setCellValue('D1','gender');
+        $activeSheet->setCellValue('E1','division');
+        $activeSheet->setCellValue('F1','department');
+        $activeSheet->setCellValue('G1','positionDescription');
+        $activeSheet->setCellValue('H1','status');
+        $activeSheet->setCellValue('I1','startDate');
+        $activeSheet->setCellValue('J1','endDate');
+        $activeSheet->setCellValue('K1','birthPlace');
+        $activeSheet->setCellValue('L1','birthDate');
+        $activeSheet->setCellValue('M1','address');
+        $activeSheet->setCellValue('N1','city');
+        $activeSheet->setCellValue('O1','idNo');
+        $activeSheet->setCellValue('P1','npwpNo');
+        $activeSheet->setCellValue('Q1','bpkstkNo');
+        $activeSheet->setCellValue('R1','gender');
+        $activeSheet->setCellValue('S1','maritalStatus');
+        $activeSheet->setCellValue('T1','education');
+        $activeSheet->setCellValue('U1','major');
+        $activeSheet->setCellValue('V1','TaxParm');
+        $activeSheet->setCellValue('W1','jamsostekParm');
+        $activeSheet->setCellValue('X1','bankName');
+        $activeSheet->setCellValue('Y1','branch');
+        $activeSheet->setCellValue('Z1','bankNo');
+        $activeSheet->setCellValue('AA1','npwpName');
+        $activeSheet->setCellValue('AB1','npwpAddress');
+        $activeSheet->setCellValue('AC1','TaxLocation');
+        $activeSheet->setCellValue('AD1','prorateSetting');
+        $activeSheet->setCellValue('AE1','overtimeId');
+        $activeSheet->setCellValue('AF1','shiftCode');
 
                 
 
