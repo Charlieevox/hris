@@ -226,7 +226,7 @@ protected function saveModel($model) {
                 $objReader = \PHPExcel_IOFactory::createReader($inputFileType);
                 $objPHPExcel = $objReader->load($inputFileName);
             } catch (Exception $ex) {
-                die('Error loading file "' . pathinfo($inputFileName, PATHINFO_BASENAME) . '": ' . $e->getMessage());
+                die('Error loading file "' . pathinfo($inputFileName, PATHINFO_BASENAME) . '": ' . $ex->getMessage());
             }
 
             $sheet = $objPHPExcel->getSheet(0);
@@ -237,13 +237,13 @@ protected function saveModel($model) {
 
             for ($row = 2; $row <= $highestRow; ++$row) {
                 $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
-                $count = $workingCalcActualHead->find()->where('id = "' . $rowData[0][0] . '" ')->count();
+                $count = $workingCalcActualHead->find()->where('period = "' . $rowData[0][0] . '" ')->count();
 
                 if ($count == 0) {
                     \Yii::$app->db->createCommand()->insert('ms_attendancewcalcactualhead', [
-                        'id' => $rowData[0][0],
-                        'period' => $rowData[0][1],
-                        'nik' => $rowData[0][2],
+                        //'id' => $rowData[0][0],
+                        'period' => $rowData[0][0],
+                        'nik' => $rowData[0][1],
                         'createdBy' => Yii::$app->user->identity->username,
                         'createdDate' => new Expression('NOW()'),
                     ])->execute();
@@ -259,13 +259,13 @@ protected function saveModel($model) {
                     $connection = \Yii::$app->db;
                     $command = $connection->createCommand(
                             'UPDATE ms_attendancewcalcactualdetail SET inTime= "' . $rowData[0][4] . '", outTime= "' . $rowData[0][5] . '"'
-                            . ' WHERE id= "' . $rowData[0][0] . '" and date = "' . date('Y-m-d', AppHelper::ExcelToPHP($rowData[0][3])) . '"');
+                            . ' WHERE nik= "' . $rowData[0][1] . '" and date = "' . date('Y-m-d', AppHelper::ExcelToPHP($rowData[0][3])) . '"');
                     $command->execute();
                 } else {
                     \Yii::$app->db->createCommand()->insert('ms_attendancewcalcactualdetail', [
-                        'id' => $rowData[0][0],
-                        'period' => $rowData[0][1],
-                        'nik' => $rowData[0][2],
+                        //'id' => $rowData[0][0],
+                        'period' => $rowData[0][0],
+                        'nik' => $rowData[0][1],
                         'date' => date('Y-m-d', AppHelper::ExcelToPHP($rowData[0][3])),
                         'inTime' => $rowData[0][4],
                         'outTime' => $rowData[0][5],

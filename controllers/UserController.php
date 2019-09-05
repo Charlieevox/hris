@@ -94,52 +94,7 @@ class UserController extends ControllerUAC
          if ($model->load(Yii::$app->request->post())) {
 	
             if ($model->save()) {
-                     $connection = Yii::$app->db;
-                    $sql = "SELECT b.companyName
-                    FROM ms_user a
-                    JOIN ms_company b on a.companyID = b.companyID
-                    where a.username = '" .$model->username . "' ";
-                    $command= $connection->createCommand($sql);
-
-                    $command->execute();
-                    $headResult = $command->queryAll();
-
-                    $companyNames = "";
-                    foreach ($headResult as $detailMenu) {
-                            $companyNames = $detailMenu['companyName'];
-                    }
-                    $temp1 = str_replace(' ', '_',  $companyNames);
-                    $temp1 = str_replace('.', '_',  $temp1);
-
-                    $model->dbName = $temp1;
-                    $model->save();
-                    print_r($model->getErrors());
-
-                    $transaction = Yii::$app->db->beginTransaction();
-                    $connection = Yii::$app->db;
-                    $command = $connection->createCommand('call sp_database(:dbName)');
-                    $id = $model->dbName;
-                    $command->bindParam(':dbName', $id);
-                    $command->execute();
-
-                     $connection = Yii::$app->db;
-                     $command = $connection->createCommand('call sp_company_balance(0,2,:username)');
-                     $id = $model->username;
-                     $command->bindParam(':username', $id);
-                     $command->execute();
-
-                       $transaction->commit();
-                    // $sqlFile = Yii::$app->basePath .'/database_backup/easyb_web.sql';
-                    // $temp = $this->execSqlFile($sqlFile);
                      AppHelper::insertTransactionLog('Add Master User', $model->fullName);
-
-                      
-//                           echo"<pre>";
-//                            var_dump($temp);
-//                            echo"</pre>";
-//                            yii::$app->end();
-                              
-			  
             return $this->redirect(['index']);
 			}	
         } else {
