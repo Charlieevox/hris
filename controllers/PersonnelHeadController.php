@@ -518,6 +518,12 @@ class PersonnelHeadController extends ControllerUAC {
         $model->flagActive = 1;
         // $model->fullName = $model->firstName . ' ' . $model->lastName;
 
+        // echo "<pre>";
+        // var_dump($model);
+        // echo "</pre>";
+        // Yii::$app->end();
+
+        
         if (!$model->save()) {
             $transaction->rollBack();
             return false;
@@ -529,11 +535,7 @@ class PersonnelHeadController extends ControllerUAC {
 //        if (empty($model->joinPersonnelfamily) || !is_array($model->joinPersonnelfamily) || count($model->joinPersonnelfamily) < 1) {
 //            $transaction->rollBack();
 //            return false;
-//        }
-//        echo "<pre>";
-//        var_dump($model->joinPersonnelContract);
-//        echo "</pre>";
-//        Yii::$app->end();
+       // }
 
         function removeElementWithValue($array, $key, $value) {
             foreach ($array as $subKey => $subArray) {
@@ -544,8 +546,9 @@ class PersonnelHeadController extends ControllerUAC {
             return $array;
         }
 
+
         $arrayFamily = removeElementWithValue(($model->joinPersonnelfamily), "firstName", "");
-        $arrayContract = removeElementWithValue(($model->joinPersonnelContract), "startContract", "");
+        $arrayContract = removeElementWithValue(($model->joinPersonnelContract), "startWorking", "");
 
 		
 
@@ -569,11 +572,12 @@ class PersonnelHeadController extends ControllerUAC {
         }
 
         foreach ($arrayContract as $joinPersonnelContract) {
+
             $PersonnelContractModel = new MsPersonnelContract();
             $PersonnelContractModel->nik = $model->id;
 			$PersonnelContractModel->startWorking = AppHelper::convertDateTimeFormat($joinPersonnelContract['startWorking'], 'd-m-Y', 'Y-m-d');
-            $PersonnelContractModel->startDate = AppHelper::convertDateTimeFormat($joinPersonnelContract['startContract'], 'd-m-Y', 'Y-m-d');
-            $PersonnelContractModel->endDate = AppHelper::convertDateTimeFormat($joinPersonnelContract['endContract'], 'd-m-Y', 'Y-m-d');
+            $PersonnelContractModel->startDate = AppHelper::convertDateTimeFormat($joinPersonnelContract['startDate'], 'd-m-Y', 'Y-m-d');
+            $PersonnelContractModel->endDate = AppHelper::convertDateTimeFormat($joinPersonnelContract['endDate'], 'd-m-Y', 'Y-m-d');
             $PersonnelContractModel->docNo = $joinPersonnelContract['docNo'];
 
 
@@ -674,7 +678,7 @@ class PersonnelHeadController extends ControllerUAC {
                 ->setOrientation(\PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE)
                 ->setPaperSize(\PHPExcel_Worksheet_PageSetup::PAPERSIZE_FOLIO);
 
-        HEADER
+        // HEADER
         $activeSheet->setCellValue('B1','employeeNo');
         $activeSheet->setCellValue('C1','fullName');
         $activeSheet->setCellValue('D1','gender');

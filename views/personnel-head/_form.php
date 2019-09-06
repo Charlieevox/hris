@@ -320,16 +320,6 @@ use app\models\MsAttendanceShift;
 										<div class="col-md-6">
 											 <?= $form->field($model, 'idNo')->textInput(['maxlength' => true, 'placeholder' => 'ex: admin.web.com']) ?>
 										</div>	
-
-										
-										<div class="col-md-6">
-											<?=
-												$form->field($model, 'locationID')
-												->dropDownList(ArrayHelper::map(MsSetting::find()
-																->where('key1="Area"')->all(), 'value1', 'key2'), ['prompt' => 'Select ' . $model->getAttributeLabel('locationID')])
-											?>
-										</div>	
-
 									</div>											
                                 </div>
                             </div>
@@ -370,17 +360,6 @@ use app\models\MsAttendanceShift;
                                                                 <th style="">Start Date</th>
                                                                 <th style="">End Date</th>
                                                                 <th style="">Agreement No</th>
-																<?=
-																Html::a('<i class="glyphicon glyphicon-plus"></i>', ['personnel-position/addbrowse'], [
-																	'type' => 'button',
-																	'title' => 'Add Position',
-																	'data-toggle' => 'tooltip',
-																	'data-target-width' => '400',
-																	'data-target-height' => '400',
-																	'data-target-value' => '.posHiddenInput',
-																	'class' => 'btn btn-xs pull-right btn-primary WindowDialogBrowse'
-																]);
-																?>
 																</th>
                                                             </tr>
                                                         </thead>
@@ -407,7 +386,7 @@ use app\models\MsAttendanceShift;
                                                                     <?=
                                                                     DatePicker::widget([
                                                                         'removeButton' => false,
-                                                                        'name' => 'startContract',
+                                                                        'name' => 'startDate',
                                                                         'options' => ['class' => 'form-control actionStartContract', 'placeholder' => 'ex: 01-01-2016'],
                                                                         'pluginOptions' => ['autoclose' => True, 'format' => 'dd-mm-yyyy']
                                                                     ]);
@@ -417,7 +396,7 @@ use app\models\MsAttendanceShift;
                                                                     <?=
                                                                     DatePicker::widget([
                                                                         'removeButton' => false,
-                                                                        'name' => 'endContract',
+                                                                        'name' => 'endDate',
                                                                         'options' => ['class' => 'form-control actionEndContract', 'placeholder' => 'ex: 01-01-2016'],
                                                                         'pluginOptions' => ['autoclose' => True, 'format' => 'dd-mm-yyyy']
                                                                     ]);
@@ -1228,6 +1207,7 @@ $(document).ready(function () {
         
 //CONTRACT GRID VIEW
 		var initValue2 = $contractDetail;
+		console.log(initValue2);
 		var rowTemplate2 = "" +
         "<tr class='tr-action'>" +
 		"   <td class='text-left'>" +
@@ -1243,7 +1223,7 @@ $(document).ready(function () {
 		"			<div class='input-group-addon'>" +
         "				<span class='glyphicon glyphicon-calendar'></span>" +
 		"			</div>" +
-		"			<input id='datepickerStartContract' data-key='{{Count}}' type='' class='startDate form-control datepickerStartContract' name='MsPersonnelHead[joinPersonnelContract][{{Count}}][startContract]' value='{{startContract}}'>" +
+		"			<input id='datepickerStartContract' data-key='{{Count}}' type='' class='startDate form-control datepickerStartContract' name='MsPersonnelHead[joinPersonnelContract][{{Count}}][startDate]' value='{{startDate}}'>" +
 		"		</div>" +	
 		"   </td>" +
 		"   <td class='text-left'>" +
@@ -1251,7 +1231,7 @@ $(document).ready(function () {
 		"				<div class='input-group-addon'>" +
         "					<span class='glyphicon glyphicon-calendar'></span>" +
 		"				</div>" +
-		"			<input id='datepickerEndContract' type='text' class='endDate form-control datepickerEndContract' name='MsPersonnelHead[joinPersonnelContract][{{Count}}][endContract]' value='{{endContract}}'>" +
+		"			<input id='datepickerEndContract' type='text' class='endDate form-control datepickerEndContract' name='MsPersonnelHead[joinPersonnelContract][{{Count}}][endDate]' value='{{endDate}}'>" +
 		"		</div>" +
 		"   </td>" +
         "   <td class='text-left'>" +
@@ -1262,7 +1242,7 @@ $(document).ready(function () {
 
         if (initValue2 != null) {
             initValue2.forEach(function(entry) {
-			addRow2(entry.startWorking.toString(),entry.startContract.toString(), entry.endContract.toString(),entry.docNo.toString());
+				addRow2(entry.startWorking.toString(),entry.startDate.toString(), entry.endDate.toString(),entry.docNo.toString());
             });
         }
  
@@ -1338,11 +1318,11 @@ $(document).ready(function () {
 			
         });
         
-        function addRow2(actionStartWorking,actionStartContract, actionEndContract,actionDocNo,actionStatus,actionStatusDescription,actionPosition,actionPositionDescription){
+        function addRow2(actionStartWorking,actionStartDate, actionEndDate,actionDocNo,actionStatus,actionStatusDescription,actionPosition,actionPositionDescription){
             var template = rowTemplate2;
 			template = replaceAll(template, '{{startWorking}}', actionStartWorking);
-            template = replaceAll(template, '{{startContract}}', actionStartContract);
-            template = replaceAll(template, '{{endContract}}', actionEndContract);
+            template = replaceAll(template, '{{startDate}}', actionStartDate);
+            template = replaceAll(template, '{{endDate}}', actionEndDate);
             template = replaceAll(template, '{{docNo}}', actionDocNo);       
             template = replaceAll(template, '{{Count}}', getMaximumCounter2() + 1);
 			template = replaceAll(template, '{{position}}', actionPosition);  
@@ -1809,8 +1789,9 @@ $(document).on('pjax:end', function() {
           
         
         
-//CONTRACT GRID VIEW
+		//CONTRACT GRID VIEW
 		var initValue2 = $contractDetail;
+		console.log(initValue2);
 		var rowTemplate2 = "" +
         "<tr class='tr-action'>" +
 		"   <td class='text-left'>" +
@@ -1822,52 +1803,38 @@ $(document).on('pjax:end', function() {
 		"		</div>" +	
 		"   </td>" +
 		"   <td class='text-left'>" +
-		"	<div class='input-group date'>" +
+		"		<div class='input-group date'>" +
 		"			<div class='input-group-addon'>" +
         "				<span class='glyphicon glyphicon-calendar'></span>" +
 		"			</div>" +
-		"		<input id='datepickerStartContract' data-key='{{Count}}' type='text' class='startDate form-control datepicker datepickerStartContract' name='MsPersonnelHead[joinPersonnelContract][{{Count}}][startContract]' value='{{startContract}}'>" +
-		"	</div>" +	
+		"			<input id='datepickerStartContract' data-key='{{Count}}' type='' class='startDate form-control datepickerStartContract' name='MsPersonnelHead[joinPersonnelContract][{{Count}}][startDate]' value='{{startDate}}'>" +
+		"		</div>" +	
 		"   </td>" +
 		"   <td class='text-left'>" +
 		"		<div class='input-group date'>" +
 		"				<div class='input-group-addon'>" +
         "					<span class='glyphicon glyphicon-calendar'></span>" +
 		"				</div>" +
-		"			<input id='datepickerEndContract' type='text' class='endDate form-control datepicker datepickerEndContract' name='MsPersonnelHead[joinPersonnelContract][{{Count}}][endContract]' value='{{endContract}}'>" +
+		"			<input id='datepickerEndContract' type='text' class='endDate form-control datepickerEndContract' name='MsPersonnelHead[joinPersonnelContract][{{Count}}][endContract]' value='{{endDate}}'>" +
 		"		</div>" +
 		"   </td>" +
         "   <td class='text-left'>" +
         "       <input type='' class='docNo form-control' name='MsPersonnelHead[joinPersonnelContract][{{Count}}][docNo]' value='{{docNo}}' > " +
         "   </td>" +
-		"   <td class='text-left'>" +
-		"		<div class=''>" +
-        "       	<select class='js-example-data-array-status' style='width: 100%;' class='status form-control' name='MsPersonnelHead[joinPersonnelContract][{{Count}}][status]' value='{{status}}'> " +
-		"				<option value='{{status}}' selected='selected'>{{actionstatusDescription}}</option> " +		
-		"			</select> " +
-		"		</div> "+
-        "   </td>" +
-		"   <td class='text-left'>" +
-		"		<div class=''>" +
-        "       	<select class='js-example-data-array-selected' style='width: 100%;'  class='status form-control' name='MsPersonnelHead[joinPersonnelContract][{{Count}}][position]' value='{{position}}'> " +
-		"				<option value='{{position}}' selected='selected'>{{actionPositionDescription}}</option> " +
-		"			</select> " +
-		"		</div> "+
-        "   </td>" +
         $deleteRow
-        "</tr>";		
-		
+        "</tr>";
+
         if (initValue2 != null) {
-			$('.tr-action').remove(); 
-			initValue2.forEach(function(entry) {
-			addRow2(entry.startWorking.toString(),entry.startContract.toString(), entry.endContract.toString(),entry.docNo.toString(),entry.status.toString(),'',entry.position.toString(),'');
-           });
+            initValue2.forEach(function(entry) {
+				addRow2(entry.startWorking.toString(),entry.startDate.toString(), entry.endDate.toString(),entry.docNo.toString());
+            });
         }
  
         
         
     $('.Contract-Detail-Table .btnAdd').on('click', function (e) {
         e.preventDefault();
+		var actionStartWorking= $('.actionStartWorking').val();
         var actionStartContract= $('.actionStartContract').val();
         var actionEndContract= $('.actionEndContract').val();
         var actionDocNo = $('.actionDocNo').val();
@@ -1881,97 +1848,96 @@ $(document).on('pjax:end', function() {
             bootbox.alert("Fill Start Contract");
             return false;
         }
-
-        if(actionEndContract=="" || actionEndContract==undefined){
-            bootbox.alert("Fill End Contract");
-            return false;
-        }   
-		
-        addRow2(actionStartContract, actionEndContract,actionDocNo,actionStatus,actionStatusDescription,actionPosition,actionPositionDescription);
-		$('.actionStartContract').val('');
-		$('.actionEndContract').val('');
-		$('.actionDocNo').val('');
-		$('.actionPosition').val('').trigger('change');
-		$('.actionStatus').val('').trigger('change');
-		
-		$(".js-example-data-array-status").select2({
-			//data: dataStatus,
-			theme: "krajee"
-		})
-				
-		$(".js-example-data-array-selected").select2({
-			//data: dataPosition,
-			theme: "krajee"
-		})
-		
-		$('.datepickerStartContract').kvDatepicker({
-			autoclose: true,
-			format: 'dd-mm-yyyy'
-		})
-		
-		$('.datepickerEndContract').kvDatepicker({
-			autoclose: true,
-			format: 'dd-mm-yyyy'
-		})
-		
-		
-		$("[name='MsPersonnelHead[joinPersonnelContract][" + (getMaximumCounter2()) + "][status]']").select2({
-			data: dataStatus,
-			theme: "krajee"
-		})
-		
-		$("[name='MsPersonnelHead[joinPersonnelContract][" + (getMaximumCounter2()) + "][position]']").select2({
-			data: dataPosition,
-			theme: "krajee"
-		})
-		
-		$("[name='MsPersonnelHead[joinPersonnelContract][" + (getMaximumCounter2()) + "][startContract]']").kvDatepicker({
-			autoclose: true,
-		})
-		
-		$("[name='MsPersonnelHead[joinPersonnelContract][" + (getMaximumCounter2()) + "][endContract]']").kvDatepicker({
-			autoclose: true,
-			format: 'dd-mm-yyyy'
-		})
-			
-	});
         
-	function addRow2(actionStartWorking,actionStartContract, actionEndContract,actionDocNo,actionStatus,actionStatusDescription,actionPosition,actionPositionDescription){
-		var template = rowTemplate2;
-		template = replaceAll(template, '{{startWorking}}', actionStartWorking);
-		template = replaceAll(template, '{{startContract}}', actionStartContract);
-		template = replaceAll(template, '{{endContract}}', actionEndContract);
-		template = replaceAll(template, '{{docNo}}', actionDocNo);       
-		template = replaceAll(template, '{{Count}}', getMaximumCounter2() + 1);
-		template = replaceAll(template, '{{position}}', actionPosition);  
-		template = replaceAll(template, '{{actionPositionDescription}}', actionPositionDescription); 
-		template = replaceAll(template, '{{status}}', actionStatus);  
-		template = replaceAll(template, '{{actionstatusDescription}}', actionStatusDescription);
-		$('.Contract-Detail-Table .actionBody').append(template); 		
-	
-		$('.datepickerStartContract').kvDatepicker({
-			autoclose: true,
-			format: 'dd-mm-yyyy'
-		})
+        addRow2(actionStartWorking,actionStartContract, actionEndContract,actionDocNo);
+            $('.actionStartContract').val('');
+			$('.actionStartWorking').val('');
+            $('.actionEndContract').val('');
+            $('.actionDocNo').val('');
+			
+			$(".js-example-data-array-status").select2({
+				//data: dataStatus,
+				theme: "krajee"
+			})
+					
+			$(".js-example-data-array-selected").select2({
+				//data: dataPosition,
+				theme: "krajee"
+			})
+			
+			$('.datepickerStartWorking').kvDatepicker({
+				autoclose: true,
+				format: 'dd-mm-yyyy'
+			})
+			
+			$('.datepickerStartContract').kvDatepicker({
+				autoclose: true,
+				format: 'dd-mm-yyyy'
+			})
+			
+			$('.datepickerEndContract').kvDatepicker({
+				autoclose: true,
+				format: 'dd-mm-yyyy'
+			})
+			
+			
+			$("[name='MsPersonnelHead[joinPersonnelContract][" + (getMaximumCounter2()) + "][status]']").select2({
+				data: dataStatus,
+				theme: "krajee"
+			})
+			
+			$("[name='MsPersonnelHead[joinPersonnelContract][" + (getMaximumCounter2()) + "][position]']").select2({
+				data: dataPosition,
+				theme: "krajee"
+			})
+			
+			$("[name='MsPersonnelHead[joinPersonnelContract][" + (getMaximumCounter2()) + "][startContract]']").kvDatepicker({
+				autoclose: true,
+			})
+			
+			$("[name='MsPersonnelHead[joinPersonnelContract][" + (getMaximumCounter2()) + "][endContract]']").kvDatepicker({
+				autoclose: true,
+				format: 'dd-mm-yyyy'
+			})
+			
+        });
+        
+        function addRow2(actionStartWorking,actionStartDate, actionEndDate,actionDocNo,actionStatus,actionStatusDescription,actionPosition,actionPositionDescription){
+            var template = rowTemplate2;
+			template = replaceAll(template, '{{startWorking}}', actionStartWorking);
+            template = replaceAll(template, '{{startDate}}', actionStartDate);
+            template = replaceAll(template, '{{endDate}}', actionEndDate);
+            template = replaceAll(template, '{{docNo}}', actionDocNo);       
+            template = replaceAll(template, '{{Count}}', getMaximumCounter2() + 1);
+			template = replaceAll(template, '{{position}}', actionPosition);  
+			template = replaceAll(template, '{{actionPositionDescription}}', actionPositionDescription); 
+			template = replaceAll(template, '{{status}}', actionStatus);  
+			template = replaceAll(template, '{{actionstatusDescription}}', actionStatusDescription);
+			$('.Contract-Detail-Table .actionBody').append(template); 	
 		
-		$('.datepickerEndContract').kvDatepicker({
-			autoclose: true,
-			format: 'dd-mm-yyyy'
-		})
-	
+			$('.datepickerStartContract').kvDatepicker({
+				autoclose: true,
+				format: 'dd-mm-yyyy'
+			})
+			
+			$('.datepickerEndContract').kvDatepicker({
+				autoclose: true,
+				format: 'dd-mm-yyyy'
+			})
 		
-		$(".js-example-data-array-status").select2({
-			//data: dataStatus,
-			theme: "krajee"
-		})
-		
-		
-		$(".js-example-data-array-selected").select2({
-			//data: dataPosition,
-			theme: "krajee"
-		})
-		
-	}
+			
+			$(".js-example-data-array-status").select2({
+				//data: dataStatus,
+				theme: "krajee"
+			})
+			
+			
+			$(".js-example-data-array-selected").select2({
+				//data: dataPosition,
+				theme: "krajee"
+			})
+			
+		}
 	
 	function getMaximumCounter2() {
             var maximum = 0;
@@ -1983,7 +1949,7 @@ $(document).on('pjax:end', function() {
             });
             return maximum;
 	}
-
+	
 	function replaceAll(string, find, replace) {
 		return string.replace(new RegExp(escapeRegExp(find), 'g'), replace);
 	}

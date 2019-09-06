@@ -237,7 +237,7 @@ protected function saveModel($model) {
 
             for ($row = 2; $row <= $highestRow; ++$row) {
                 $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
-                $count = $workingCalcActualHead->find()->where('period = "' . $rowData[0][0] . '" ')->count();
+                $count = $workingCalcActualHead->find()->where('period = "' . $rowData[0][0] . '" And NIK = "'.$rowData[0][1].'"')->count();
 
                 if ($count == 0) {
                     \Yii::$app->db->createCommand()->insert('ms_attendancewcalcactualhead', [
