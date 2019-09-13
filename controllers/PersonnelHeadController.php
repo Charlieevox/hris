@@ -586,6 +586,11 @@ class PersonnelHeadController extends ControllerUAC {
                 $transaction->rollBack();
                 return false;
             }
+
+            if (date('Y-m-d') > $PersonnelContractModel->endDate){
+                $model->flagActive = 0;
+                $model->save();
+            }
         }
 
 

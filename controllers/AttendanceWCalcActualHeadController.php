@@ -281,6 +281,14 @@ protected function saveModel($model) {
         }
     }
 
+    public function actionGenerateSchedule() {
+		$connection = Yii::$app->db;
+		$command = $connection->createCommand('call spa_generatescheduleactual');
+		$command->execute();
+		AppHelper::insertTransactionLog('Generate Schedule', '');
+		return $this->redirect(['index']);
+    }
+
 
     public function actionDownload() {
         ini_set('memory_limit', '-1');

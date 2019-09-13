@@ -34,7 +34,7 @@ class MsPersonnelHead extends \yii\db\ActiveRecord {
         return [
             //[['firstName','gender','divisionId','departmentId','bankName','dependent','npwpNo'], 'required'],
             [['npwpNo'],'string','length' => [20,20]],
-			[['birthDate', 'createdDate', 'editedDate', 'phoneNo','joinPersonnelStatus','joinPersonnelPosition' ,'joinPersonnelfamily', 'joinPersonnelContract', 'taxId','locationID','imageKTP','imageNPWP','imagePhoto'], 'safe'],
+			[['birthDate', 'createdDate', 'editedDate', 'phoneNo','joinPersonnelStatus','joinPersonnelPosition' ,'joinPersonnelfamily', 'joinPersonnelContract', 'taxId','locationID','imageKTP','imageNPWP','imagePhoto','positionID'], 'safe'],
             [['flagActive'], 'boolean'],
             [['major','employeeNo','shiftCode','nationality','swiftCode', 'country', 'firstName', 'lastName', 'fullName', 'birthPlace', 'city', 'branch'], 'string', 'max' => 50],
             [['maritalStatus','prorateSetting','taxSetting','overtimeId'], 'string', 'max' => 20],
