@@ -1,0 +1,379 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `spr_taxcalctiering`(IN `periodDate` VARCHAR(10), `mode` VARCHAR(5))
+BEGIN
+DECLARE NotMatch INT DEFAULT 1;
+DECLARE Count INT DEFAULT 0;
+
+DECLARE T02Temp DECIMAL(18,2);
+DECLARE sumT07 DECIMAL(18,2);
+DECLARE curNik varchar(20);
+DECLARE done INT DEFAULT 0;
+
+DECLARE tableName VARCHAR(60);
+
+
+WHILE NotMatch > 0 DO 
+
+
+/* --------------- DECLARE NAMA TABLE ------------------*/
+IF mode = 1 THEN
+	SET tableName = 'tr_payrolltaxmonthlyproc';
+ELSE
+	SET tableName = 'tr_payrolltaxmonthlyprocdummy';
+END If;
+/* -----------------------END----------------------------*/
+
+
+
+
+/* ------------------------------------------ INITIAL INPUT ----------------------------------------------*/
+
+SELECT taxSetting INTO @taxSetting 
+FROM ms_company
+where companyid = 1;
+
+Select rate,maxAmount into @FERate, @FEMaxAmount from ms_payrollfunctionalexpenses
+where id = 1;
+
+
+SELECT ptkp,rate INTO @ptkp,@rate FROM ms_payrollptkp;
+
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN ms_personnelhead b on b.id = a.nik
+SET NPWP = 
+CASE WHEN b.npwpNo = '' THEN
+0
+ELSE
+1
+END;
+
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN ms_personnelhead b on b.id = a.nik
+SET PTKP = (b.depENDent * @rate ) + @ptkp
+WHERE period = periodDate;
+
+Select end,npwpRate,NonNpwpRate into @endT1, @npwpRateT1,@nonNpwpRateT1 from ms_payrolltaxrate where tieringcode = 'T1';
+Select end,npwpRate,NonNpwpRate into @endT2, @npwpRateT2,@nonNpwpRateT2 from ms_payrolltaxrate where tieringcode = 'T2';
+Select end,npwpRate,NonNpwpRate into @endT3, @npwpRateT3,@nonNpwpRateT3 from ms_payrolltaxrate where tieringcode = 'T3';
+Select end,npwpRate,NonNpwpRate into @endT4, @npwpRateT4,@nonNpwpRateT4 from ms_payrolltaxrate where tieringcode = 'T4';
+
+
+
+/* ------------------- SET PREV TAX --------------------*/
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN (SELECT nik,sum(pphAmount) amount FROM tr_payrolltaxmonthlyproc WHERE period  < periodDate and LEFT(period,4) = LEFT(periodDate,4) group by nik) b on b.nik = a.nik
+SET prevTaxPaid = b.amount
+WHERE period = periodDate;
+
+/* ------------------ SET WORK MONTH--------------------*/
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN 
+
+(SELECT nik,min(a.startDate) 'startDate',max(a.endDate) 'endDate' FROM ms_personnelcontract a
+Group By Nik) b on b.nik = a.nik
+SET workmonth = 
+
+CASE WHEN year(b.startDate) =  Left(periodDate,4) THEN
+	CASE WHEN  periodDate = concat(year(b.endDate),'/',DATE_FORMAT(b.endDate,'%m')) THEN
+		TIMESTAMPDIFF(MONTH, b.startDate, b.enddate) +1
+	ELSE
+		TIMESTAMPDIFF(MONTH, b.startDate, concat(LEFT(periodDate,4),'/12/01')) +1
+    END
+
+WHEN year(b.startDate) <  Left(periodDate,4) THEN
+    CASE WHEN  periodDate = concat(year(b.endDate),'/',DATE_FORMAT(b.endDate,'%m')) THEN
+		TIMESTAMPDIFF(MONTH,  concat(LEFT(periodDate,4),'/01/01'),b.endDate) +1
+    ELSE
+    	TIMESTAMPDIFF(MONTH,  concat(LEFT(periodDate,4),'/01/01'),concat(LEFT(periodDate,4),'/12/01')) +1
+	END
+END
+WHERE period = periodDate;
+
+/* ------------------- SET SEQUANCE --------------------*/
+
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN (
+SELECT nik,count(nik) as count FROM tr_payrolltaxmonthlyproc
+WHERE LEFT(period,4) = LEFT(periodDate,4)
+group by Nik
+) b on b.nik = a.nik
+SET 
+a.sequance = b.count - 1 
+WHERE period = periodDate;
+
+
+
+/* ------------------- SET PREV NETTO --------------------*/
+
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN (SELECT nik,sum(netto) amount FROM tr_payrolltaxmonthlyproc WHERE period  <= periodDate and LEFT(period,4) = LEFT(periodDate ,4)  group by nik) b on b.nik = a.nik
+SET prevNetto = b.amount
+WHERE period = periodDate  AND Count = 0;
+
+
+/* ------------------- SET PREV NETTO BJ --------------------*/
+
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN (SELECT nik,sum(nettoBJ) amount FROM tr_payrolltaxmonthlyproc WHERE period  <= periodDate and LEFT(period,4) = LEFT(periodDate,4)  group by nik) b on b.nik = a.nik
+SET prevNettoBJ = b.amount
+WHERE period = periodDate  AND Count = 0;
+
+/* ---------------------------------------------END-------------------------------------------------*/
+
+
+
+
+/* ---------------------------------------- CALCULATION -------------------------------------------*/
+
+
+/* ------------------- NETTO BJ --------------------*/
+
+UPDATE tr_payrolltaxmonthlyproc
+SET nettoBJ= floor(T01+T02+T03+T04+T05+T06)
+WHERE period = periodDate;
+
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN (
+SELECT nik,Sum(T07) as 'T07' FROM tr_payrolltaxmonthlyproc
+WHERE isFinal <> 1 AND LEFT(period,4) = LEFT(periodDate,4)
+group by Nik) b 
+on a.nik = b.nik
+SET NettoSumBJ= nettoBJ*(workmonth-sequance) + PrevNettoBJ + b.T07
+WHERE period = periodDate;
+
+/* ------------------- -NETTO-----------------------*/
+
+UPDATE tr_payrolltaxmonthlyproc
+SET netto= floor(T01+T02+T03+T04+T05+T06)-(T10)
+WHERE period = periodDate;
+
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN (
+SELECT nik,Sum(T07) as 'T07' FROM tr_payrolltaxmonthlyproc
+WHERE isFinal <> 1 AND LEFT(period,4) = LEFT(periodDate,4)
+group by Nik) b 
+on a.nik = b.nik
+SET NettoSum= Netto*(workmonth-sequance) + PrevNetto+b.T07
+WHERE period = periodDate;
+
+/* ---------------------BIAYA JABATAN-----------------------*/
+UPDATE tr_payrolltaxmonthlyproc
+SET 
+biayajabatan = 
+CASE WHEN NettoSumBJ * @FERate/100>@FEMaxAmount 
+THEN 
+(@FEMaxAmount/12)* workmonth
+ELSE 
+NettoSumBJ * @FERate/100 
+END
+WHERE period = periodDate AND Isfinal = 0;
+
+/* ------------------------PKP--------------------------*/
+UPDATE tr_payrolltaxmonthlyproc
+SET PKP=floor((Nettosum-PTKP-BiayaJabatan)/1000)*1000  
+WHERE period = periodDate;
+
+
+/* START GROOS UP */
+
+UPDATE tr_payrolltaxmonthlyproc
+SET T02 = 
+CASE WHEN npwp = 1 THEN
+	CASE 
+		WHEN PKP <= 47500000 
+		THEN
+			FLOOR(((PKP - 0 )* 5 / 95 + 0)/WorkMonth)
+		WHEN PKP > 47500000 
+		THEN
+			FLOOR(((PKP - 47500000) * 15 / 85 + 2500000) / WorkMonth)
+		WHEN PKP > 217500000 THEN
+			FLOOR(((PKP -217500000) * 25/75 + 32500000) / WorkMonth)
+		WHEN PKP > 405000000 THEN
+		FLOOR(((PKP -405000000) * 30/70 + 95000000) / WorkMonth)
+	END
+
+WHEN npwp = 0 THEN
+	CASE 
+		WHEN PKP <= 47000000 
+		THEN
+			FLOOR(((PKP - 0 )* 6 / 94 + 0)/WorkMonth)
+		WHEN PKP > 47000000 
+		THEN
+			FLOOR(((PKP - 47000000) * 18 / 82 + 3000000) / WorkMonth)
+		WHEN PKP > 211000000 THEN
+			FLOOR(((PKP -211000000) * 30/70 + 39000000) / WorkMonth)
+		WHEN PKP > 386000000 THEN
+		FLOOR(((PKP -386000000) * 36/64 + 114000000) / WorkMonth)
+	END
+END
+
+WHERE period = periodDate AND T02 = 0 AND nik IN (select id from ms_personnelhead where taxSetting = 3);
+
+
+/*
+UPDATE tr_payrolltaxmonthlyproc
+SET T02 =  0
+WHERE period = periodDate AND T02 < 0;
+*/
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN (
+SELECT nik,sum(T02) as 'T02' from tr_payrolltaxmonthlyproc
+WHERE isFinal <> 1 AND LEFT(period,4) = LEFT(periodDate,4)
+group by Nik
+) b on b.nik = a.nik
+SET 
+a.t02 = a.t02 + b.t02
+WHERE isFinal = 12 AND a.nik IN (select id from ms_personnelhead where taxSetting = 3) AND period = periodDate;
+
+/* Update */
+
+
+/* ------------------- NETTO BJ --------------------*/
+
+UPDATE tr_payrolltaxmonthlyproc
+SET nettoBJ= floor(T01+T02+T03+T04+T05+T06)
+WHERE period = periodDate;
+
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN (
+SELECT nik,Sum(T07) as 'T07' FROM tr_payrolltaxmonthlyproc
+WHERE isFinal <> 1 AND LEFT(period,4) = LEFT(periodDate,4)
+group by Nik) b 
+on a.nik = b.nik
+SET NettoSumBJ= nettoBJ*(workmonth-sequance) + PrevNettoBJ + b.T07
+WHERE a.nik IN (select id from ms_personnelhead where taxSetting = 3) AND period = periodDate;
+
+
+
+Select rate,maxAmount into @FERate, @FEMaxAmount from ms_payrollfunctionalexpenses
+where id = 1;
+
+
+/* ---------------------BIAYA JABATAN-----------------------*/
+
+UPDATE tr_payrolltaxmonthlyproc
+SET 
+biayajabatan = 
+CASE WHEN NettoSumBJ * @FERate/100>@FEMaxAmount 
+THEN 
+(@FEMaxAmount/12)* workmonth
+ELSE 
+NettoSumBJ * @FERate/100 
+END
+WHERE nik IN (select id from ms_personnelhead where taxSetting = 3) AND period = periodDate AND Isfinal = 0;
+
+
+/* ---------------------NETTO-----------------------*/
+
+UPDATE tr_payrolltaxmonthlyproc
+SET netto= floor(T01+T02+T03+T04+T05+T06)-(T10)
+WHERE nik IN (select id from ms_personnelhead where taxSetting = 3) AND period = periodDate;
+
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN (
+SELECT nik,Sum(T07) as 'T07' FROM tr_payrolltaxmonthlyproc
+WHERE isFinal <> 1 AND LEFT(period,4) = LEFT(periodDate,4)
+group by Nik) b 
+on a.nik = b.nik
+SET NettoSum= Netto*(workmonth-sequance) + PrevNetto+b.T07
+WHERE a.nik IN (select id from ms_personnelhead where taxSetting = 3) AND period = periodDate;
+
+/* ------------------------PKP--------------------------*/
+
+UPDATE tr_payrolltaxmonthlyproc
+SET PKP=floor((Nettosum-PTKP-BiayaJabatan)/1000)*1000  
+WHERE nik IN (select id from ms_personnelhead where taxSetting = 3) AND period = periodDate;
+
+
+/* --------------------------------  END GROOS UP --------------------------------------*/
+
+
+
+
+
+/* ---------------------------------------- TIERING -------------------------------------------*/
+
+/* ------------------- -TIERING 1-----------------------*/
+
+UPDATE tr_payrolltaxmonthlyproc
+SET PKP1=
+CASE 
+WHEN PKP>=  @endT1 
+THEN 
+@endT1 
+ELSE 
+PKP 
+END
+WHERE PKP>=0 AND period = periodDate;
+
+/* ------------------- -TIERING 2-----------------------*/
+UPDATE tr_payrolltaxmonthlyproc
+SET PKP2=
+CASE 
+WHEN PKP-(PKP1)>=@endT2 
+THEN 
+@endT2 
+ELSE 
+PKP-(PKP1) 
+END
+WHERE PKP>=PKP1 AND period =  periodDate;
+
+/* ------------------- -TIERING 3-----------------------*/
+UPDATE tr_payrolltaxmonthlyproc
+SET PKP3=
+CASE WHEN PKP-(PKP1+PKP2)>=@endT3 
+THEN 
+@endT3 
+ELSE PKP-(PKP1+PKP2) 
+END
+WHERE PKP>=PKP1+PKP2 AND period = periodDate;
+
+/* ------------------- -TIERING 4-----------------------*/
+UPDATE tr_payrolltaxmonthlyproc
+SET PKP4=PKP - (PKP1+PKP2+PKP3) 
+WHERE PKP>=PKP1+PKP2+PKP3;
+
+/* ----------------------PPH CALC-----------------------*/
+UPDATE tr_payrolltaxmonthlyproc
+SET  PPHCalc=
+CASE WHEN npwp = 1 THEN
+FLOOR((((PKP1*@npwpRateT1)+(PKP2*@npwpRateT2)+(PKP3*@npwpRateT3)+(PKP4*@npwpRateT4))/100))
+ELSE
+FLOOR((((PKP1*@nonNpwpRateT1)+(PKP2*@nonNpwpRateT2)+(PKP3*@nonNpwpRateT3)+(PKP4*@nonNpwpRateT4))/100))
+END
+WHERE period = periodDate;
+
+/* ----------------------PPH AMOUNT-----------------------*/
+UPDATE tr_payrolltaxmonthlyproc a
+JOIN ms_personnelhead b on b.id = a.nik
+SET  pphAmount= 
+CASE WHEN isFinal = 1 THEN
+FLOOR(PPHCalc - prevTaxPaid)
+ELSE
+FLOOR((PPHCalc - prevTaxPaid) / (workmonth-sequance))
+END
+WHERE period = periodDate;
+
+
+-- IF @TaxSETting <> 3 THEN
+-- SET NotMatch = 0;
+-- ELSE
+
+SELECT COUNT(*) INTO @notMatch FROM tr_payrolltaxmonthlyproc 
+WHERE T02<>PPhAmount AND IsFinal = 0 AND nik IN (select id from ms_personnelhead where taxSetting = 3);
+
+IF @notMatch = 0 or @notMatch Is Null  THEN
+	SET NotMatch =  0;
+	ELSE
+SET NotMatch = @notMatch ;
+
+	UPDATE tr_payrolltaxmonthlyproc  
+	SET T02=PPhAmount,PPhAmount=0 
+	WHERE T02<>PPhAmount AND IsFinal = 0 AND nik IN (select id from ms_personnelhead where taxSetting = 3);
+END IF;
+    
+-- END IF;
+
+Set Count = Count + 1;
+
+END WHILE;
+END
