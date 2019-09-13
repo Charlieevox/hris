@@ -721,7 +721,7 @@ class PersonnelHeadController extends ControllerUAC {
         $baseRow = 2;
         $no = 1;
         foreach ($download as $value) {
-            $activeSheet->setCellValue('A' . $baseRow, $no);
+            $activeSheet->setCellValue('A' . $baseRow, $value['id']);
             $activeSheet->setCellValue('B' . $baseRow, $value['employeeNo']);
             $activeSheet->setCellValue('C' . $baseRow, $value['fullName']);
             $activeSheet->setCellValue('D' . $baseRow, $value['gender']);
