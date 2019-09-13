@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\MsPersonnelHead */
 
-$this->title = 'View Profile: ' . ' ' . $model->id;
+$this->title = 'View Profile: ' . ' ' . $model->fullName;
 $this->params['breadcrumbs'][] = ['label' => 'Profile', 'url' => ['index']];
 $this->params['breadcrumbs'][] = 'View ' . $model->id;
 ?>

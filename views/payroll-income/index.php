@@ -39,24 +39,24 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ],
         'columns' => [
-            ['class' => 'kartik\grid\SerialColumn'],
-            'nik',
-            [
-                'attribute' => 'fullNameEmployee',
-                'value' => 'personnelHead.fullName',
-                'format' => 'raw',
-                'value' => function ($model) {
-                    return Html::a($model->personnelHead->fullName, ['/personnel-head/view', 'id' => $model->nik], [
-                                'title' => 'Lihat',
-                                'target' => '_blank',
-                                'class' => 'open-modal-btn'
-                                    ]
-                    );
-                },
-                    ],
-                    AppHelper::getMasterActionColumn2('{update} {delete}')
+                ['class' => 'kartik\grid\SerialColumn'],
+                'nik',
+                [
+                    'attribute' => 'fullNameEmployee',
+                    'value' => 'personnelHead.fullName',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        return Html::a($model->personnelHead->fullName, ['/personnel-head/view', 'id' => $model->nik], [
+                                    'title' => 'Lihat',
+                                    'target' => '_blank',
+                                    'class' => 'open-modal-btn'
+                                        ]
+                        );
+                    },
                 ],
-            ]);
-            ?>
+                AppHelper::getMasterActionColumn2('{update} {delete}')
+            ],
+        ]);
+    ?>
 
 </div>

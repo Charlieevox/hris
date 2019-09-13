@@ -33,6 +33,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     'title' => 'Upload Working Schedule',
                     'class' => 'btn btn-default open-modal-btn'
                 ]) . '&nbsp;' .
+                Html::a('<i class="glyphicon glyphicon-saved"></i>', ['generate-schedule'], [
+                    'type' => 'button',
+                    'title' => 'Generate Working Schedule',
+                    'class' => 'btn btn-default open-modal-btn'
+                ]) . '&nbsp;' .
                 Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['index'], [
                     'class' => 'btn btn-default',
                     'title' => 'Reset Grid'
@@ -65,4 +70,16 @@ $this->params['breadcrumbs'][] = $this->title;
     ]);
     ?>
 
+</div>
+
+<div class="panel-footer">
+    <div class="pull-right">
+        <?=  Html::a('Download', ['download'], [
+                    'type' => 'button',
+                    'title' => 'Download Working Schedule',
+                    'class' => 'btn btn-default open-modal-btn'
+                ]) 
+        ?>
+    </div>
+    <div class="clearfix"></div>           
 </div>

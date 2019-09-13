@@ -518,6 +518,12 @@ class PersonnelHeadController extends ControllerUAC {
         $model->flagActive = 1;
         // $model->fullName = $model->firstName . ' ' . $model->lastName;
 
+        // echo "<pre>";
+        // var_dump($model);
+        // echo "</pre>";
+        // Yii::$app->end();
+
+        
         if (!$model->save()) {
             $transaction->rollBack();
             return false;
@@ -529,11 +535,7 @@ class PersonnelHeadController extends ControllerUAC {
 //        if (empty($model->joinPersonnelfamily) || !is_array($model->joinPersonnelfamily) || count($model->joinPersonnelfamily) < 1) {
 //            $transaction->rollBack();
 //            return false;
-//        }
-//        echo "<pre>";
-//        var_dump($model->joinPersonnelContract);
-//        echo "</pre>";
-//        Yii::$app->end();
+       // }
 
         function removeElementWithValue($array, $key, $value) {
             foreach ($array as $subKey => $subArray) {
@@ -544,8 +546,9 @@ class PersonnelHeadController extends ControllerUAC {
             return $array;
         }
 
+
         $arrayFamily = removeElementWithValue(($model->joinPersonnelfamily), "firstName", "");
-        $arrayContract = removeElementWithValue(($model->joinPersonnelContract), "startContract", "");
+        $arrayContract = removeElementWithValue(($model->joinPersonnelContract), "startWorking", "");
 
 		
 
@@ -569,11 +572,12 @@ class PersonnelHeadController extends ControllerUAC {
         }
 
         foreach ($arrayContract as $joinPersonnelContract) {
+
             $PersonnelContractModel = new MsPersonnelContract();
             $PersonnelContractModel->nik = $model->id;
 			$PersonnelContractModel->startWorking = AppHelper::convertDateTimeFormat($joinPersonnelContract['startWorking'], 'd-m-Y', 'Y-m-d');
-            $PersonnelContractModel->startDate = AppHelper::convertDateTimeFormat($joinPersonnelContract['startContract'], 'd-m-Y', 'Y-m-d');
-            $PersonnelContractModel->endDate = AppHelper::convertDateTimeFormat($joinPersonnelContract['endContract'], 'd-m-Y', 'Y-m-d');
+            $PersonnelContractModel->startDate = AppHelper::convertDateTimeFormat($joinPersonnelContract['startDate'], 'd-m-Y', 'Y-m-d');
+            $PersonnelContractModel->endDate = AppHelper::convertDateTimeFormat($joinPersonnelContract['endDate'], 'd-m-Y', 'Y-m-d');
             $PersonnelContractModel->docNo = $joinPersonnelContract['docNo'];
 
 
@@ -581,6 +585,11 @@ class PersonnelHeadController extends ControllerUAC {
                 print_r($PersonnelContractModel->getErrors());
                 $transaction->rollBack();
                 return false;
+            }
+
+            if (date('Y-m-d') > $PersonnelContractModel->endDate){
+                $model->flagActive = 0;
+                $model->save();
             }
         }
 
@@ -609,6 +618,190 @@ class PersonnelHeadController extends ControllerUAC {
         }
 
         return \yii\helpers\Json::encode($flagExists);
+    }
+
+    public function actionDownload() {
+
+        $connection = \Yii::$app->db;
+        $sql = "
+        SELECT 
+        a.id,
+        a.employeeNo,
+        a.fullName,
+        k.description 'gender',
+        d.description 'division',
+        c.departmentDesc 'department',
+        b.positionDescription,
+        j.key2 'status',
+        e.startDate,
+        e.endDate,
+        a.birthPlace,
+        a.birthDate,
+        a.address,
+        a.city,
+        a.idNo,
+        a.npwpNo,
+        a.bpkstkNo,
+        k.description 'gender',
+        g.key2 'maritalStatus',
+        a.education,
+        a.major,
+        f.key2 'TaxParm',
+        a.jamsostekParm,
+        a.bankName,
+        a.branch,
+        a.bankNo,
+        a.npwpName,
+        a.npwpAddress,
+        a.taxId 'TaxLocation',
+        a.prorateSetting,
+        a.overtimeId,
+        a.shiftCode
+        FROM ms_personnelhead a
+        LEFT JOIN ms_personnelposition b ON a.positionID = b.ID
+        LEFT JOIN ms_personneldepartment c ON c.departmentCode =a.departmentID
+        LEFT JOIN ms_personneldivision d ON d.divisionID = a.divisionId
+        LEFT JOIN ms_personnelcontract e ON e.nik = a.id AND (CURDATE() BETWEEN e.startDate AND endDate) 
+        LEFT JOIN ms_setting f ON f.value1 = a.taxSetting  AND f.key1 = 'TaxParm'
+        LEFT JOIN ms_setting g ON g.value1 = a.maritalStatus  AND g.key1 = 'MaritalStatus'
+        LEFT JOIN ms_setting h ON h.value1 = a.nationality  AND h.key1 = 'Nationality'
+        LEFT JOIN ms_setting i ON i.value1 = a.paymentMethod  AND i.key1 = 'paymentMethod'
+        LEFT JOIN ms_setting j ON j.value1 = a.empStatus  AND j.key1 = 'Status'
+        LEFT JOIN lk_gender k ON k.id = a.gender;";
+        $model = $connection->createCommand($sql);
+        $download = $model->queryAll();
+
+
+
+        $objReader = \PHPExcel_IOFactory::createReader('Excel2007');
+        $template = Yii::getAlias('@app/assets_b/uploads/template') . '/template.xlsx';
+
+        $objPHPExcel = $objReader->load($template);
+        $activeSheet = $objPHPExcel->getActiveSheet();
+
+        $activeSheet->getPageSetup()
+                ->setOrientation(\PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE)
+                ->setPaperSize(\PHPExcel_Worksheet_PageSetup::PAPERSIZE_FOLIO);
+
+        // HEADER
+        $activeSheet->setCellValue('B1','employeeNo');
+        $activeSheet->setCellValue('C1','fullName');
+        $activeSheet->setCellValue('D1','gender');
+        $activeSheet->setCellValue('E1','division');
+        $activeSheet->setCellValue('F1','department');
+        $activeSheet->setCellValue('G1','positionDescription');
+        $activeSheet->setCellValue('H1','status');
+        $activeSheet->setCellValue('I1','startDate');
+        $activeSheet->setCellValue('J1','endDate');
+        $activeSheet->setCellValue('K1','birthPlace');
+        $activeSheet->setCellValue('L1','birthDate');
+        $activeSheet->setCellValue('M1','address');
+        $activeSheet->setCellValue('N1','city');
+        $activeSheet->setCellValue('O1','idNo');
+        $activeSheet->setCellValue('P1','npwpNo');
+        $activeSheet->setCellValue('Q1','bpkstkNo');
+        $activeSheet->setCellValue('R1','gender');
+        $activeSheet->setCellValue('S1','maritalStatus');
+        $activeSheet->setCellValue('T1','education');
+        $activeSheet->setCellValue('U1','major');
+        $activeSheet->setCellValue('V1','TaxParm');
+        $activeSheet->setCellValue('W1','jamsostekParm');
+        $activeSheet->setCellValue('X1','bankName');
+        $activeSheet->setCellValue('Y1','branch');
+        $activeSheet->setCellValue('Z1','bankNo');
+        $activeSheet->setCellValue('AA1','npwpName');
+        $activeSheet->setCellValue('AB1','npwpAddress');
+        $activeSheet->setCellValue('AC1','TaxLocation');
+        $activeSheet->setCellValue('AD1','prorateSetting');
+        $activeSheet->setCellValue('AE1','overtimeId');
+        $activeSheet->setCellValue('AF1','shiftCode');
+
+                
+
+        $baseRow = 2;
+        $no = 1;
+        foreach ($download as $value) {
+            $activeSheet->setCellValue('A' . $baseRow, $value['id']);
+            $activeSheet->setCellValue('B' . $baseRow, $value['employeeNo']);
+            $activeSheet->setCellValue('C' . $baseRow, $value['fullName']);
+            $activeSheet->setCellValue('D' . $baseRow, $value['gender']);
+            $activeSheet->setCellValue('E' . $baseRow, $value['division']);
+            $activeSheet->setCellValue('F' . $baseRow, $value['department']);
+            $activeSheet->setCellValue('G' . $baseRow, $value['positionDescription']);
+            $activeSheet->setCellValue('H' . $baseRow, $value['status']);
+            $activeSheet->setCellValue('I' . $baseRow, $value['startDate']);
+            $activeSheet->setCellValue('J' . $baseRow, $value['endDate']);
+            $activeSheet->setCellValue('K' . $baseRow, $value['birthPlace']);
+            $activeSheet->setCellValue('L' . $baseRow, $value['birthDate']);
+            $activeSheet->setCellValue('M' . $baseRow, $value['address']);
+            $activeSheet->setCellValue('N' . $baseRow, $value['city']);
+            $activeSheet->setCellValue('O' . $baseRow, $value['idNo']);
+            $activeSheet->setCellValue('P' . $baseRow, $value['npwpNo']);
+            $activeSheet->setCellValue('Q' . $baseRow, $value['bpkstkNo']);
+            $activeSheet->setCellValue('R' . $baseRow, $value['gender']);
+            $activeSheet->setCellValue('S' . $baseRow, $value['maritalStatus']);
+            $activeSheet->setCellValue('T' . $baseRow, $value['education']);
+            $activeSheet->setCellValue('U' . $baseRow, $value['major']);
+            $activeSheet->setCellValue('V' . $baseRow, $value['TaxParm']);
+            $activeSheet->setCellValue('W' . $baseRow, $value['jamsostekParm']);
+            $activeSheet->setCellValue('X' . $baseRow, $value['bankName']);
+            $activeSheet->setCellValue('Y' . $baseRow, $value['branch']);
+            $activeSheet->setCellValue('Z' . $baseRow, $value['bankNo']);
+            $activeSheet->setCellValue('AA' . $baseRow, $value['npwpName']);
+            $activeSheet->setCellValue('AB' . $baseRow, $value['npwpAddress']);
+            $activeSheet->setCellValue('AC' . $baseRow, $value['TaxLocation']);
+            $activeSheet->setCellValue('AD' . $baseRow, $value['prorateSetting']);
+            $activeSheet->setCellValue('AE' . $baseRow, $value['overtimeId']);
+            $activeSheet->setCellValue('AF' . $baseRow, $value['shiftCode']);
+
+            
+
+            $baseRow++;
+            $no++;
+        }
+
+        $activeSheet->getColumnDimension('B')->setAutoSize(true);
+        $activeSheet->getColumnDimension('C')->setAutoSize(true);
+        $activeSheet->getColumnDimension('D')->setAutoSize(true);
+        $activeSheet->getColumnDimension('E')->setAutoSize(true);
+        $activeSheet->getColumnDimension('F')->setAutoSize(true);
+        $activeSheet->getColumnDimension('G')->setAutoSize(true);
+        $activeSheet->getColumnDimension('H')->setAutoSize(true);
+        $activeSheet->getColumnDimension('I')->setAutoSize(true);
+        $activeSheet->getColumnDimension('J')->setAutoSize(true);
+        $activeSheet->getColumnDimension('K')->setAutoSize(true);
+        $activeSheet->getColumnDimension('L')->setAutoSize(true);
+        $activeSheet->getColumnDimension('M')->setAutoSize(true);
+        $activeSheet->getColumnDimension('N')->setAutoSize(true);
+        $activeSheet->getColumnDimension('O')->setAutoSize(true);
+        $activeSheet->getColumnDimension('P')->setAutoSize(true);
+        $activeSheet->getColumnDimension('Q')->setAutoSize(true);
+        $activeSheet->getColumnDimension('R')->setAutoSize(true);
+        $activeSheet->getColumnDimension('S')->setAutoSize(true);
+        $activeSheet->getColumnDimension('T')->setAutoSize(true);
+        $activeSheet->getColumnDimension('U')->setAutoSize(true);
+        $activeSheet->getColumnDimension('V')->setAutoSize(true);
+        $activeSheet->getColumnDimension('W')->setAutoSize(true);
+        $activeSheet->getColumnDimension('X')->setAutoSize(true);
+        $activeSheet->getColumnDimension('Y')->setAutoSize(true);
+        $activeSheet->getColumnDimension('Z')->setAutoSize(true);
+        $activeSheet->getColumnDimension('AA')->setAutoSize(true);
+        $activeSheet->getColumnDimension('AB')->setAutoSize(true);
+        $activeSheet->getColumnDimension('AC')->setAutoSize(true);
+        $activeSheet->getColumnDimension('AD')->setAutoSize(true);
+        $activeSheet->getColumnDimension('AE')->setAutoSize(true);
+        $activeSheet->getColumnDimension('AF')->setAutoSize(true);
+        
+
+        $filename = 'Data-' . Date('YmdGis') . '-Export.xls';
+
+
+        header('Content-Type: application/vnd-ms-excel');
+        header("Content-Disposition: attachment; filename=" . $filename);
+        header('Cache-Control: max-age=0');
+        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, "Excel2007");
+        $objWriter->save('php://output');
+        exit;
     }
 
 }

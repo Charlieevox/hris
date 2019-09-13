@@ -32,18 +32,18 @@ class MsPersonnelHead extends \yii\db\ActiveRecord {
 	 */
     public function rules() {
         return [
-            [['firstName','gender','divisionId','departmentId','bankName','dependent','npwpNo'], 'required'],
+            //[['firstName','gender','divisionId','departmentId','bankName','dependent','npwpNo'], 'required'],
             [['npwpNo'],'string','length' => [20,20]],
-			[['birthDate', 'createdDate', 'editedDate', 'phoneNo','joinPersonnelStatus','joinPersonnelPosition' ,'joinPersonnelfamily', 'joinPersonnelContract', 'taxId','locationID','imageKTP','imageNPWP','imagePhoto'], 'safe'],
+			[['birthDate', 'createdDate', 'editedDate', 'phoneNo','joinPersonnelStatus','joinPersonnelPosition' ,'joinPersonnelfamily', 'joinPersonnelContract', 'taxId','locationID','imageKTP','imageNPWP','imagePhoto','positionID'], 'safe'],
             [['flagActive'], 'boolean'],
-            [['major','employeeNo','shiftCode','nationality','swiftCode', 'country', 'firstName', 'lastName', 'fullName', 'birthPlace', 'address', 'city', 'branch'], 'string', 'max' => 50],
+            [['major','employeeNo','shiftCode','nationality','swiftCode', 'country', 'firstName', 'lastName', 'fullName', 'birthPlace', 'city', 'branch'], 'string', 'max' => 50],
             [['maritalStatus','prorateSetting','taxSetting','overtimeId'], 'string', 'max' => 20],
             [['email'], 'string', 'max' => 60],
             [['curency'], 'string', 'max' => 8],
             [['email'], 'email'],
             [['dependent'], 'number','max' => 3],
             [['gender'], 'string', 'max' => 15],
-            [['npwpAddress'], 'string', 'max' => 100],
+            [['npwpAddress', 'address'], 'string', 'max' => 300],
             [['npwpName', 'education', 'divisionId', 'departmentId', 'createdBy', 'editedBy', 'ecFirstName', 'ecLastName', 'ecRelationShip', 'ecPhone1', 'ecPhone2'], 'string', 'max' => 45],
             [['empStatus', 'jamsostekParm','paymentMethod'], 'string', 'max' => 30],
             [['idNo','npwpNo', 'bpjskNo', 'bpkstkNo', 'bankName', 'bankNo'], 'string', 'max' => 25],
@@ -233,9 +233,10 @@ class MsPersonnelHead extends \yii\db\ActiveRecord {
 
         $j = 0;
         foreach ($this->getContractdetail()->all() as $joinPersonnelContractDetail) {
+
 			$this->joinPersonnelContract[$j]["startWorking"] = AppHelper::convertDateTimeFormat($joinPersonnelContractDetail->startWorking, 'Y-m-d', 'd-m-Y');
-            $this->joinPersonnelContract[$j]["startContract"] = AppHelper::convertDateTimeFormat($joinPersonnelContractDetail->startDate, 'Y-m-d', 'd-m-Y');
-            $this->joinPersonnelContract[$j]["endContract"] = AppHelper::convertDateTimeFormat($joinPersonnelContractDetail->endDate, 'Y-m-d', 'd-m-Y');
+            $this->joinPersonnelContract[$j]["startDate"] = AppHelper::convertDateTimeFormat($joinPersonnelContractDetail->startDate, 'Y-m-d', 'd-m-Y');
+            $this->joinPersonnelContract[$j]["endDate"] = AppHelper::convertDateTimeFormat($joinPersonnelContractDetail->endDate, 'Y-m-d', 'd-m-Y');
             $this->joinPersonnelContract[$j]["docNo"] = $joinPersonnelContractDetail->docNo;
             $j += 1;
         }

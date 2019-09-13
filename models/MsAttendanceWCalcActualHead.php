@@ -82,7 +82,7 @@ class MsAttendanceWCalcActualHead extends \yii\db\ActiveRecord {
     }
 
     public function getWCalActualdetails() {
-        return $this->hasMany(MsAttendanceWCalcActualDetail::className(), ['id' => 'id']);
+        return $this->hasMany(MsAttendanceWCalcActualDetail::className(), ['period' => 'period','nik' => 'nik'] );
     }
 
     public function afterFind() {
