@@ -656,7 +656,8 @@ class PersonnelHeadController extends ControllerUAC {
         a.taxId 'TaxLocation',
         a.prorateSetting,
         a.overtimeId,
-        a.shiftCode
+        a.shiftCode,
+        a.flagActive
         FROM ms_personnelhead a
         LEFT JOIN ms_personnelposition b ON a.positionID = b.ID
         LEFT JOIN ms_personneldepartment c ON c.departmentCode =a.departmentID
@@ -715,6 +716,7 @@ class PersonnelHeadController extends ControllerUAC {
         $activeSheet->setCellValue('AD1','prorateSetting');
         $activeSheet->setCellValue('AE1','overtimeId');
         $activeSheet->setCellValue('AF1','shiftCode');
+        $activeSheet->setCellValue('AG1','flagActive');
 
                 
 
@@ -753,6 +755,7 @@ class PersonnelHeadController extends ControllerUAC {
             $activeSheet->setCellValue('AD' . $baseRow, $value['prorateSetting']);
             $activeSheet->setCellValue('AE' . $baseRow, $value['overtimeId']);
             $activeSheet->setCellValue('AF' . $baseRow, $value['shiftCode']);
+            $activeSheet->setCellValue('AG' . $baseRow, $value['flagActive']);
 
             
 
@@ -791,6 +794,7 @@ class PersonnelHeadController extends ControllerUAC {
         $activeSheet->getColumnDimension('AD')->setAutoSize(true);
         $activeSheet->getColumnDimension('AE')->setAutoSize(true);
         $activeSheet->getColumnDimension('AF')->setAutoSize(true);
+        $activeSheet->getColumnDimension('AG')->setAutoSize(true);
         
 
         $filename = 'Data-' . Date('YmdGis') . '-Export.xls';

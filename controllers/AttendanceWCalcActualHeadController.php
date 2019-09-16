@@ -234,20 +234,27 @@ protected function saveModel($model) {
             $highestColumn = $sheet->getHighestColumn();
             $workingCalcActualDet = new MsAttendanceWCalcActualDetail();
             $workingCalcActualHead = new MsAttendanceWCalcActualHead();
+            $personnelHead = new MsPersonnelHead();
 
             for ($row = 2; $row <= $highestRow; ++$row) {
                 $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
                 $count = $workingCalcActualHead->find()->where('period = "' . $rowData[0][0] . '" And NIK = "'.$rowData[0][1].'"')->count();
+                
+                $checkNik = $personnelHead->find()->where('id = "' . $rowData[0][1] . '"')->count();
 
-                if ($count == 0) {
-                    \Yii::$app->db->createCommand()->insert('ms_attendancewcalcactualhead', [
-                        //'id' => $rowData[0][0],
-                        'period' => $rowData[0][0],
-                        'nik' => $rowData[0][1],
-                        'createdBy' => Yii::$app->user->identity->username,
-                        'createdDate' => new Expression('NOW()'),
-                    ])->execute();
+                if ($checkNik > 0 ) {
+                    if ($count == 0) {
+                        \Yii::$app->db->createCommand()->insert('ms_attendancewcalcactualhead', [
+                            'id' => $rowData[0][0]."-".$rowData[0][1],
+                            'period' => $rowData[0][0],
+                            'nik' => $rowData[0][1],
+                            'createdBy' => Yii::$app->user->identity->username,
+                            'createdDate' => new Expression('NOW()'),
+                        ])->execute();
+                    }
                 }
+
+                
             }
 
             //$row is start 2 because first row assigned for heading.         
@@ -255,22 +262,27 @@ protected function saveModel($model) {
                 $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
                 $count = $workingCalcActualDet->find()->where('id = "' . $rowData[0][0] . '"  and date = "' . date('Y-m-d', AppHelper::ExcelToPHP($rowData[0][3])) . '"')->count();
 
-                if ($count > 0) {
-                    $connection = \Yii::$app->db;
-                    $command = $connection->createCommand(
-                            'UPDATE ms_attendancewcalcactualdetail SET inTime= "' . $rowData[0][4] . '", outTime= "' . $rowData[0][5] . '"'
-                            . ' WHERE nik= "' . $rowData[0][1] . '" and date = "' . date('Y-m-d', AppHelper::ExcelToPHP($rowData[0][3])) . '"');
-                    $command->execute();
-                } else {
-                    \Yii::$app->db->createCommand()->insert('ms_attendancewcalcactualdetail', [
-                        //'id' => $rowData[0][0],
-                        'period' => $rowData[0][0],
-                        'nik' => $rowData[0][1],
-                        'date' => date('Y-m-d', AppHelper::ExcelToPHP($rowData[0][3])),
-                        'inTime' => $rowData[0][4],
-                        'outTime' => $rowData[0][5],
-                    ])->execute();
+                $checkNik = $personnelHead->find()->where('id = "' . $rowData[0][1] . '"')->count();
+
+                if ($checkNik > 0 ) {
+                    if ($count > 0) {
+                        $connection = \Yii::$app->db;
+                        $command = $connection->createCommand(
+                                'UPDATE ms_attendancewcalcactualdetail SET inTime= "' . $rowData[0][4] . '", outTime= "' . $rowData[0][5] . '"'
+                                . ' WHERE nik= "' . $rowData[0][1] . '" and date = "' . date('Y-m-d', AppHelper::ExcelToPHP($rowData[0][3])) . '"');
+                        $command->execute();
+                    } else {
+                        \Yii::$app->db->createCommand()->insert('ms_attendancewcalcactualdetail', [
+                            'id' => $rowData[0][0]."-".$rowData[0][1],
+                            'period' => $rowData[0][0],
+                            'nik' => $rowData[0][1],
+                            'date' => date('Y-m-d', AppHelper::ExcelToPHP($rowData[0][3])),
+                            'inTime' => $rowData[0][4],
+                            'outTime' => $rowData[0][5],
+                        ])->execute();
+                    }
                 }
+                
             }
 
             return $this->redirect(['index']);

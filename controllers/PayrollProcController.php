@@ -53,6 +53,9 @@ class PayrollProcController extends ControllerUAC {
      * @return mixed
      */
     public function actionCreate() {
+        ini_set('memory_limit', '-1');
+        ini_set('max_execution_time', 36000);
+
         $model = new TrPayrollProc();
 
         $connection = Yii::$app->db;
@@ -158,6 +161,9 @@ class PayrollProcController extends ControllerUAC {
      * @return mixed
      */
     public function actionUpdate($id) {
+        ini_set('memory_limit', '-1');
+        ini_set('max_execution_time', 36000);
+
         $model = $this->findModel($id);
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
@@ -257,7 +263,7 @@ class PayrollProcController extends ControllerUAC {
         f.JPNEmp as 'JPNEmployee',
         g.pphAmount as'PPH'
         FROM ms_personnelhead a
-        LEFT JOIN ms_personnelposition b on b.id = a.position
+        LEFT JOIN ms_personnelposition b on b.id = a.positionID
         LEFT JOIN ms_personneldivision c on c.divisionId = a.divisionID
         LEFT JOIN ms_personneldepartment d on d.departmentCode = a.departmentID
         LEFT JOIN ms_setting e on e.Value1 = a.maritalstatus and e.key1 = 'MaritalStatus'
@@ -277,6 +283,38 @@ class PayrollProcController extends ControllerUAC {
         $activeSheet->getPageSetup()
                 ->setOrientation(\PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE)
                 ->setPaperSize(\PHPExcel_Worksheet_PageSetup::PAPERSIZE_FOLIO);
+                
+
+        $activeSheet->setCellValue('A1','No');
+        $activeSheet->setCellValue('B1','Fullname');
+        $activeSheet->setCellValue('C1','birthPlace');
+        $activeSheet->setCellValue('D1','BirthDate');
+        $activeSheet->setCellValue('E1','Address');
+        $activeSheet->setCellValue('F1','City');
+        $activeSheet->setCellValue('G1','MaritalStatus');
+        $activeSheet->setCellValue('H1','Dependent');
+        $activeSheet->setCellValue('I1','Position');
+        $activeSheet->setCellValue('J1','Division');
+        $activeSheet->setCellValue('K1','DepartmentDesc');
+        $activeSheet->setCellValue('L1','npwpNo');
+        $activeSheet->setCellValue('M1','Salary');
+        $activeSheet->setCellValue('N1','Transportasi');
+        $activeSheet->setCellValue('O1','UangMakan');
+        $activeSheet->setCellValue('P1','UangDriver');
+        $activeSheet->setCellValue('Q1','THR');
+        $activeSheet->setCellValue('R1','Hutang');
+        $activeSheet->setCellValue('S1','Bonus');
+        $activeSheet->setCellValue('T1','Overtime');
+        $activeSheet->setCellValue('U1','JHTCompany');
+        $activeSheet->setCellValue('V1','JHTEmployee');
+        $activeSheet->setCellValue('W1','JKKCompany');
+        $activeSheet->setCellValue('X1','JKKEmployee');
+        $activeSheet->setCellValue('Y1','JKMEmployee');
+        $activeSheet->setCellValue('Z1','JPKCompany');
+        $activeSheet->setCellValue('AA1','JPKEmployee');
+        $activeSheet->setCellValue('AB1','JPNCompany');
+        $activeSheet->setCellValue('AC1','JPNEmployee');
+        $activeSheet->setCellValue('AD1','PPH');
 
         $baseRow = 2;
         $no = 1;
@@ -293,26 +331,24 @@ class PayrollProcController extends ControllerUAC {
             $activeSheet->setCellValue('J' . $baseRow, $value['Division']);
             $activeSheet->setCellValue('K' . $baseRow, $value['DepartmentDesc']);
             $activeSheet->setCellValue('L' . $baseRow, $value['npwpNo']);
-            $activeSheet->setCellValue('M' . $baseRow, $value['StartPayroll']);
-            $activeSheet->setCellValue('N' . $baseRow, $value['EndPayroll']);
-            $activeSheet->setCellValue('O' . $baseRow, $value['Salary']);
-            $activeSheet->setCellValue('P' . $baseRow, $value['Transportasi']);
-            $activeSheet->setCellValue('Q' . $baseRow, $value['UangMakan']);
-            $activeSheet->setCellValue('R' . $baseRow, $value['UangDriver']);
-            $activeSheet->setCellValue('S' . $baseRow, $value['THR']);
-            $activeSheet->setCellValue('T' . $baseRow, $value['Hutang']);
-            $activeSheet->setCellValue('U' . $baseRow, $value['Bonus']);
-            $activeSheet->setCellValue('V' . $baseRow, $value['Overtime']);
-            $activeSheet->setCellValue('W' . $baseRow, $value['JHTCompany']);
-            $activeSheet->setCellValue('X' . $baseRow, $value['JHTEmployee']);
-            $activeSheet->setCellValue('Y' . $baseRow, $value['JKKCompany']);
-            $activeSheet->setCellValue('Z' . $baseRow, $value['JKKEmployee']);
-            $activeSheet->setCellValue('AA' . $baseRow, $value['JKMEmployee']);
-            $activeSheet->setCellValue('AB' . $baseRow, $value['JPKCompany']);
-            $activeSheet->setCellValue('AC' . $baseRow, $value['JPKEmployee']);
-            $activeSheet->setCellValue('AD' . $baseRow, $value['JPNCompany']);
-            $activeSheet->setCellValue('AF' . $baseRow, $value['JPNEmployee']);
-            $activeSheet->setCellValue('AG' . $baseRow, $value['PPH']);
+            $activeSheet->setCellValue('M' . $baseRow, $value['Salary']);
+            $activeSheet->setCellValue('N' . $baseRow, $value['Transportasi']);
+            $activeSheet->setCellValue('O' . $baseRow, $value['UangMakan']);
+            $activeSheet->setCellValue('P' . $baseRow, $value['UangDriver']);
+            $activeSheet->setCellValue('Q' . $baseRow, $value['THR']);
+            $activeSheet->setCellValue('R' . $baseRow, $value['Hutang']);
+            $activeSheet->setCellValue('S' . $baseRow, $value['Bonus']);
+            $activeSheet->setCellValue('T' . $baseRow, $value['Overtime']);
+            $activeSheet->setCellValue('U' . $baseRow, $value['JHTCompany']);
+            $activeSheet->setCellValue('V' . $baseRow, $value['JHTEmployee']);
+            $activeSheet->setCellValue('W' . $baseRow, $value['JKKCompany']);
+            $activeSheet->setCellValue('X' . $baseRow, $value['JKKEmployee']);
+            $activeSheet->setCellValue('Y' . $baseRow, $value['JKMEmployee']);
+            $activeSheet->setCellValue('Z' . $baseRow, $value['JPKCompany']);
+            $activeSheet->setCellValue('AA' . $baseRow, $value['JPKEmployee']);
+            $activeSheet->setCellValue('AB' . $baseRow, $value['JPNCompany']);
+            $activeSheet->setCellValue('AC' . $baseRow, $value['JPNEmployee']);
+            $activeSheet->setCellValue('AD' . $baseRow, $value['PPH']);
             $baseRow++;
             $no++;
         }

@@ -262,43 +262,52 @@ class AttendanceWCalcHeadController extends ControllerUAC {
             $highestColumn = $sheet->getHighestColumn();
             $workingCalcDet = new MsAttendanceWCalcDet();
             $workingCalcHead = new MsAttendanceWCalcHead();
+            $personnelHead = new MsPersonnelHead();
 
             for ($row = 2; $row <= $highestRow; ++$row) {
                 $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
                 $count = $workingCalcHead->find()->where('id = "' . $rowData[0][0] . '" ')->count();
 
-                if ($count == 0) {
-                    \Yii::$app->db->createCommand()->insert('ms_attendancewcalchead', [
-                        'id' => $rowData[0][0],
-                        'period' => $rowData[0][1],
-                        'nik' => $rowData[0][2],
-                        'flagActive' => '1',
-                        'createdBy' => Yii::$app->user->identity->username,
-                        'createdDate' => new Expression('NOW()'),
-                    ])->execute();
+                $checkNik = $personnelHead->find()->where('id = "' . $rowData[0][1] . '"')->count();
+                
+                if($checkNik > 0) {
+                    if ($count == 0) {
+                        \Yii::$app->db->createCommand()->insert('ms_attendancewcalchead', [
+                            'id' => $rowData[0][1]."-".$rowData[0][2],
+                            'period' => $rowData[0][1],
+                            'nik' => $rowData[0][2],
+                            'flagActive' => '1',
+                            'createdBy' => Yii::$app->user->identity->username,
+                            'createdDate' => new Expression('NOW()'),
+                        ])->execute();
+                    }
                 }
+                
             }
 
             //$row is start 2 because first row assigned for heading.         
             for ($row = 2; $row <= $highestRow; ++$row) {
                 $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
                 $count = $workingCalcDet->find()->where('id = "' . $rowData[0][0] . '"  and date = "' . date('Y-m-d', AppHelper::ExcelToPHP($rowData[0][3])) . '"')->count();
-//
 
-                if ($count > 0) {
-                    $connection = \Yii::$app->db;
-                    $command = $connection->createCommand(
-                            'UPDATE ms_attendancewcalcdet SET shiftcode= "' . $rowData[0][4] . '"'
-                            . ' WHERE id= "' . $rowData[0][0] . '" and date = "' . date('Y-m-d', AppHelper::ExcelToPHP($rowData[0][3])) . '"');
-                    $command->execute();
-                } else {
-                    \Yii::$app->db->createCommand()->insert('ms_attendancewcalcdet', [
-                        'id' => $rowData[0][0],
-                        'period' => $rowData[0][1],
-                        'nik' => $rowData[0][2],
-                        'date' => date('Y-m-d', AppHelper::ExcelToPHP($rowData[0][3])),
-                        'shiftcode' => $rowData[0][4],
-                    ])->execute();
+                $checkNik = $personnelHead->find()->where('id = "' . $rowData[0][1] . '"')->count();
+
+                if ($checkNik > 0 ) {
+                    if ($count > 0) {
+                        $connection = \Yii::$app->db;
+                        $command = $connection->createCommand(
+                                'UPDATE ms_attendancewcalcdet SET shiftcode= "' . $rowData[0][4] . '"'
+                                . ' WHERE id= "' . $rowData[0][0] . '" and date = "' . date('Y-m-d', AppHelper::ExcelToPHP($rowData[0][3])) . '"');
+                        $command->execute();
+                    } else {
+                        \Yii::$app->db->createCommand()->insert('ms_attendancewcalcdet', [
+                            'id' => $rowData[0][1]."-".$rowData[0][2],
+                            'period' => $rowData[0][1],
+                            'nik' => $rowData[0][2],
+                            'date' => date('Y-m-d', AppHelper::ExcelToPHP($rowData[0][3])),
+                            'shiftcode' => $rowData[0][4],
+                        ])->execute();
+                    }
                 }
             }
 
