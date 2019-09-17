@@ -264,7 +264,7 @@ class MsPersonnelHead extends \yii\db\ActiveRecord {
 			select nik,a.position,b.positiondescription from ms_personnelcontract a
 			JOIN ms_personnelposition b on a.position = b.id
 			where now() between a.startdate and a.enddate
-			group by nik";
+			group by nik,a.position,b.positiondescription";
 		$temp = $connection->createCommand($sql);
 		$headResult = $temp->queryAll();
 		

@@ -414,7 +414,7 @@ class PersonnelHeadController extends ControllerUAC {
         $model = $this->findModel($id);
         $model->flagActive = 1;
         $model->save();
-        AppHelper::insertTransactionLog('Restore Master Shift', $model->id);
+        AppHelper::insertTransactionLog('Restore Master Personnel', $model->id);
         return $this->redirect(['index']);
     }
 
@@ -587,10 +587,15 @@ class PersonnelHeadController extends ControllerUAC {
                 return false;
             }
 
+
             if (date('Y-m-d') > $PersonnelContractModel->endDate){
                 $model->flagActive = 0;
-                $model->save();
             }
+            else {
+                $model->flagActive = 1;
+            }
+            
+            $model->save();
         }
 
 
