@@ -23,6 +23,8 @@ class MsLoan extends \yii\db\ActiveRecord {
 
     public $fullNameEmployee;
     public $joinTrLoanProc;
+    public $manualPrincipalPeriod;
+    public $manualPrincipalPaid;
 
     /**
      * @inheritdoc
@@ -39,8 +41,8 @@ class MsLoan extends \yii\db\ActiveRecord {
             [['registrationPeriod', 'principal', 'term'], 'required'],
             [['id'], 'integer'],
             [['registrationPeriod', 'joinTrLoanProc'], 'safe'],
-            [['createdDate', 'editedDate'], 'safe'],
-            [['principal', 'downPayment', 'principalPaid', 'fullNameEmployee'], 'safe'],
+            [['createdDate', 'editedDate','principalPaidMonthly'], 'safe'],
+            [['principal', 'downPayment', 'principalPaid', 'fullNameEmployee','manualPrincipalPaid','manualPrincipalPeriod'], 'safe'],
             [['term'], 'integer'],
             [['flagActive'], 'boolean'],
             [['createdBy', 'editedBy'], 'string', 'max' => 50],
@@ -61,6 +63,9 @@ class MsLoan extends \yii\db\ActiveRecord {
             'term' => 'Term',
             'downPayment' => 'Down Payment',
             'principalPaid' => 'Principal Paid',
+            'principalPaidMonthly' => 'Principal Paid Monthly',
+            'manualPrincipalPaid' => 'Principal Period',
+            'manualPrincipalPeriod' => 'Principal Period',
             'remarks' => 'Remarks',
             'flagActive' => 'Flag Active',
         ];

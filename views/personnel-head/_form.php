@@ -1054,7 +1054,15 @@ use app\models\MsAttendanceShift;
 									</div>	
                                 </div>
                             </div>
-                        </div>
+						</div>
+						
+						<div class="panel panel-default">
+                                <div class="panel-heading"><b>Other</b></div>
+                                <div class="panel-body">
+									<?= $form->field($model, 'notes')->textArea(['style' => 'padding-bottom: 2px !important; height: 100px !important;', 'rows' => '5', 'placeholder' => 'ex: Surat Peringatan']) ?>   
+								</div>
+						</div>
+
 						<div class="panel-footer">
 							<div class="pull-right">
 								<?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

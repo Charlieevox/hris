@@ -288,8 +288,8 @@ $(document).ready(function () {
                 var startDate = $('.actionStartDate').val();
                 var endDate = $('.actionEndDate').val();
                		
-        	amount = replaceAll(amount, ".", "");
-		amount = replaceAll(amount, ",", ".");
+        	    amount = replaceAll(amount, ".", "");
+		        amount = replaceAll(amount, ",", ".");
         
                 if(payrollCode=="" || payrollCode==undefined){
                     bootbox.alert("Select Payroll Code");

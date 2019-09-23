@@ -49,7 +49,7 @@ class MsPersonnelHead extends \yii\db\ActiveRecord {
             [['idNo','npwpNo', 'bpjskNo', 'bpkstkNo', 'bankName', 'bankNo'], 'string', 'max' => 25],
             [['imageGalleryPhoto'], 'file', 'extensions'=>'jpg, gif, png'],
 			[['imageGalleryKTP','imageGalleryNPWP'], 'file', 'extensions'=>'jpg, gif, png, pdf'],
-			[['imageGalleryKTPMode','imageGalleryNPWPMode','imageGalleryPhotoMode'], 'safe'],
+			[['imageGalleryKTPMode','imageGalleryNPWPMode','imageGalleryPhotoMode','notes'], 'safe'],
 			[['fullName', 'position', 'divisionId', 'email', 'departmentId', 'phoneNo','positionID'], 'safe','on'=>'search'],
 			
         ];

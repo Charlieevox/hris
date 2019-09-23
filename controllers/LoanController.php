@@ -16,6 +16,7 @@ use yii\web\Response;
 use app\components\AppHelper;
 use yii\db\Expression;
 use app\components\ControllerUAC;
+use app\models\TrLoanProc;
 
 /**
  * LoanController implements the CRUD actions for MsLoan model.
@@ -65,35 +66,9 @@ class LoanController extends Controller {
      */
     public function actionCreate() {
         $model = new MsLoan();
+
+        $model->joinTrLoanProc = [];
         $personnelModel = new MsPersonnelHead();
-
-        $model->flagActive = 1;
-        $model->createdBy = Yii::$app->user->identity->username;
-        $model->createdDate = new Expression('NOW()');
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return ActiveForm::validate($model);
-        }
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            AppHelper::insertTransactionLog('Add Loan', $model->id);
-            return $this->redirect(['index']);
-        } else {
-            return $this->render('create', [
-                        'model' => $model,
-                        'personnelModel' => $personnelModel,
-            ]);
-        }
-    }
-
-    /**
-     * Updates an existing MsLoan model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionUpdate($id) {
-        $model = $this->findModel($id);
-        $personnelModel= MsPersonnelHead::findOne($model->nik);
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = Response::FORMAT_JSON;
@@ -101,17 +76,77 @@ class LoanController extends Controller {
         }
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->editedBy = Yii::$app->user->identity->username;
-            $model->editedDate = new Expression('NOW()');
-            $model->save();
-            AppHelper::insertTransactionLog('Edit Loan', $model->id);
-            return $this->redirect(['index']);
+            if ($this->saveModel($model, true)) {
+                AppHelper::insertTransactionLog('Create Loan', $model->nik);
+                return $this->redirect(['index']);
+            }
         } else {
-            return $this->render('update', [
+            return $this->render('create', [
                         'model' => $model,
                         'personnelModel' => $personnelModel,
             ]);
         }
+    }
+    
+    public function actionUpdate($id) {
+        $model = $this->findModel($id);
+        $personnelModel = MsPersonnelHead::findOne($model->nik);
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+
+        if ($model->load(Yii::$app->request->post())) {
+
+            if ($this->saveModel($model, false)) {
+                AppHelper::insertTransactionLog('Edit Loan ', $model->nik);
+                return $this->redirect(['index']);
+            }
+        }
+
+        return $this->render('update', [
+                    'model' => $model,
+                    'personnelModel' => $personnelModel,
+        ]);
+    }
+
+    protected function saveModel($model) {
+        $transaction = Yii::$app->db->beginTransaction();
+        $model->createdBy = Yii::$app->user->identity->username;
+        $model->createdDate = new Expression('NOW()');
+        $model->flagActive = 1;
+        
+        if (!$model->save()) {
+            $transaction->rollBack();
+            return false;
+        }
+
+        // echo "<pre>";
+        // var_dump($model->id);
+        // var_dump($model->joinTrLoanProc);
+        // echo "</pre>";
+        // Yii::$app->end();
+
+
+        TrLoanProc::deleteAll('id = :id', [":id" => $model->id]);
+
+        foreach ($model->joinTrLoanProc as $joinTrLoanProc) {
+            $joinLoanProcModel = new TrLoanProc();
+            $joinLoanProcModel->id = $model->id;
+            $joinLoanProcModel->paymentPeriod = $joinTrLoanProc["paymentPeriod"];
+            $joinLoanProcModel->principalPaid = str_replace(",", ".", str_replace(".", "", $joinTrLoanProc['principalPaid']));
+            $joinLoanProcModel->createdBy = Yii::$app->user->identity->username;
+            
+            if (!$joinLoanProcModel->save()) {
+                print_r($joinLoanProcModel->getErrors());
+                $transaction->rollBack();
+                return false;
+            }
+        }
+
+        $transaction->commit();
+        return true;
     }
 
     /**

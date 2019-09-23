@@ -85,7 +85,7 @@ use kartik\date\DatePicker;
                             ])
                     ?> 
                     <?=
-                            $form->field($model, 'downPayment', [
+                            $form->field($model, 'principalPaidMonthly', [
                                 'addon' => [
                                     'prepend' => ['content' => "Rp."],
                                     'allowNegative' => false,]])
@@ -99,30 +99,10 @@ use kartik\date\DatePicker;
                                     'autoGroup' => true,
                                     'removeMaskOnSubmit' => true],
                                 'options' => [
-                                    'class' => 'form-control actionDP', 'maxlength' => 12
+                                    'class' => 'form-control actionPrincipalMonthly', 'maxlength' => 12
                                 ]
                             ])
                     ?> 
-                    <?=
-                            $form->field($model, 'principalPaid', [
-                                'addon' => [
-                                    'prepend' => ['content' => "Rp."],
-                                    'allowNegative' => false,]])
-                            ->widget(\yii\widgets\MaskedInput::className(), [
-                                'clientOptions' => [
-                                    'alias' => 'decimal',
-                                    'digits' => 2,
-                                    'digitsOptional' => false,
-                                    'radixPoint' => '.',
-                                    'groupSeparator' => ',',
-                                    'autoGroup' => true,
-                                    'removeMaskOnSubmit' => true],
-                                'options' => [
-                                    'class' => 'form-control ', 'maxlength' => 12, 'readOnly' => 'readOnly'
-                                ]
-                            ])
-                    ?> 
-
                 </div>
             </div>
 
@@ -144,7 +124,47 @@ use kartik\date\DatePicker;
                                         <tbody>
                                         </tbody>
 
-                                        <tfoot>
+                                        <tfoot class="table-detail">
+                                            <tr>                                            
+                                                <td class="text-center">
+                                                    <?=
+                                                    DatePicker::widget([
+                                                        'removeButton' => false,
+                                                        'name' => 'paymentPeriod',
+                                                        'options' => ['class' => 'form-control actionPaymentPeriod', 'placeholder' => 'ex: 01-01-1990'],
+                                                        'pluginOptions' => [
+                                                            'autoclose' => true,
+                                                            'format' => 'yyyy/mm',
+                                                            'minViewMode' => 1,
+                                                        ]
+                                                    ]);
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <?=
+                                                    \yii\widgets\MaskedInput::widget([
+                                                        'name' => 'principalPaid',
+                                                        'value' => '0,00',
+                                                        'clientOptions' => [
+                                                            'alias' => 'decimal',
+                                                            'digits' => 2,
+                                                            'digitsOptional' => false,
+                                                            'radixPoint' => ',',
+                                                            'groupSeparator' => '.',
+                                                            'autoGroup' => true,
+                                                            'removeMaskOnSubmit' => false
+                                                        ],
+                                                        'options' => [
+                                                            'class' => 'form-control actionPrincipalPaid', 'maxlength' => 16
+                                                        ],
+                                                    ])
+                                                    ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <?= Html::a('<i class="glyphicon glyphicon-plus">Add</i>', '#', ['class' => 'btn btn-primary btn-sm btnAdd']) ?>
+                                                </td>
+                                                </td>
+                                            </tr>
                                         </tfoot>
                                     </table>
                                 </div>
@@ -153,7 +173,6 @@ use kartik\date\DatePicker;
                     </div>    
                 </div>
             </div>    
-
         </div>
 
         <div class="panel-footer">
@@ -169,6 +188,15 @@ use kartik\date\DatePicker;
 
 <?php
 $LoanDetail = \yii\helpers\Json::encode($model->joinTrLoanProc);
+$deleteRow = '';
+if (!isset($isView)) {
+    $deleteRow = <<< DELETEROW
+			"   <td class='text-center'>" +
+			"       <a class='btn btn-danger btn-sm btnDelete' href='#'><i class='glyphicon glyphicon-remove'></i>Delete</a>" +
+			"   </td>" +
+DELETEROW;
+}
+
 $js = <<< SCRIPT
 
 $(document).ready(function () {
@@ -176,11 +204,12 @@ $(document).ready(function () {
         var rowTemplate = "" +
         "<tr>" +
         "   <td class='text-left'>" +
-        "      <input type='hidden' class='documentPaymentPeriod' name='TrLoanProc[joinTrLoanProc][{{Count}}][paymentPeriod]' data-key='{{Count}}' value='{{paymentPeriod}}' > {{paymentPeriod}}" +
+        "      <input type='hidden' class='documentPaymentPeriod form-control datepickerPeriod' name='MsLoan[joinTrLoanProc][{{Count}}][paymentPeriod]' data-key='{{Count}}' value='{{paymentPeriod}}' > {{paymentPeriod}} " +
         "   </td>" +
         "   <td class='text-left'>" +
-        "       <input type='hidden' class='documentPrincipalPaid' name='TrLoanProc[joinTrLoanProc][{{Count}}][principalPaid]' value='{{principalPaid}}' > {{principalPaid}} " +
+        "       <input type='hidden' class='documentPrincipalPaid form-control' name='MsLoan[joinTrLoanProc][{{Count}}][principalPaid]' value='{{principalPaid}}' > {{principalPaid}}" +
         "   </td>" +
+        $deleteRow
         "</tr>";
 		
 	if (initValue != null) {
@@ -196,7 +225,38 @@ $(document).ready(function () {
         template = replaceAll(template, '{{principalPaid}}', formatNumber(principalPaid));
         template = replaceAll(template, '{{Count}}', getMaximumCounter() + 1);
         $('.Transaction-Detail-Table tbody').append(template);      
+
+        
+        $('.datepickerPeriod').kvDatepicker({
+            autoclose: true,
+            format: 'yyyy/mm',
+            minViewMode : 1
+        })
      }
+
+     $('.Transaction-Detail-Table .btnAdd').on('click', function (e) {
+        e.preventDefault();
+		var actionPaymentPeriod= $('.actionPaymentPeriod').val();
+        var actionPrincipalPaid= $('.actionPrincipalPaid').val();
+
+		actionPrincipalPaid = replaceAll(actionPrincipalPaid, ".", "");
+		actionPrincipalPaid = replaceAll(actionPrincipalPaid, ",", ".");
+	
+        addRow(actionPaymentPeriod,actionPrincipalPaid);
+            $('.actionPaymentPeriod').val('');
+			$('.actionPrincipalPaid').val('');
+        });
+
+
+     $('.Transaction-Detail-Table').on('click', '.btnDelete', function (e) {
+        var self = this;
+        e.preventDefault();
+        yii.confirm('Are you sure you want to delete this data ?',deleteRow);
+        function deleteRow(){
+        $(self).parents('tr').remove();
+        }
+    
+    });
         
     function getMaximumCounter() {
         var maximum = 0;
@@ -235,11 +295,16 @@ $(document).ready(function () {
 
             var nik= $('.nik').val();
             var principal = $('.actionPrincipal').val();
+            var principalMonthly = $('.actionPrincipalMonthly').val();
             var downPayment = $('.actionDP').val();
         
             principal = replaceAll(principal, ".", "");
             principal = replaceAll(principal, ",", ".");
             principal = parseFloat(principal);
+
+            principalMonthly = replaceAll(principalMonthly, ".", "");
+            principalMonthly = replaceAll(principalMonthly, ",", ".");
+            principalMonthly = parseFloat(principalMonthly);
         
             downPayment = replaceAll(downPayment, ".", "");
             downPayment = replaceAll(downPayment, ",", ".");       

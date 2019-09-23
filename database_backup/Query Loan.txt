@@ -1,0 +1,5 @@
+ALTER TABLE `hris`.`tr_loanproc` 
+ADD COLUMN `createdBy` VARCHAR(45) NULL AFTER `principalPaid`;
+
+ALTER TABLE `hris`.`ms_personnelhead` 
+ADD COLUMN `notes` TEXT NULL AFTER `imageNPWP`;
