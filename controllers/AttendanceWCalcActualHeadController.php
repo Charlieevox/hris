@@ -307,20 +307,7 @@ protected function saveModel($model) {
         ini_set('max_execution_time', 3000);
 
         $connection = \Yii::$app->db;
-        $sql = "   
-        SELECT 
-        c.start,
-        c.end,
-        b.inTime,
-        b.outTime,
-        TIMESTAMPDIFF(MINUTE,c.end,b.outTime) 'diff',
-        e.rate1,
-        TIMESTAMPDIFF(MINUTE,c.end,b.outTime) * e.rate1 'lembur' 
-        from ms_attendancewcalcdet a
-        join ms_attendancewcalcactualdetail b on a.date = b.date
-        join ms_attendanceshift c on c.shiftCode = a.shiftCode
-        join ms_personnelhead d on d.id = b.nik
-        join ms_attendanceovertime e on e.overtimeId = d.overtimeId;";
+        $sql = "call spa_overtimecalc";
         $model = $connection->createCommand($sql);
         $download = $model->queryAll();
 
@@ -337,13 +324,15 @@ protected function saveModel($model) {
                 ->setPaperSize(\PHPExcel_Worksheet_PageSetup::PAPERSIZE_FOLIO);
 
         //HEADER
-        $activeSheet->setCellValue('B1','Start');
-        $activeSheet->setCellValue('C1','End');
-        $activeSheet->setCellValue('D1','In');
-        $activeSheet->setCellValue('E1','Out');
-        $activeSheet->setCellValue('F1','Difference');
-        $activeSheet->setCellValue('G1','Rate');
-        $activeSheet->setCellValue('H1','Overtime Value');
+        $activeSheet->setCellValue('A1','No');
+        $activeSheet->setCellValue('B1','FullName');
+        $activeSheet->setCellValue('C1','Start');
+        $activeSheet->setCellValue('D1','End');
+        $activeSheet->setCellValue('E1','In');
+        $activeSheet->setCellValue('F1','Out');
+        $activeSheet->setCellValue('G1','Difference');
+        $activeSheet->setCellValue('H1','Rate');
+        $activeSheet->setCellValue('I1','Overtime Value');
 
                 
 
@@ -352,13 +341,14 @@ protected function saveModel($model) {
         if($download){
             foreach ($download as $value) {
                 $activeSheet->setCellValue('A' . $baseRow, $no);
-                $activeSheet->setCellValue('B' . $baseRow, $value['start']);
-                $activeSheet->setCellValue('C' . $baseRow, $value['end']);
-                $activeSheet->setCellValue('D' . $baseRow, $value['inTime']);
-                $activeSheet->setCellValue('E' . $baseRow, $value['outTime']);
-                $activeSheet->setCellValue('F' . $baseRow, $value['diff']);
-                $activeSheet->setCellValue('G' . $baseRow, $value['rate1']);
-                $activeSheet->setCellValue('H' . $baseRow, $value['lembur']);
+                $activeSheet->setCellValue('B' . $baseRow, $value['fullName']);
+                $activeSheet->setCellValue('C' . $baseRow, $value['start']);
+                $activeSheet->setCellValue('D' . $baseRow, $value['end']);
+                $activeSheet->setCellValue('E' . $baseRow, $value['inTime']);
+                $activeSheet->setCellValue('F' . $baseRow, $value['outTime']);
+                $activeSheet->setCellValue('G' . $baseRow, $value['diff']);
+                $activeSheet->setCellValue('H' . $baseRow, $value['rate1']);
+                $activeSheet->setCellValue('I' . $baseRow, $value['lembur']);
                 $baseRow++;
                 $no++;
             }
@@ -375,29 +365,6 @@ protected function saveModel($model) {
         $activeSheet->getColumnDimension('G')->setAutoSize(true);
         $activeSheet->getColumnDimension('H')->setAutoSize(true);
         $activeSheet->getColumnDimension('I')->setAutoSize(true);
-        $activeSheet->getColumnDimension('J')->setAutoSize(true);
-        $activeSheet->getColumnDimension('K')->setAutoSize(true);
-        $activeSheet->getColumnDimension('L')->setAutoSize(true);
-        $activeSheet->getColumnDimension('M')->setAutoSize(true);
-        $activeSheet->getColumnDimension('N')->setAutoSize(true);
-        $activeSheet->getColumnDimension('O')->setAutoSize(true);
-        $activeSheet->getColumnDimension('P')->setAutoSize(true);
-        $activeSheet->getColumnDimension('Q')->setAutoSize(true);
-        $activeSheet->getColumnDimension('R')->setAutoSize(true);
-        $activeSheet->getColumnDimension('S')->setAutoSize(true);
-        $activeSheet->getColumnDimension('T')->setAutoSize(true);
-        $activeSheet->getColumnDimension('U')->setAutoSize(true);
-        $activeSheet->getColumnDimension('V')->setAutoSize(true);
-        $activeSheet->getColumnDimension('W')->setAutoSize(true);
-        $activeSheet->getColumnDimension('X')->setAutoSize(true);
-        $activeSheet->getColumnDimension('Y')->setAutoSize(true);
-        $activeSheet->getColumnDimension('Z')->setAutoSize(true);
-        $activeSheet->getColumnDimension('AA')->setAutoSize(true);
-        $activeSheet->getColumnDimension('AB')->setAutoSize(true);
-        $activeSheet->getColumnDimension('AC')->setAutoSize(true);
-        $activeSheet->getColumnDimension('AD')->setAutoSize(true);
-        $activeSheet->getColumnDimension('AE')->setAutoSize(true);
-        $activeSheet->getColumnDimension('AF')->setAutoSize(true);
         
         header('Content-Type: application/vnd-ms-excel');
         header("Content-Disposition: attachment; filename=" . $filename);
