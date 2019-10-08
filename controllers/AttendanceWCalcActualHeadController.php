@@ -263,22 +263,23 @@ protected function saveModel($model) {
                 $count = $workingCalcActualDet->find()->where('id = "' . $rowData[0][0] . '"  and date = "' . date('Y-m-d', AppHelper::ExcelToPHP($rowData[0][3])) . '"')->count();
 
                 $checkNik = $personnelHead->find()->where('id = "' . $rowData[0][1] . '"')->count();
-
+          
+               
                 if ($checkNik > 0 ) {
                     if ($count > 0) {
                         $connection = \Yii::$app->db;
                         $command = $connection->createCommand(
-                                'UPDATE ms_attendancewcalcactualdetail SET inTime= "' . $rowData[0][4] . '", outTime= "' . $rowData[0][5] . '"'
-                                . ' WHERE nik= "' . $rowData[0][1] . '" and date = "' . date('Y-m-d', AppHelper::ExcelToPHP($rowData[0][3])) . '"');
+                                'UPDATE ms_attendancewcalcactualdetail SET inTime= "' . $rowData[0][5] . '", outTime= "' . $rowData[0][6] . '"'
+                                . ' WHERE nik= "' . $rowData[0][1] . '" and date = "' . date('Y-m-d', AppHelper::ExcelToPHP($rowData[0][4])) . '"');
                         $command->execute();
                     } else {
                         \Yii::$app->db->createCommand()->insert('ms_attendancewcalcactualdetail', [
                             'id' => $rowData[0][0]."-".$rowData[0][1],
                             'period' => $rowData[0][0],
                             'nik' => $rowData[0][1],
-                            'date' => date('Y-m-d', AppHelper::ExcelToPHP($rowData[0][3])),
-                            'inTime' => $rowData[0][4],
-                            'outTime' => $rowData[0][5],
+                            'date' => date('Y-m-d', AppHelper::ExcelToPHP($rowData[0][4])),
+                            'inTime' => $rowData[0][5],
+                            'outTime' => $rowData[0][6],
                         ])->execute();
                     }
                 }
@@ -325,14 +326,15 @@ protected function saveModel($model) {
 
         //HEADER
         $activeSheet->setCellValue('A1','No');
-        $activeSheet->setCellValue('B1','FullName');
-        $activeSheet->setCellValue('C1','Start');
-        $activeSheet->setCellValue('D1','End');
-        $activeSheet->setCellValue('E1','In');
-        $activeSheet->setCellValue('F1','Out');
-        $activeSheet->setCellValue('G1','Difference');
-        $activeSheet->setCellValue('H1','Rate');
-        $activeSheet->setCellValue('I1','Overtime Value');
+        $activeSheet->setCellValue('B1','Date');
+        $activeSheet->setCellValue('C1','FullName');
+        $activeSheet->setCellValue('D1','Start');
+        $activeSheet->setCellValue('E1','End');
+        $activeSheet->setCellValue('F1','In');
+        $activeSheet->setCellValue('G1','Out');
+        $activeSheet->setCellValue('H1','Difference');
+        $activeSheet->setCellValue('I1','Rate');
+        $activeSheet->setCellValue('J1','Overtime Value');
 
                 
 
@@ -341,14 +343,15 @@ protected function saveModel($model) {
         if($download){
             foreach ($download as $value) {
                 $activeSheet->setCellValue('A' . $baseRow, $no);
-                $activeSheet->setCellValue('B' . $baseRow, $value['fullName']);
-                $activeSheet->setCellValue('C' . $baseRow, $value['start']);
-                $activeSheet->setCellValue('D' . $baseRow, $value['end']);
-                $activeSheet->setCellValue('E' . $baseRow, $value['inTime']);
-                $activeSheet->setCellValue('F' . $baseRow, $value['outTime']);
-                $activeSheet->setCellValue('G' . $baseRow, $value['diff']);
-                $activeSheet->setCellValue('H' . $baseRow, $value['rate1']);
-                $activeSheet->setCellValue('I' . $baseRow, $value['lembur']);
+                $activeSheet->setCellValue('B' . $baseRow, $value['date']);
+                $activeSheet->setCellValue('C' . $baseRow, $value['fullName']);
+                $activeSheet->setCellValue('D' . $baseRow, $value['start']);
+                $activeSheet->setCellValue('E' . $baseRow, $value['end']);
+                $activeSheet->setCellValue('F' . $baseRow, $value['inTime']);
+                $activeSheet->setCellValue('G' . $baseRow, $value['outTime']);
+                $activeSheet->setCellValue('H' . $baseRow, $value['diff']);
+                $activeSheet->setCellValue('I' . $baseRow, $value['rate1']);
+                $activeSheet->setCellValue('J' . $baseRow, $value['lembur']);
                 $baseRow++;
                 $no++;
             }
@@ -365,6 +368,7 @@ protected function saveModel($model) {
         $activeSheet->getColumnDimension('G')->setAutoSize(true);
         $activeSheet->getColumnDimension('H')->setAutoSize(true);
         $activeSheet->getColumnDimension('I')->setAutoSize(true);
+        $activeSheet->getColumnDimension('J')->setAutoSize(true);
         
         header('Content-Type: application/vnd-ms-excel');
         header("Content-Disposition: attachment; filename=" . $filename);
