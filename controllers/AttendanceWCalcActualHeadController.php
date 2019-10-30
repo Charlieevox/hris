@@ -260,7 +260,7 @@ protected function saveModel($model) {
             //$row is start 2 because first row assigned for heading.         
             for ($row = 2; $row <= $highestRow; ++$row) {
                 $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
-                $count = $workingCalcActualDet->find()->where('id = "' . $rowData[0][0] . '"  and date = "' . date('Y-m-d', AppHelper::ExcelToPHP($rowData[0][3])) . '"')->count();
+                $count = $workingCalcActualDet->find()->where('nik = "' . $rowData[0][1] . '"  and date = "' . date('Y-m-d', AppHelper::ExcelToPHP($rowData[0][3])) . '"')->count();
 
                 $checkNik = $personnelHead->find()->where('id = "' . $rowData[0][1] . '"')->count();
           
