@@ -22,6 +22,7 @@ use yii\web\Response;
 use app\components\AppHelper;
 use yii\db\Expression;
 use app\components\ControllerUAC;
+use PHPExcel_Style_Fill;
 
 
 /**
@@ -335,6 +336,8 @@ protected function saveModel($model) {
         $activeSheet->setCellValue('H1','Difference');
         $activeSheet->setCellValue('I1','Rate');
         $activeSheet->setCellValue('J1','Overtime Value');
+        $activeSheet->setCellValue('K1','Uang Makan');
+        $activeSheet->setCellValue('L1','Uang Makan 24');
 
                 
 
@@ -352,6 +355,17 @@ protected function saveModel($model) {
                 $activeSheet->setCellValue('H' . $baseRow, $value['diff']);
                 $activeSheet->setCellValue('I' . $baseRow, $value['rate1']);
                 $activeSheet->setCellValue('J' . $baseRow, $value['lembur']);
+                $activeSheet->setCellValue('K' . $baseRow, $value['uangmakan']);
+                $activeSheet->setCellValue('L' . $baseRow, $value['uangmakan24']);
+                if ($value['late'] == 'Y' ) {
+                    $objPHPExcel->getActiveSheet()->getStyle('F' . $baseRow)->getFill()->applyFromArray(array(
+                        'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                        'startcolor' => array(
+                            'rgb' => 'F28A8C'
+                        )
+                    ));
+                };
+
                 $baseRow++;
                 $no++;
             }
