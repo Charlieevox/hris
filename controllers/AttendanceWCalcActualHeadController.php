@@ -211,6 +211,9 @@ protected function saveModel($model) {
 
     
     public function actionUpload() {
+        ini_set('memory_limit', '-1');
+        ini_set('max_execution_time', 36000);
+
         $model = new UploadForm();
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
@@ -261,11 +264,10 @@ protected function saveModel($model) {
             //$row is start 2 because first row assigned for heading.         
             for ($row = 2; $row <= $highestRow; ++$row) {
                 $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
-                $count = $workingCalcActualDet->find()->where('nik = "' . $rowData[0][1] . '"  and date = "' . date('Y-m-d', AppHelper::ExcelToPHP($rowData[0][3])) . '"')->count();
+                $count = $workingCalcActualDet->find()->where('nik = "' . $rowData[0][1] . '"  and date = "' . date('Y-m-d', AppHelper::ExcelToPHP($rowData[0][4])) . '"')->count();
 
                 $checkNik = $personnelHead->find()->where('id = "' . $rowData[0][1] . '"')->count();
-          
-               
+                
                 if ($checkNik > 0 ) {
                     if ($count > 0) {
                         $connection = \Yii::$app->db;
