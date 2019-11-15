@@ -62,8 +62,8 @@ class SiteController extends Controller {
 					'Member Not Register In Payroll Income' as 'Remarks',
 					'A01' as 'allertId'
 					from ms_personnelhead
-					where id not in (select nik from ms_payrollincomedetail)";
-
+                    where id not in (select nik from ms_payrollincomedetail)";
+                    
 			$model = new SqlDataProvider([
 				'sql' => $sql,
 				'totalCount' => $count,

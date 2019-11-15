@@ -363,7 +363,16 @@ protected function saveModel($model) {
                     $objPHPExcel->getActiveSheet()->getStyle('F' . $baseRow)->getFill()->applyFromArray(array(
                         'type' => PHPExcel_Style_Fill::FILL_SOLID,
                         'startcolor' => array(
-                            'rgb' => 'F28A8C'
+                            'rgb' => 'ffff00'
+                        )
+                    ));
+                };
+
+                if ($value['vlate'] == 'Y' ) {
+                    $objPHPExcel->getActiveSheet()->getStyle('F' . $baseRow)->getFill()->applyFromArray(array(
+                        'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                        'startcolor' => array(
+                            'rgb' => 'ff0000'
                         )
                     ));
                 };
