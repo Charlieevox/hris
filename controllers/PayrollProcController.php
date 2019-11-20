@@ -248,7 +248,7 @@ class PayrollProcController extends ControllerUAC {
         f.A03 as 'UangMakan',
         f.A04 as 'UangDriver',
         f.B02 as 'THR',
-        f.D01 as 'Hutang',
+        COALESCE(h.principalPaid,0) as 'Hutang',
         f.D02 as 'Bonus',
         f.D03 as 'Overtime',
         f.JHTCom as 'JHTCompany',
@@ -268,7 +268,12 @@ class PayrollProcController extends ControllerUAC {
         LEFT JOIN ms_personneldepartment d on d.departmentCode = a.departmentID
         LEFT JOIN ms_setting e on e.Value1 = a.maritalstatus and e.key1 = 'MaritalStatus'
         LEFT JOIN vr_crosstab f on f.nik = a.id and Period = '" . $model->period . "'
-        LEFT JOIN tr_payrolltaxmonthlyproc g on a.id = g.nik and g.period = '" . $model->period . "'";
+        LEFT JOIN tr_payrolltaxmonthlyproc g on a.id = g.nik and g.period = '" . $model->period . "'
+        LEFT JOIN (
+            SELECT b.nik,a.principalPaid,a.paymentPeriod FROM tr_loanproc a
+            JOIN ms_loan b ON a.id = b.id
+            WHERE a.paymentPeriod = '" . $model->period . "'
+        ) h ON h.nik = a.id";
         $model = $connection->createCommand($sql);
         $download = $model->queryAll();
 
