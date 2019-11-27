@@ -22,41 +22,57 @@ $headResult = $temp->queryOne();
             <h1><?= Html::encode($this->title) ?></h1>
         </div>
         <div class="panel-body">
-            <div class="row">
-                <div class="col-md-8">
-                    <?=
-                            $form->field($model, 'period')
-                            ->widget(DatePicker::className(), [
-                                'options' => ['class' => 'actionPeriod'],
-                                'pluginOptions' => [
-                                    'autoclose' => true,
-                                    'format' => 'yyyy/mm',
-                                    'startDate' => date($headResult['startPayrollPeriod']),
-                                    'minViewMode' => 1,
-                                ]
-                            ])
-                    ?>
-                </div>
-                <div class="col-md-4">
-                    <?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
-                </div>
-            </div>
+			<ul class="nav nav-tabs">
+				<li class="active"><a data-toggle="tab" href="#main">Main</a></li>
+				<li><a data-toggle="tab" href="#report">Report</a></li>
+			</ul>
+
+			<div class="tab-content">
+				<div id="main" class="tab-pane fade in active">	
+					<div class="row">
+						<div class="col-md-8">
+							<?=
+									$form->field($model, 'period')
+									->widget(DatePicker::className(), [
+										'options' => ['class' => 'actionPeriod'],
+										'pluginOptions' => [
+											'autoclose' => true,
+											'format' => 'yyyy/mm',
+											'startDate' => date($headResult['startPayrollPeriod']),
+											'minViewMode' => 1,
+										]
+									])
+							?>
+						</div>
+						<div class="col-md-4">
+							<?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
+						</div>
+					</div>
+				</div>
+				
+				<div id="report" class="tab-pane fade">
+					</br>
+					</br>
+					<div class="row">
+					<ul>
+						<li><?= Html::a('Report Payroll', ['payroll-proc/download', 'id' => $model->period], ['class' => 'reportItem']);?></li>
+						<li><?= Html::a('Report Overtime', ['payroll-proc/report-overtime', 'id' => $model->period], ['class' => 'reportItem']);?></li>
+						<li><?= Html::a('Report Payroll Draft', ['payroll-proc/report-payroll-draft', 'id' => $model->period], ['class' => 'reportItem']);?></li>
+						<li><?= Html::a('Report Payroll Draft All', ['payroll-proc/report-payroll-draft-all', 'id' => $model->period], ['class' => 'reportItem']);?></li>
+						<li><?= Html::a('Report Print', ['payroll-proc/print', 'id' => $model->period], ['class' => 'reportItem']);?></li>
+                    </ul>
+					
+				</div>
+			</div>
+
         </div>
         <div class="panel-footer">
             <div class="pull-left">
                 <?= Html::submitButton($model->isNewRecord ? 'Process' : 'Process', ['class' => $model->isNewRecord ? 'btn btn-success action create-payroll' : 'btn btn-success action create-payroll']) ?>
 				
-				<?php if (!isset($isFinish)){?>
-					<?= Html::a('<i class="glyphicon glyphicon-print"> Print</i>', ['payroll-proc/print', 'id' => $model->period], ['class' => 'btn btn-primary btnPrint']) ?>
-					<?= Html::a('<i class="glyphicon glyphicon-file"> Export&nbspExcel</i>', ['payroll-proc/download', 'id' => $model->period], ['class' => 'btn btn-primary btnPrint']) ?>
-                <?php } ?>
+
 				
             </div>
-			<div class="pull-right">
-			<?php if (!isset($isFinish)){?>
-				<?= Html::a('<i class="glyphicon glyphicon-paperclip"> Dummy Process</i>', ['payroll-proc/reprocess', 'id' => $model->period], ['class' => 'btn btn-danger btn-reprocess']) ?>
-			<?php } ?>
-			</div>
             <div class="clearfix"></div> 
         </div>          
     </div>

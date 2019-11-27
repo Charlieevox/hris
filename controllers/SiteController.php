@@ -66,7 +66,7 @@ class SiteController extends Controller {
                     
 			$model = new SqlDataProvider([
 				'sql' => $sql,
-				'totalCount' => $count,
+				'totalCount' => (int)$count,
 				'key' => 'id',
 			]);
 
