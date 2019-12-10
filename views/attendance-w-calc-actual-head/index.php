@@ -4,6 +4,7 @@ use app\components\AppHelper;
 use kartik\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use kartik\date\DatePicker;
 use app\models\MsPersonnelHead;
 
 /* @var $this yii\web\View */
@@ -73,13 +74,47 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <div class="panel-footer">
-    <div class="pull-right">
-        <?=  Html::a('Download', ['download'], [
-                    'type' => 'button',
-                    'title' => 'Download Working Schedule',
-                    'class' => 'btn btn-default open-modal-btn'
-                ]) 
-        ?>
+    <div class="row">
+        <div class="pull-right">            
+            <?=  Html::a('Download', ['download'], [
+                        'type' => 'button',
+                        'title' => 'Download Working Schedule',
+                        'class' => 'btn btn-default open-modal-btn',
+                        'id' => 'btnDownload'
+                    ]) 
+            ?>
+        </div>
+        <div class="col-md-2 pull-right">
+            <?=
+                DatePicker::widget([
+                'id' => 'period',
+                'name' => 'period', 
+                'value' => date('Y/m'),
+                'options' => ['placeholder' => 'Select Period ...'],
+                'pluginOptions' => [
+                    'autoclose' => true,
+                    'format' => 'yyyy/mm',
+                    'minViewMode' => 1,
+                ]])
+                
+            ?>
+        </div>
     </div>
     <div class="clearfix"></div>           
 </div>
+
+
+<?php
+$js = <<< SCRIPT
+        
+$(document).ready(function () {
+    
+    $('#period').change(function(){
+       var period = $('#period').val();
+       $("#btnDownload").attr("href", "attendance-w-calc-actual-head/download?period="+period);
+    }); 
+                
+});
+SCRIPT;
+$this->registerJs($js);
+?>
