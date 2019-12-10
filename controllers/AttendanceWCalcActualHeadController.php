@@ -306,12 +306,14 @@ protected function saveModel($model) {
     }
 
 
-    public function actionDownload() {
+    public function actionDownload($period = '') {
         ini_set('memory_limit', '-1');
         ini_set('max_execution_time', 3000);
 
+        $period = $period = '' ? date('Y/m') : $period;
+
         $connection = \Yii::$app->db;
-        $sql = "call spa_overtimecalc";
+        $sql = "call spa_overtimecalc ('$period')";
         $model = $connection->createCommand($sql);
         $download = $model->queryAll();
 
