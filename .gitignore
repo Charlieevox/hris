@@ -36,3 +36,5 @@ assets_b/uploads/excel/uploadFile.xlsx
 
 # composer vendor dir
 /assets
+
+/config/db.php
