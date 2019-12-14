@@ -49,6 +49,7 @@ class AttendanceWCalcHeadController extends ControllerUAC {
      */
     public function actionIndex() {
         $model = new MsAttendanceWCalcHead();
+        $model->period = date('Y/m');
         $model->load(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -229,9 +230,11 @@ class AttendanceWCalcHeadController extends ControllerUAC {
         return true;
     }
 
-    public function actionGenerateSchedule() {
+    public function actionGenerateSchedule($period = '') {
+        $period = $period = '' ? date('Y/m') : $period;
+
 		$connection = Yii::$app->db;
-		$command = $connection->createCommand('call spa_generateschedule');
+		$command = $connection->createCommand("call spa_generateschedule ('$period')");
 		$command->execute();
 		AppHelper::insertTransactionLog('Generate Schedule', '');
 		return $this->redirect(['index']);

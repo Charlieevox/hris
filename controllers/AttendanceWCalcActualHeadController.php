@@ -57,6 +57,7 @@ class AttendanceWCalcActualHeadController extends ControllerUAC {
     public function actionIndex()
     {
         $model = new MsAttendanceWCalcActualHead();
+        $model->period = date('Y/m');
         $model->load(Yii::$app->request->queryParams);
 
         return $this->render('index', [

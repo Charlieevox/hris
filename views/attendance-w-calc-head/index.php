@@ -1,6 +1,7 @@
 <?php
 
 use app\components\AppHelper;
+use kartik\date\DatePicker;
 use kartik\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -33,11 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'title' => 'Upload Working Schedule',
                     'class' => 'btn btn-default open-modal-btn'
                 ]) . '&nbsp;' .
-                Html::a('<i class="glyphicon glyphicon-saved"></i>', ['generate-schedule'], [
-                    'type' => 'button',
-                    'title' => 'Generate Working Schedule',
-                    'class' => 'btn btn-default open-modal-btn'
-                ]) . '&nbsp;' .
                 Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['index'], [
                     'class' => 'btn btn-default',
                     'title' => 'Reset Grid'
@@ -52,14 +48,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filterWidgetOptions' => AppHelper::getDatePickerConfigMonthYear()
             ],
             [
-                'attribute' => 'nik',
-                'value' => function ($data) {
-                    return $data->personnelHead->fullName;
-                },
-                'filter' => ArrayHelper::map(MsPersonnelHead::find()->where('flagActive = 1')->orderBy('fullName')->all(), 'id', 'fullName'),
-                'filterInputOptions' => [
-                    'prompt' => '- All -'
-                ]
+                'attribute' => 'fullName',
+                'value' => 'personnelHead.fullName',
             ],
             AppHelper::getMasterActionColumn2('{update} {delete}')
         ],
@@ -67,13 +57,49 @@ $this->params['breadcrumbs'][] = $this->title;
     ?> 
 </div>
 
+<div class="panel-footer">
+    <div class="row">
+        <div class="col-md-1 pull-right">            
+            <?=  Html::a('Generate', ['generate-schedule'], [
+                        'type' => 'button',
+                        'title' => 'Generate Schedule Schedule',
+                        'class' => 'btn btn-default',
+                        'id' => 'btnGenerate'
+                    ]) 
+            ?>
+        </div>
+        <div class="col-md-2 pull-right">
+            <?=
+                DatePicker::widget([
+                'id' => 'period',
+                'name' => 'period', 
+                'value' => date('Y/m'),
+                'options' => ['placeholder' => 'Select Period ...'],
+                'pluginOptions' => [
+                    'autoclose' => true,
+                    'format' => 'yyyy/mm',
+                    'minViewMode' => 1,
+                ]])
+                
+            ?>
+        </div>
+    </div>
+    <div class="clearfix"></div>           
+</div>
+
 <?php
 $js = <<< SCRIPT
-
-$(document).ready(function () {
         
+$(document).ready(function () {
+    
+    $('#period').change(function(){
+       var period = $('#period').val();
+       $("#btnDownload").attr("href", "attendance-w-calc-head/generate-schedule?period="+period);
+    }); 
+                
 });
 SCRIPT;
 $this->registerJs($js);
 ?>
+
 

@@ -53,14 +53,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filterWidgetOptions' => AppHelper::getDatePickerConfigMonthYear()
             ],
             [
-                'attribute' => 'nik',
-                'value' => function ($data) {
-                    return $data->personnelHead->fullName;
-                },
-                'filter' => ArrayHelper::map(MsPersonnelHead::find()->where('flagActive = 1')->orderBy('fullName')->all(), 'id', 'fullName'),
-                'filterInputOptions' => [
-                    'prompt' => '- All -'
-                ]
+                'attribute' => 'fullName',
+                'value' => 'personnelHead.fullName',
             ],
             //'createdBy',
             //'createdDate',
@@ -75,11 +69,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="panel-footer">
     <div class="row">
-        <div class="pull-right">            
+        <div class="col-md-1 pull-right">            
             <?=  Html::a('Download', ['download'], [
                         'type' => 'button',
                         'title' => 'Download Working Schedule',
-                        'class' => 'btn btn-default open-modal-btn',
+                        'class' => 'btn btn-default',
                         'id' => 'btnDownload'
                     ]) 
             ?>

@@ -20,6 +20,7 @@ use app\components\AppHelper;
 class MsAttendanceWCalcActualHead extends \yii\db\ActiveRecord {
 
     public $joinPersonnelwCalcActualDetail;
+    public $fullName;
 
     /**
      * @inheritdoc
@@ -37,7 +38,7 @@ class MsAttendanceWCalcActualHead extends \yii\db\ActiveRecord {
             [['id'], 'string', 'max' => 20],
             [['createdDate', 'editedDate'], 'safe'],
             [['period', 'nik', 'createdBy', 'editedBy'], 'string', 'max' => 45],
-            [['joinPersonnelwCalcActualDetail'], 'safe']
+            [['joinPersonnelwCalcActualDetail','fullName'], 'safe']
         ];
     }
 
@@ -58,20 +59,22 @@ class MsAttendanceWCalcActualHead extends \yii\db\ActiveRecord {
 
     public function search() {
         $query = self::find()
-                ->andFilterWhere(['like', 'ms_attendancewcalcactualhead.period', $this->period])
-                ->andFilterWhere(['like', 'ms_attendancewcalcactualhead.nik', $this->nik]);
+                ->joinWith('personnelHead')
+                ->andFilterWhere(['=', 'ms_attendancewcalcactualhead.period', $this->period])
+                ->andFilterWhere(['like', 'ms_personnelhead.fullname', $this->fullName]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
-                'defaultOrder' => ['nik' => SORT_ASC],
-                'attributes' => ['nik', 'period']
+                'defaultOrder' => ['fullName' => SORT_ASC],
+                'attributes' => ['period','fullName']
             ],
         ]);
 
-        $dataProvider->sort->attributes['nik'] = [
-            'asc' => [self::tableName() . '.nik' => SORT_ASC],
-            'desc' => [self::tableName() . '.nik' => SORT_DESC],
+        
+        $dataProvider->sort->attributes['fullName'] = [
+            'asc' => ['ms_personnelhead.fullName' => SORT_ASC],
+            'desc' => ['ms_personnelhead.fullName' => SORT_DESC],
         ];
 
         return $dataProvider;
