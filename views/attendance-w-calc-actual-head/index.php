@@ -34,11 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'title' => 'Upload Working Schedule',
                     'class' => 'btn btn-default open-modal-btn'
                 ]) . '&nbsp;' .
-                Html::a('<i class="glyphicon glyphicon-saved"></i>', ['generate-schedule'], [
-                    'type' => 'button',
-                    'title' => 'Generate Working Schedule',
-                    'class' => 'btn btn-default open-modal-btn'
-                ]) . '&nbsp;' .
                 Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['index'], [
                     'class' => 'btn btn-default',
                     'title' => 'Reset Grid'
