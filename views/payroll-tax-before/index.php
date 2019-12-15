@@ -41,16 +41,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filterType' => GridView::FILTER_DATE,
                 'filterWidgetOptions' => AppHelper::getDatePickerConfigMonthYear()
             ],
-            [
-                'attribute' => 'nik',
-                'value' => function ($data) {
-                    return $data->personnelHead->fullName;
-                },
-                'filter' => ArrayHelper::map(MsPersonnelHead::find()->where('flagActive = 1')->orderBy('fullName')->all(), 'id', 'fullName'),
-                'filterInputOptions' => [
-                    'prompt' => '- All -'
-                ]
-            ],
+            // [
+            //     'attribute' => 'nik',
+            //     'value' => function ($data) {
+            //         return $data->personnelHead->fullName;
+            //     },
+            //     'filter' => ArrayHelper::map(MsPersonnelHead::find()->where('flagActive = 1')->orderBy('fullName')->all(), 'id', 'fullName'),
+            //     'filterInputOptions' => [
+            //         'prompt' => '- All -'
+            //     ]
+            // ],
             AppHelper::getMasterActionColumn2('{update} {delete}')
         ],
     ]);
