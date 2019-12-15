@@ -14,8 +14,9 @@ use app\models\MsPayrollJamsostek;
 use app\models\MsBank;
 use app\models\LkEducation;
 use app\models\LkGender;
-use app\models\MsSetting;
 use app\models\LkCurrency;
+use app\models\MsLate;
+use app\models\MsSetting;
 use app\models\MsPayrollProrate;
 use app\models\MsTaxLocation;
 use kartik\widgets\DepDrop;
@@ -28,89 +29,90 @@ use app\models\MsAttendanceShift;
 ?>
 
 <div class="ms-personnel-head-form">
-    <?php
-    $form = ActiveForm::begin(['id' => 'mainForm', 'enableAjaxValidation' => true, 'options' => [
-                    'enctype' => 'multipart/form-data',
-                ],
-    ]);
-    ?>
+	<?php
+	$form = ActiveForm::begin([
+		'id' => 'mainForm', 'enableAjaxValidation' => true, 'options' => [
+			'enctype' => 'multipart/form-data',
+		],
+	]);
+	?>
 
-    <?php
-    $imageUrlKTP = \yii\helpers\Url::toRoute(['personnel-head/get-image', 'fileName' => $model->imageKTP]);
-    $imageUrlNPWP = \yii\helpers\Url::toRoute(['personnel-head/get-image', 'fileName' => $model->imageNPWP]);
-    $imageUrlPhoto = \yii\helpers\Url::toRoute(['personnel-head/get-image', 'fileName' => $model->imagePhoto]);
-    $imageUrlUnknown = \yii\helpers\Url::toRoute(['personnel-head/get-image', 'fileName' => "unknown.jpg"]);
-    $deleteUrlKTP = \yii\helpers\Url::toRoute(['personnel-head/remove-image', 'id' => $model->id, 'fileName' => $model->imageKTP, 'docName' => 'KTP']);
-    $deleteUrlNPWP = \yii\helpers\Url::toRoute(['personnel-head/remove-image', 'id' => $model->id, 'fileName' => $model->imageNPWP, 'docName' => 'NPWP']);
-    $deleteUrlPhoto = \yii\helpers\Url::toRoute(['personnel-head/remove-image', 'id' => $model->id, 'fileName' => $model->imagePhoto, 'docName' => 'PHOTO']);
+	<?php
+	$imageUrlKTP = \yii\helpers\Url::toRoute(['personnel-head/get-image', 'fileName' => $model->imageKTP]);
+	$imageUrlNPWP = \yii\helpers\Url::toRoute(['personnel-head/get-image', 'fileName' => $model->imageNPWP]);
+	$imageUrlPhoto = \yii\helpers\Url::toRoute(['personnel-head/get-image', 'fileName' => $model->imagePhoto]);
+	$imageUrlUnknown = \yii\helpers\Url::toRoute(['personnel-head/get-image', 'fileName' => "unknown.jpg"]);
+	$deleteUrlKTP = \yii\helpers\Url::toRoute(['personnel-head/remove-image', 'id' => $model->id, 'fileName' => $model->imageKTP, 'docName' => 'KTP']);
+	$deleteUrlNPWP = \yii\helpers\Url::toRoute(['personnel-head/remove-image', 'id' => $model->id, 'fileName' => $model->imageNPWP, 'docName' => 'NPWP']);
+	$deleteUrlPhoto = \yii\helpers\Url::toRoute(['personnel-head/remove-image', 'id' => $model->id, 'fileName' => $model->imagePhoto, 'docName' => 'PHOTO']);
 
-    if ($model->imageKTP != NULL) {
-        $initialPreviewKTP = [
-            Html::img($imageUrlKTP, ['class' => 'file-preview-image', 'alt' => $model->imageKTP, 'title' => $model->imageKTP])
-        ];
-        $initialPreviewConfigKTP = [
-            [
-                'url' => $deleteUrlKTP,
-                'key' => $model->imageKTP,
-                'extra' => ['key' => $model->imageKTP],
-            ]
-        ];
-    } else {
-        $initialPreviewKTP = '';
-        $initialPreviewConfigKTP = '';
-    }
+	if ($model->imageKTP != NULL) {
+		$initialPreviewKTP = [
+			Html::img($imageUrlKTP, ['class' => 'file-preview-image', 'alt' => $model->imageKTP, 'title' => $model->imageKTP])
+		];
+		$initialPreviewConfigKTP = [
+			[
+				'url' => $deleteUrlKTP,
+				'key' => $model->imageKTP,
+				'extra' => ['key' => $model->imageKTP],
+			]
+		];
+	} else {
+		$initialPreviewKTP = '';
+		$initialPreviewConfigKTP = '';
+	}
 
-    if ($model->imageNPWP != NULL) {
-        $initialPreviewNPWP = [
-            Html::img($imageUrlNPWP, ['class' => 'file-preview-image', 'alt' => $model->imageNPWP, 'title' => $model->imageNPWP])
-        ];
-        $initialPreviewConfigNPWP = [
-            [
-                'url' => $deleteUrlNPWP,
-                'key' => $model->imageNPWP,
-                'extra' => ['key' => $model->imageNPWP],
-            ]
-        ];
-    } else {
-        $initialPreviewNPWP = '';
-        $initialPreviewConfigNPWP = '';
-    }
+	if ($model->imageNPWP != NULL) {
+		$initialPreviewNPWP = [
+			Html::img($imageUrlNPWP, ['class' => 'file-preview-image', 'alt' => $model->imageNPWP, 'title' => $model->imageNPWP])
+		];
+		$initialPreviewConfigNPWP = [
+			[
+				'url' => $deleteUrlNPWP,
+				'key' => $model->imageNPWP,
+				'extra' => ['key' => $model->imageNPWP],
+			]
+		];
+	} else {
+		$initialPreviewNPWP = '';
+		$initialPreviewConfigNPWP = '';
+	}
 
-    if ($model->imagePhoto != NULL) {
-        $initialPreviewPhoto = [
-            Html::img($imageUrlPhoto, ['class' => 'file-preview-image', 'alt' => $model->imagePhoto, 'title' => $model->imagePhoto])
-        ];
-        $initialPreviewConfigPhoto = [
-            [
-                'url' => $deleteUrlPhoto,
-                'key' => $model->imagePhoto,
-                'extra' => ['key' => $model->imagePhoto],
-            ]
-        ];
-    } else {
-        $initialPreviewPhoto = '';
-        $initialPreviewConfigPhoto = '';
-    }
+	if ($model->imagePhoto != NULL) {
+		$initialPreviewPhoto = [
+			Html::img($imageUrlPhoto, ['class' => 'file-preview-image', 'alt' => $model->imagePhoto, 'title' => $model->imagePhoto])
+		];
+		$initialPreviewConfigPhoto = [
+			[
+				'url' => $deleteUrlPhoto,
+				'key' => $model->imagePhoto,
+				'extra' => ['key' => $model->imagePhoto],
+			]
+		];
+	} else {
+		$initialPreviewPhoto = '';
+		$initialPreviewConfigPhoto = '';
+	}
 
 
 
-    $connection = Yii::$app->db;
-    $sql = "select * from ms_company";
-    $temp = $connection->createCommand($sql);
-    $headResult = $temp->queryOne();
-    ?>
+	$connection = Yii::$app->db;
+	$sql = "select * from ms_company";
+	$temp = $connection->createCommand($sql);
+	$headResult = $temp->queryOne();
+	?>
 
-    <div class="panel panel-default" id="myForm">
-        <div class="panel-heading">
-            <div class="row"> 
-                <div class="col-md-6"> 
-                    <h1><?= Html::encode($this->title) ?></h1>
-                </div>
-                <div class="col-md-6"> 
-					<div class="row"> 
+	<div class="panel panel-default" id="myForm">
+		<div class="panel-heading">
+			<div class="row">
+				<div class="col-md-6">
+					<h1><?= Html::encode($this->title) ?></h1>
+				</div>
+				<div class="col-md-6">
+					<div class="row">
 						<div class="col-md-8">
 
-						</div>	
+						</div>
 						<div class="col-md-4">
 							<?php
 							if ($model->imagePhoto != NULL) {
@@ -118,439 +120,442 @@ use app\models\MsAttendanceShift;
 							} else {
 								echo '<img src="' . $imageUrlUnknown . '" alt="Cover" class="file-preview-image pull-right" style="width:145px;height:126px;" >';
 							}
-							?> 
+							?>
 						</div>
 					</div>
-                </div>
-            </div>
-        </div>
-        <div class="panel-body">
-            <div class="tabsControlStyling">
-                <ul  id="myTab" class="nav nav-tabs nav-tabs-custom nav-justified tab-pane">
-                    <li class="active"><a data-toggle="tab" href="#home" class="glyphicon glyphicon-user"> Profile</a></li>
-                    <li><a data-toggle="tab" href="#menu1" class="glyphicon glyphicon-inbox"> Employment</a></li>
-                    <li><a data-toggle="tab" href="#menu2" class="glyphicon glyphicon-tag"> Payment</a></li>
-                    <li><a data-toggle="tab" href="#menu3" class="glyphicon glyphicon-folder-open"> BPJS</a></li>
-                    <li><a data-toggle="tab" href="#menu4" class="glyphicon glyphicon-file"> NPWP</a></li>
-                    <li><a data-toggle="tab" href="#menu5" class="glyphicon glyphicon-phone-alt"> Emergency</a></li>
-                    <li><a data-toggle="tab" href="#menu6" class="glyphicon glyphicon-file"> Document</a></li>
-                </ul>
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">
+			<div class="tabsControlStyling">
+				<ul id="myTab" class="nav nav-tabs nav-tabs-custom nav-justified tab-pane">
+					<li class="active"><a data-toggle="tab" href="#home" class="glyphicon glyphicon-user"> Profile</a></li>
+					<li><a data-toggle="tab" href="#menu1" class="glyphicon glyphicon-inbox"> Employment</a></li>
+					<li><a data-toggle="tab" href="#menu2" class="glyphicon glyphicon-tag"> Payment</a></li>
+					<li><a data-toggle="tab" href="#menu3" class="glyphicon glyphicon-folder-open"> BPJS</a></li>
+					<li><a data-toggle="tab" href="#menu4" class="glyphicon glyphicon-file"> NPWP</a></li>
+					<li><a data-toggle="tab" href="#menu5" class="glyphicon glyphicon-phone-alt"> Emergency</a></li>
+					<li><a data-toggle="tab" href="#menu6" class="glyphicon glyphicon-file"> Document</a></li>
+				</ul>
 
-                <div class="tab-content">
-                    <div id="home" class="tab-pane fade in active">
-                        <div class="information-form">
-                            <div class="panel panel-default">
-                                <div class="panel-heading"> <b> Information </b></div>
-                                <div class="panel-body">
-									<div class ="row">
+				<div class="tab-content">
+					<div id="home" class="tab-pane fade in active">
+						<div class="information-form">
+							<div class="panel panel-default">
+								<div class="panel-heading"> <b> Information </b></div>
+								<div class="panel-body">
+									<div class="row">
 										<div class="col-md-6">
 											<?= $form->field($model, 'fullName')->textInput(['maxlength' => true, 'placeholder' => 'Enter First Name...']) ?>
 										</div>
 
 										<div class="col-md-6">
-											 <?= $form->field($model, 'employeeNo')->textInput(['maxlength' => true, 'placeholder' => 'Enter Employee No']) ?>
-										</div>	
-										
-									</div>
-									
-									<div class ="row">
+											<?= $form->field($model, 'employeeNo')->textInput(['maxlength' => true, 'placeholder' => 'Enter Employee No']) ?>
+										</div>
 
-									
+									</div>
+
+									<div class="row">
+
+
 										<div class="col-md-6">
 											<?=
 												$form->field($model, 'gender')
-												->dropDownList(ArrayHelper::map(LkGender::find()
-													->orderBy('id')->all(), 'id', 'description'), ['prompt' => 'Select ' . $model->getAttributeLabel('gender')])
-                                            ?>
-										</div>	
-										
-										<div class="col-md-6">
-											<div class="row">
-                                                <div class="col-md-4">
-                                                    <?= $form->field($model, 'birthPlace')->textInput(['maxlength' => true, 'placeholder' => 'ex: Jakarta']) ?>
-                                                </div>
-                                                <div class="col-md-8">
-                                                    <?=
-                                                    $form->field($model, 'birthDate')->widget(DatePicker::className(),AppHelper::getDatePickerConfig ())
-                                                    ?>			
-                                                </div>    
-                                            </div>
+													->dropDownList(ArrayHelper::map(LkGender::find()
+														->orderBy('id')->all(), 'id', 'description'), ['prompt' => 'Select ' . $model->getAttributeLabel('gender')])
+											?>
 										</div>
 
-									</div>									
-									
-									<div class ="row">
-										
+										<div class="col-md-6">
+											<div class="row">
+												<div class="col-md-4">
+													<?= $form->field($model, 'birthPlace')->textInput(['maxlength' => true, 'placeholder' => 'ex: Jakarta']) ?>
+												</div>
+												<div class="col-md-8">
+													<?=
+														$form->field($model, 'birthDate')->widget(DatePicker::className(), AppHelper::getDatePickerConfig())
+													?>
+												</div>
+											</div>
+										</div>
+
+									</div>
+
+									<div class="row">
+
 										<div class="col-md-6">
 											<div class="row">
 												<div class="col-md-6">
 													<?=
-															$form->field($model, 'education')
+														$form->field($model, 'education')
 															->dropDownList(ArrayHelper::map(LkEducation::find()
-																			->orderBy('EducationId')->all(), 'educationId', 'educationDescription'), ['prompt' => 'Select ' . $model->getAttributeLabel('Education')])
+																->orderBy('EducationId')->all(), 'educationId', 'educationDescription'), ['prompt' => 'Select ' . $model->getAttributeLabel('Education')])
 													?>
-												</div>	
-												
+												</div>
+
 												<div class="col-md-6">
 													<?= $form->field($model, 'major')->textInput(['maxlength' => true, 'placeholder' => 'ex: Social']) ?>
-												</div>	
-													
+												</div>
+
 											</div>
-										</div>		
-										
+										</div>
+
 										<div class="col-md-6">
-											 <?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => 'ex: admin.web.com']) ?>
-										</div>	
-									</div>									
-								
-									<div class ="row">
+											<?= $form->field($model, 'email')->textInput(['maxlength' => true, 'placeholder' => 'ex: admin.web.com']) ?>
+										</div>
+									</div>
+
+									<div class="row">
 										<div class="col-md-6">
-											<?= $form->field($model, 'address')->textArea(['style' => 'padding-bottom: 2px !important; height: 100px !important;', 'rows' => '5', 'placeholder' => 'ex: Jalan Manokwari 10 No 15 Rt.002 Rw.008 Kec. Tanjung Pandan']) ?>   
+											<?= $form->field($model, 'address')->textArea(['style' => 'padding-bottom: 2px !important; height: 100px !important;', 'rows' => '5', 'placeholder' => 'ex: Jalan Manokwari 10 No 15 Rt.002 Rw.008 Kec. Tanjung Pandan']) ?>
 										</div>
 
 										<div class="col-md-6">
 											<?= $form->field($model, 'city')->textInput(['maxlength' => true, 'placeholder' => 'ex: Belitung']) ?>
-                                            <?=
-                                                    $form->field($model, 'phoneNo')->textInput(['maxlength' => true, 'placeholder' => 'ex: +021-9094567'])
-                                                    ->widget(\yii\widgets\MaskedInput::classname(), [
-                                                        'mask' => '+9[9]-[9][9][9]-[9][9][9][9][9][9][9][9][9][9][9]',
-                                                    ])
-                                            ?>
-										</div>										
-									</div>	
-
-									<div class ="row">
-										<div class="col-md-6">
-											<?php Pjax::begin(['id' => 'divdropdown']) ?>                           
-                                            <?=
-                                                    $form->field($model, 'divisionId', [
-                                                        'addon' => [
-                                                            'append' => [
-                                                                'content' =>
-                                                                Html::a('<i class="glyphicon glyphicon-plus"></i>', ['personnel-division/browse'], [
-                                                                    'type' => 'button',
-                                                                    'title' => 'Add Division',
-                                                                    'data-toggle' => 'tooltip',
-                                                                    'data-target-width' => '375',
-                                                                    'data-target-height' => '375',
-                                                                    'data-target-value' => '.divHiddenInput',
-                                                                    'class' => 'btn btn-primary WindowDialogBrowse'
-                                                                ]) . ' ' .
-                                                                Html::a('<i class="glyphicon glyphicon-pencil"></i>', ['personnel-division/browse'], [
-                                                                    'type' => 'button',
-                                                                    'title' => 'Edit Division',
-                                                                    'data-toggle' => 'tooltip',
-                                                                    'data-filter-Input' => '.divdropdownclass',
-                                                                    'data-target-width' => '375',
-                                                                    'data-target-height' => '375',
-                                                                    'data-target-value' => '.divHiddenInput',
-                                                                    'class' => 'btn btn-primary WindowDialogBrowse btneditdiv'
-                                                                ]),
-                                                                'asButton' => true
-                                                            ],
-                                                        ]
-                                                    ])
-													->dropDownList(ArrayHelper::map(MsPersonnelDivision::findActive()->where('flagActive="1"')
-                                                                    ->orderBy('divisionId')->all(), 'divisionId', 'description'), ['prompt' => 'Select Division', 'class' => 'divdropdownclass',
-                                                        'onchange' => ''
-                                                        . '$.post( "' . Yii::$app->urlManager->createUrl('personnel-head/lists?id=') . '"+$(this).val(), function( data ) {
-														$( "select#description" ).html(data);
-													});'
-                                            ]);?>
-                                            <?php Pjax::end() ?>
+											<?=
+												$form->field($model, 'phoneNo')->textInput(['maxlength' => true, 'placeholder' => 'ex: +021-9094567'])
+													->widget(\yii\widgets\MaskedInput::classname(), [
+														'mask' => '+9[9]-[9][9][9]-[9][9][9][9][9][9][9][9][9][9][9]',
+													])
+											?>
 										</div>
-
-										<div class="col-md-6">
-											<?php Pjax::begin(['id' => 'depdropdown']) ?>
-                                            <?=
-                                                    $form->field($model, 'departmentId', [
-                                                        'addon' => [
-                                                            'append' => [
-                                                                'content' =>
-                                                                Html::a('<i class="glyphicon glyphicon-plus"></i>', ['personnel-department/browse'], [
-                                                                    'type' => 'button',
-                                                                    'title' => 'Add Department',
-                                                                    'data-toggle' => 'tooltip',
-                                                                    'data-target-width' => '500',
-                                                                    'data-target-height' => '550',
-                                                                    'data-target-value' => '.depHiddenInput',
-                                                                    'class' => 'btn btn-primary WindowDialogBrowse'
-                                                                ]) . ' ' .
-                                                                Html::a('<i class="glyphicon glyphicon-pencil"></i>', ['personnel-department/browse'], [
-                                                                    'type' => 'button',
-                                                                    'title' => 'Edit Department',
-                                                                    'data-toggle' => 'tooltip',
-                                                                    'data-filter-Input' => '.depdropdownclass',
-                                                                    'data-target-width' => '375',
-                                                                    'data-target-height' => '375',
-                                                                    'data-target-value' => '.depHiddenInput',
-                                                                    'class' => 'btn btn-primary WindowDialogBrowse btneditdepartment'
-                                                                ]),
-                                                                'asButton' => true
-                                                            ],
-                                                        ]
-                                                    ])
-                                                    ->dropDownList(ArrayHelper::map(MsPersonnelDepartment::findActive()->where('flagActive="1"')
-                                                                    ->orderBy('departmentCode')->all(), 'departmentCode', 'departmentDesc'), ['prompt' => 'Select Department', 'id' => 'description', 'class' => 'depdropdownclass'])
-                                            ?>
-
-                                            <?php Pjax::end() ?>
-										</div>										
-									</div>	
-															
-									<div class="row">
-										<div class="col-md-6">
-											<?=
-												$form->field($model, 'empStatus')
-												->dropDownList(ArrayHelper::map(MsSetting::find()
-																->where('key1="Status"')->all(), 'value1', 'key2'), ['prompt' => 'Select ' . $model->getAttributeLabel('empStatus')])
-											?>
-										</div>	
-
-										<div class="col-md-6">
-											<?=
-												$form->field($model, 'positionID')
-												->dropDownList(ArrayHelper::map(MsPersonnelPosition::find()
-																->where('flagActive="1"')->all(), 'id', 'positionDescription'), ['prompt' => 'Select ' . $model->getAttributeLabel('positionID')])
-											?>
-										</div>	
 									</div>
 
 									<div class="row">
 										<div class="col-md-6">
-											 <?= $form->field($model, 'idNo')->textInput(['maxlength' => true, 'placeholder' => 'ex: admin.web.com']) ?>
-										</div>	
-									</div>											
-                                </div>
-                            </div>
-                        </div> 
+											<?php Pjax::begin(['id' => 'divdropdown']) ?>
+											<?=
+												$form->field($model, 'divisionId', [
+													'addon' => [
+														'append' => [
+															'content' =>
+															Html::a('<i class="glyphicon glyphicon-plus"></i>', ['personnel-division/browse'], [
+																'type' => 'button',
+																'title' => 'Add Division',
+																'data-toggle' => 'tooltip',
+																'data-target-width' => '375',
+																'data-target-height' => '375',
+																'data-target-value' => '.divHiddenInput',
+																'class' => 'btn btn-primary WindowDialogBrowse'
+															]) . ' ' .
+																Html::a('<i class="glyphicon glyphicon-pencil"></i>', ['personnel-division/browse'], [
+																	'type' => 'button',
+																	'title' => 'Edit Division',
+																	'data-toggle' => 'tooltip',
+																	'data-filter-Input' => '.divdropdownclass',
+																	'data-target-width' => '375',
+																	'data-target-height' => '375',
+																	'data-target-value' => '.divHiddenInput',
+																	'class' => 'btn btn-primary WindowDialogBrowse btneditdiv'
+																]),
+															'asButton' => true
+														],
+													]
+												])
+													->dropDownList(ArrayHelper::map(MsPersonnelDivision::findActive()->where('flagActive="1"')
+														->orderBy('divisionId')->all(), 'divisionId', 'description'), [
+														'prompt' => 'Select Division', 'class' => 'divdropdownclass',
+														'onchange' => ''
+															. '$.post( "' . Yii::$app->urlManager->createUrl('personnel-head/lists?id=') . '"+$(this).val(), function( data ) {
+														$( "select#description" ).html(data);
+													});'
+													]); ?>
+											<?php Pjax::end() ?>
+										</div>
+
+										<div class="col-md-6">
+											<?php Pjax::begin(['id' => 'depdropdown']) ?>
+											<?=
+												$form->field($model, 'departmentId', [
+													'addon' => [
+														'append' => [
+															'content' =>
+															Html::a('<i class="glyphicon glyphicon-plus"></i>', ['personnel-department/browse'], [
+																'type' => 'button',
+																'title' => 'Add Department',
+																'data-toggle' => 'tooltip',
+																'data-target-width' => '500',
+																'data-target-height' => '550',
+																'data-target-value' => '.depHiddenInput',
+																'class' => 'btn btn-primary WindowDialogBrowse'
+															]) . ' ' .
+																Html::a('<i class="glyphicon glyphicon-pencil"></i>', ['personnel-department/browse'], [
+																	'type' => 'button',
+																	'title' => 'Edit Department',
+																	'data-toggle' => 'tooltip',
+																	'data-filter-Input' => '.depdropdownclass',
+																	'data-target-width' => '375',
+																	'data-target-height' => '375',
+																	'data-target-value' => '.depHiddenInput',
+																	'class' => 'btn btn-primary WindowDialogBrowse btneditdepartment'
+																]),
+															'asButton' => true
+														],
+													]
+												])
+													->dropDownList(ArrayHelper::map(MsPersonnelDepartment::findActive()->where('flagActive="1"')
+														->orderBy('departmentCode')->all(), 'departmentCode', 'departmentDesc'), ['prompt' => 'Select Department', 'id' => 'description', 'class' => 'depdropdownclass'])
+											?>
+
+											<?php Pjax::end() ?>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-6">
+											<?=
+												$form->field($model, 'empStatus')
+													->dropDownList(ArrayHelper::map(MsSetting::find()
+														->where('key1="Status"')->all(), 'value1', 'key2'), ['prompt' => 'Select ' . $model->getAttributeLabel('empStatus')])
+											?>
+										</div>
+
+										<div class="col-md-6">
+											<?=
+												$form->field($model, 'positionID')
+													->dropDownList(ArrayHelper::map(MsPersonnelPosition::find()
+														->where('flagActive="1"')->all(), 'id', 'positionDescription'), ['prompt' => 'Select ' . $model->getAttributeLabel('positionID')])
+											?>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-6">
+											<?= $form->field($model, 'idNo')->textInput(['maxlength' => true, 'placeholder' => 'ex: admin.web.com']) ?>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 						<div class="panel-footer">
 							<div class="pull-right">
 								<a class='btn btn-success btnNextHome' href='#'><i class='glyphicon glyphicon-step-forward'></i>&nbsp;Next</a>
 							</div>
-							<div class="clearfix"></div> 
+							<div class="clearfix"></div>
 						</div>
-                    </div>
+					</div>
 
-                    <div id="menu1" class="tab-pane fade">
-                        <div class="contract-form">
-                            <div class="panel panel-default">
-                                <div class="panel-heading"><b>Employment</b></div>
-                                <div class="panel-body">
-                                    <div class="row" id="familydetail">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <div class="table-responsive">
+					<div id="menu1" class="tab-pane fade">
+						<div class="contract-form">
+							<div class="panel panel-default">
+								<div class="panel-heading"><b>Employment</b></div>
+								<div class="panel-body">
+									<div class="row" id="familydetail">
+										<div class="col-md-12">
+											<div class="form-group">
+												<div class="table-responsive">
 													<?php Pjax::begin(['id' => 'posdetail']);
-														$connection = Yii::$app->db;
-														$sql = "SELECT id,positionDescription as'text' FROM ms_personnelposition";
-														$temp = $connection->createCommand($sql);
-														$positionDetailPjax = $temp->queryAll();
-														
-														$positionDetailPjax = \yii\helpers\Json::encode($positionDetailPjax);
-														
-													
+													$connection = Yii::$app->db;
+													$sql = "SELECT id,positionDescription as'text' FROM ms_personnelposition";
+													$temp = $connection->createCommand($sql);
+													$positionDetailPjax = $temp->queryAll();
+
+													$positionDetailPjax = \yii\helpers\Json::encode($positionDetailPjax);
+
+
 													?>
-													
-													
-                                                    <table class="table table-bordered Contract-Detail-Table" style="border-collapse: inherit;">
-                                                        <thead>
-                                                            <tr>
+
+
+													<table class="table table-bordered Contract-Detail-Table" style="border-collapse: inherit;">
+														<thead>
+															<tr>
 																<th style="">Start Working</th>
-                                                                <th style="">Start Date</th>
-                                                                <th style="">End Date</th>
-                                                                <th style="">Agreement No</th>
+																<th style="">Start Date</th>
+																<th style="">End Date</th>
+																<th style="">Agreement No</th>
 																</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody class="actionBody">
+															</tr>
+														</thead>
+														<tbody class="actionBody">
 															<?= Html::hiddenInput('MsPersonnelHead[joinPersonnelContract][0][startWorking]', '', ['class' => 'startWorking-hidden']) ?>
-                                                            <?= Html::hiddenInput('MsPersonnelHead[joinPersonnelContract][0][startContract]', '', ['class' => 'StartContract-hidden']) ?>
-                                                            <?= Html::hiddenInput('MsPersonnelHead[joinPersonnelContract][0][endContract]', '', ['class' => 'EndContract-hidden']) ?>
-                                                            <?= Html::hiddenInput('MsPersonnelHead[joinPersonnelContract][0][docNo]', '', ['class' => 'DocNo-hidden']) ?>
+															<?= Html::hiddenInput('MsPersonnelHead[joinPersonnelContract][0][startContract]', '', ['class' => 'StartContract-hidden']) ?>
+															<?= Html::hiddenInput('MsPersonnelHead[joinPersonnelContract][0][endContract]', '', ['class' => 'EndContract-hidden']) ?>
+															<?= Html::hiddenInput('MsPersonnelHead[joinPersonnelContract][0][docNo]', '', ['class' => 'DocNo-hidden']) ?>
 														</tbody>
 
-                                                        <tfoot class="table-detail">
-                                                            <tr>  
+														<tfoot class="table-detail">
+															<tr>
 																<td class="td-input">
-                                                                    <?=
-                                                                    DatePicker::widget([
-                                                                        'removeButton' => false,
-                                                                        'name' => 'startWorking',
-                                                                        'options' => ['class' => 'form-control actionStartWorking', 'placeholder' => 'ex: 01-01-2016'],
-                                                                        'pluginOptions' => ['autoclose' => True, 'format' => 'dd-mm-yyyy']
-                                                                    ]);
-                                                                    ?>
-                                                                </td> 															
-                                                                <td class="td-input">
-                                                                    <?=
-                                                                    DatePicker::widget([
-                                                                        'removeButton' => false,
-                                                                        'name' => 'startDate',
-                                                                        'options' => ['class' => 'form-control actionStartContract', 'placeholder' => 'ex: 01-01-2016'],
-                                                                        'pluginOptions' => ['autoclose' => True, 'format' => 'dd-mm-yyyy']
-                                                                    ]);
-                                                                    ?>
-                                                                </td> 
-                                                                <td class="td-input">
-                                                                    <?=
-                                                                    DatePicker::widget([
-                                                                        'removeButton' => false,
-                                                                        'name' => 'endDate',
-                                                                        'options' => ['class' => 'form-control actionEndContract', 'placeholder' => 'ex: 01-01-2016'],
-                                                                        'pluginOptions' => ['autoclose' => True, 'format' => 'dd-mm-yyyy']
-                                                                    ]);
-                                                                    ?>
-                                                                </td> 
-                                                                <td class="td-input">
-                                                                    <?=
-                                                                    Html::textInput('docNo', '', [
-                                                                        'class' => 'form-control actionDocNo',
-                                                                        'maxlength' => 50, 'placeholder' => 'ex. HRD/2016/01-0001'
-                                                                    ])
-                                                                    ?>
-                                                                </td>   
-																														
-                                                                <td class="td-input text-center">
-                                                                    <?= Html::a('<i class="glyphicon glyphicon-plus">&nbsp;Add</i>', '#', ['class' => 'btn btn-primary btn-sm btnAdd']) ?>
-                                                                </td>
-                                                            </tr>
-                                                        </tfoot>
-                                                    </table>
+																	<?=
+																		DatePicker::widget([
+																			'removeButton' => false,
+																			'name' => 'startWorking',
+																			'options' => ['class' => 'form-control actionStartWorking', 'placeholder' => 'ex: 01-01-2016'],
+																			'pluginOptions' => ['autoclose' => True, 'format' => 'dd-mm-yyyy']
+																		]);
+																	?>
+																</td>
+																<td class="td-input">
+																	<?=
+																		DatePicker::widget([
+																			'removeButton' => false,
+																			'name' => 'startDate',
+																			'options' => ['class' => 'form-control actionStartContract', 'placeholder' => 'ex: 01-01-2016'],
+																			'pluginOptions' => ['autoclose' => True, 'format' => 'dd-mm-yyyy']
+																		]);
+																	?>
+																</td>
+																<td class="td-input">
+																	<?=
+																		DatePicker::widget([
+																			'removeButton' => false,
+																			'name' => 'endDate',
+																			'options' => ['class' => 'form-control actionEndContract', 'placeholder' => 'ex: 01-01-2016'],
+																			'pluginOptions' => ['autoclose' => True, 'format' => 'dd-mm-yyyy']
+																		]);
+																	?>
+																</td>
+																<td class="td-input">
+																	<?=
+																		Html::textInput('docNo', '', [
+																			'class' => 'form-control actionDocNo',
+																			'maxlength' => 50, 'placeholder' => 'ex. HRD/2016/01-0001'
+																		])
+																	?>
+																</td>
+
+																<td class="td-input text-center">
+																	<?= Html::a('<i class="glyphicon glyphicon-plus">&nbsp;Add</i>', '#', ['class' => 'btn btn-primary btn-sm btnAdd']) ?>
+																</td>
+															</tr>
+														</tfoot>
+													</table>
 													<?php Pjax::end() ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>    
-                                </div>
-                            </div>
-                        </div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 						<div class="panel-footer">
 							<div class="pull-right">
 								<a class='btn btn-success btnNext1' href='#'><i class='glyphicon glyphicon-step-forward'></i>&nbsp;Next</a>
 							</div>
-							<div class="clearfix"></div> 
+							<div class="clearfix"></div>
 						</div>
-                    </div>
+					</div>
 
-                    <div id="menu2" class="tab-pane fade">
-                        <div class="payment-form">
-                            <div class="panel panel-default">
-                                <div class="panel-heading"><b>Payment</b></div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <?=
-                                                    Html::hiddenInput('bankHiddenInput', '', [
-                                                        'class' => 'form-control bankHiddenInput'
-                                                    ])
-                                                    ?>
-                                                    <?=
-                                                    Html::hiddenInput('divHiddenInput', '', [
-                                                        'class' => 'form-control divHiddenInput'
-                                                    ])
-                                                    ?>
-                                                    <?=
-                                                    Html::hiddenInput('depHiddenInput', '', [
-                                                        'class' => 'form-control depHiddenInput'
-                                                    ])
-                                                    ?>
-                                                    <?=
-                                                    Html::hiddenInput('posHiddenInput', '', [
-														'id' => 'posHiddenInput',
-                                                        'class' => 'form-control posHiddenInput'
-                                                    ])
-                                                    ?>
-													
-													<?=
-                                                    Html::hiddenInput('posHiddenDetail', '', [
-														'id' => 'posHiddenDetail',
-                                                        'class' => 'form-control posHiddenInput'
-                                                    ])
-                                                    ?>
-													
-													<?=
-                                                    Html::hiddenInput('taxHiddenInput', '', [
-                                                        'class' => 'form-control taxHiddenInput'
-                                                    ])
-                                                    ?>
-													<?=
-                                                    Html::hiddenInput('jamsostekHiddenInput', '', [
-                                                        'class' => 'form-control jamsostekHiddenInput'
-                                                    ])
-                                                    ?>
-													
-                                                    <?=
-                                                            $form->field($model, 'paymentMethod')
-                                                           ->dropDownList(ArrayHelper::map(MsSetting::find()
-                                                                    ->where('key1="paymentMethod"')->all(), 'value1', 'key2'), ['prompt' => 'Select ' . $model->getAttributeLabel('paymentMethod')])
-                                                    ?>
-
-                                                </div>
-
-
-                                                <div class="col-md-6">
-                                                    <?=
-                                                            $form->field($model, 'curency')
-                                                            ->dropDownList(ArrayHelper::map(LkCurrency::find()
-                                                                            ->orderBy('currencyName')->all(), 'currencyID', 'currencyName'), ['prompt' => 'Select ' . $model->getAttributeLabel('curency')])
-                                                    ?>
-                                                </div>
-
-                                            </div>
-											<div class="row">
-												<div class= "col-md-6">
-													
-                                                    <?php Pjax::begin(['id' => 'bankdropdown']) ?>
-                                                    <?=
-                                                            $form->field($model, 'bankName', [
-                                                                'addon' => [
-                                                                    'append' => [
-                                                                        'content' =>
-                                                                        Html::a('<i class="glyphicon glyphicon-plus"></i>', ['bank/browse'], [
-                                                                            'type' => 'button',
-                                                                            'title' => 'Add Bank',
-                                                                            'data-toggle' => 'tooltip',
-                                                                            'data-target-width' => '375',
-                                                                            'data-target-height' => '375',
-                                                                            'data-target-value' => '.bankHiddenInput',
-                                                                            'class' => 'btn btn-primary WindowDialogBrowse'
-                                                                        ]) . ' ' .
-                                                                        Html::a('<i class="glyphicon glyphicon-pencil"></i>', ['bank/browse'], [
-                                                                            'type' => 'button',
-                                                                            'title' => 'Edit Bank',
-                                                                            'data-toggle' => 'tooltip',
-                                                                            'data-filter-Input' => '.bankdropdownclass',
-                                                                            'data-target-width' => '375',
-                                                                            'data-target-height' => '375',
-                                                                            'data-target-value' => '.bankHiddenInput',
-                                                                            'class' => 'btn btn-primary WindowDialogBrowse btneditbank'
-                                                                        ]),
-                                                                        'asButton' => true
-                                                                    ],
-                                                                ]
-                                                            ])
-                                                            ->dropDownList(ArrayHelper::map(MsBank::find()->where('flagActive="1"')
-                                                                            ->orderBy('bankId')->all(), 'bankId', 'bankId'), ['prompt' => 'Select ' . $model->getAttributeLabel('bankName'), 'class' => 'bankdropdownclass',
-                                                                'onchange' => ''
-                                                                . '$.post( "' . Yii::$app->urlManager->createUrl('personnel-head/bankdescription?id=') . '"+$(this).val(), function( data ) {
-													$("#mspersonnelhead-bankdetail" ).val(data);
-													});'])
-                                                    ?>
-													<?php Pjax::end() ?>
-													</div>
-													<div class= "col-md-6">
-														<?= $form->field($model, 'bankDetail')->textInput(['maxlength' => true, 'id' => 'mspersonnelhead-bankdetail', 'readonly' => 'true']) ?>
-													</div>
-											</div>
-										</div>
-                                        <div class="col-md-6">
+					<div id="menu2" class="tab-pane fade">
+						<div class="payment-form">
+							<div class="panel panel-default">
+								<div class="panel-heading"><b>Payment</b></div>
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-md-6">
 											<div class="row">
 												<div class="col-md-6">
 													<?=
-															$form->field($model, 'bankNo')->textInput(['maxlength' => true, 'placeholder' => 'ex: 1123141231'])
+														Html::hiddenInput('bankHiddenInput', '', [
+															'class' => 'form-control bankHiddenInput'
+														])
+													?>
+													<?=
+														Html::hiddenInput('divHiddenInput', '', [
+															'class' => 'form-control divHiddenInput'
+														])
+													?>
+													<?=
+														Html::hiddenInput('depHiddenInput', '', [
+															'class' => 'form-control depHiddenInput'
+														])
+													?>
+													<?=
+														Html::hiddenInput('posHiddenInput', '', [
+															'id' => 'posHiddenInput',
+															'class' => 'form-control posHiddenInput'
+														])
+													?>
+
+													<?=
+														Html::hiddenInput('posHiddenDetail', '', [
+															'id' => 'posHiddenDetail',
+															'class' => 'form-control posHiddenInput'
+														])
+													?>
+
+													<?=
+														Html::hiddenInput('taxHiddenInput', '', [
+															'class' => 'form-control taxHiddenInput'
+														])
+													?>
+													<?=
+														Html::hiddenInput('jamsostekHiddenInput', '', [
+															'class' => 'form-control jamsostekHiddenInput'
+														])
+													?>
+
+													<?=
+														$form->field($model, 'paymentMethod')
+															->dropDownList(ArrayHelper::map(MsSetting::find()
+																->where('key1="paymentMethod"')->all(), 'value1', 'key2'), ['prompt' => 'Select ' . $model->getAttributeLabel('paymentMethod')])
+													?>
+
+												</div>
+
+
+												<div class="col-md-6">
+													<?=
+														$form->field($model, 'curency')
+															->dropDownList(ArrayHelper::map(LkCurrency::find()
+																->orderBy('currencyName')->all(), 'currencyID', 'currencyName'), ['prompt' => 'Select ' . $model->getAttributeLabel('curency')])
+													?>
+												</div>
+
+											</div>
+											<div class="row">
+												<div class="col-md-6">
+
+													<?php Pjax::begin(['id' => 'bankdropdown']) ?>
+													<?=
+														$form->field($model, 'bankName', [
+															'addon' => [
+																'append' => [
+																	'content' =>
+																	Html::a('<i class="glyphicon glyphicon-plus"></i>', ['bank/browse'], [
+																		'type' => 'button',
+																		'title' => 'Add Bank',
+																		'data-toggle' => 'tooltip',
+																		'data-target-width' => '375',
+																		'data-target-height' => '375',
+																		'data-target-value' => '.bankHiddenInput',
+																		'class' => 'btn btn-primary WindowDialogBrowse'
+																	]) . ' ' .
+																		Html::a('<i class="glyphicon glyphicon-pencil"></i>', ['bank/browse'], [
+																			'type' => 'button',
+																			'title' => 'Edit Bank',
+																			'data-toggle' => 'tooltip',
+																			'data-filter-Input' => '.bankdropdownclass',
+																			'data-target-width' => '375',
+																			'data-target-height' => '375',
+																			'data-target-value' => '.bankHiddenInput',
+																			'class' => 'btn btn-primary WindowDialogBrowse btneditbank'
+																		]),
+																	'asButton' => true
+																],
+															]
+														])
+															->dropDownList(ArrayHelper::map(MsBank::find()->where('flagActive="1"')
+																->orderBy('bankId')->all(), 'bankId', 'bankId'), [
+																'prompt' => 'Select ' . $model->getAttributeLabel('bankName'), 'class' => 'bankdropdownclass',
+																'onchange' => ''
+																	. '$.post( "' . Yii::$app->urlManager->createUrl('personnel-head/bankdescription?id=') . '"+$(this).val(), function( data ) {
+													$("#mspersonnelhead-bankdetail" ).val(data);
+													});'
+															])
+													?>
+													<?php Pjax::end() ?>
+												</div>
+												<div class="col-md-6">
+													<?= $form->field($model, 'bankDetail')->textInput(['maxlength' => true, 'id' => 'mspersonnelhead-bankdetail', 'readonly' => 'true']) ?>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="row">
+												<div class="col-md-6">
+													<?=
+														$form->field($model, 'bankNo')->textInput(['maxlength' => true, 'placeholder' => 'ex: 1123141231'])
 															->widget(\yii\widgets\MaskedInput::classname(), [
 																'mask' => '9',
 																'clientOptions' => ['repeat' => 15, 'greedy' => false]
@@ -560,16 +565,16 @@ use app\models\MsAttendanceShift;
 												<div class="col-md-6">
 													<?= $form->field($model, 'swiftCode')->textInput(['maxlength' => true, 'placeholder' => 'ex: CENAIDJA']) ?>
 
-												
+
 												</div>
 											</div>
-											
-											
-                                            <?= $form->field($model, 'branch')->textInput(['maxlength' => true, 'placeholder' => 'ex: KC Tangerang Kota']) ?>
 
-                                        </div>
-                                    </div>
-                                </div>
+
+											<?= $form->field($model, 'branch')->textInput(['maxlength' => true, 'placeholder' => 'ex: KC Tangerang Kota']) ?>
+
+										</div>
+									</div>
+								</div>
 							</div>
 							<div class="panel panel-default">
 								<div class="panel-heading"> <b> Calculation </b></div>
@@ -577,35 +582,43 @@ use app\models\MsAttendanceShift;
 									<div class="row">
 										<div class="col-md-6">
 											<?=
-													$form->field($model, 'prorateSetting')
+												$form->field($model, 'prorateSetting')
 													->dropDownList(ArrayHelper::map(MsPayrollProrate::find()
-																	->orderBy('prorateId')->all(), 'prorateId', 'prorateId'), ['prompt' => 'Select ' . $model->getAttributeLabel('prorateSetting')])
+														->orderBy('prorateId')->all(), 'prorateId', 'prorateId'), ['prompt' => 'Select ' . $model->getAttributeLabel('prorateSetting')])
 											?>
-											
+
 										</div>
 										<div class="col-md-6">
 											<?=
-													$form->field($model, 'taxSetting')
+												$form->field($model, 'taxSetting')
 													->dropDownList(ArrayHelper::map(MsSetting::find()
-																	->where('key1="TaxParm"')
-																	->orderBy('value1')->all(), 'value1', 'key2'), ['prompt' => 'Select ' . $model->getAttributeLabel('taxSetting')])
+														->where('key1="TaxParm"')
+														->orderBy('value1')->all(), 'value1', 'key2'), ['prompt' => 'Select ' . $model->getAttributeLabel('taxSetting')])
 											?>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-md-6">
 											<?=
-													$form->field($model, 'overtimeId')
+												$form->field($model, 'overtimeId')
 													->dropDownList(ArrayHelper::map(MsAttendanceOvertime::find()
-																	->orderBy('overtimeId')->all(), 'overtimeId', 'overtimeId'), ['prompt' => 'Select ' . $model->getAttributeLabel('overtimeId')])
+														->orderBy('overtimeId')->all(), 'overtimeId', 'overtimeId'), ['prompt' => 'Select ' . $model->getAttributeLabel('overtimeId')])
 											?>
 										</div>
 
 										<div class="col-md-6">
 											<?=
-													$form->field($model, 'shiftCode')
+												$form->field($model, 'shiftCode')
 													->dropDownList(ArrayHelper::map(MsAttendanceShift::find()
-																	->orderBy('shiftCode')->all(), 'shiftCode', 'shiftCode'), ['prompt' => 'Select ' . $model->getAttributeLabel('shiftCode')])
+														->orderBy('shiftCode')->all(), 'shiftCode', 'shiftCode'), ['prompt' => 'Select ' . $model->getAttributeLabel('shiftCode')])
+											?>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<?=
+												$form->field($model, 'lateId')
+													->dropDownList(ArrayHelper::map(MsLate::find()->all(), 'lateId', 'value'), ['prompt' => 'Select ' . $model->getAttributeLabel('lateId')])
 											?>
 										</div>
 									</div>
@@ -616,20 +629,22 @@ use app\models\MsAttendanceShift;
 							<div class="pull-right">
 								<a class='btn btn-success btnNext2' href='#'><i class='glyphicon glyphicon-step-forward'></i>&nbsp;Next</a>
 							</div>
-							<div class="clearfix"></div> 
+							<div class="clearfix"></div>
 						</div>
-                    </div>
+					</div>
 
-                    <div id="menu3" class="tab-pane fade">
-                        <div class="bpjs-form">
-                            <div class="panel panel-default">
-                                <div class="panel-heading"><b>BPJS</b></div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-md-6">
+					<div id="menu3" class="tab-pane fade">
+						<div class="bpjs-form">
+							<div class="panel panel-default">
+								<div class="panel-heading"><b>BPJS</b></div>
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-md-6">
 											<?php Pjax::begin(['id' => 'jamsostekdropdown']) ?>
-												<?=
-													$form->field($model, 'jamsostekParm',
+											<?=
+												$form->field(
+													$model,
+													'jamsostekParm',
 													[
 														'addon' => [
 															'append' => [
@@ -643,438 +658,445 @@ use app\models\MsAttendanceShift;
 																	'data-target-value' => '.jamsostekHiddenInput',
 																	'class' => 'btn btn-primary WindowDialogBrowse'
 																]) . ' ' .
-																Html::a('<i class="glyphicon glyphicon-pencil"></i>', ['payroll-jamsostek/browse'], [
-																	'type' => 'button',
-																	'title' => 'Edit Jamsostek',
-																	'data-toggle' => 'tooltip',
-																	'data-filter-Input' => '.jamsostekdropdownclass',
-																	'data-target-width' => '1036',
-																	'data-target-height' => '567',
-																	'data-target-value' => '.jamsostekHiddenInput',
-																	'class' => 'btn btn-primary WindowDialogBrowse btneditjamsostek'
-																]),
+																	Html::a('<i class="glyphicon glyphicon-pencil"></i>', ['payroll-jamsostek/browse'], [
+																		'type' => 'button',
+																		'title' => 'Edit Jamsostek',
+																		'data-toggle' => 'tooltip',
+																		'data-filter-Input' => '.jamsostekdropdownclass',
+																		'data-target-width' => '1036',
+																		'data-target-height' => '567',
+																		'data-target-value' => '.jamsostekHiddenInput',
+																		'class' => 'btn btn-primary WindowDialogBrowse btneditjamsostek'
+																	]),
 																'asButton' => true
 															],
 														]
-													])
+													]
+												)
 													->dropDownList(ArrayHelper::map(MsPayrollJamsostek::find()
-													->orderBy('jamsostekCode')->all(), 'jamsostekCode', 'jamsostekCode'), ['prompt' => 'Select ' . $model->getAttributeLabel('jamsostekParm'),'class' => 'jamsostekdropdownclass'])
-												?>
+														->orderBy('jamsostekCode')->all(), 'jamsostekCode', 'jamsostekCode'), ['prompt' => 'Select ' . $model->getAttributeLabel('jamsostekParm'), 'class' => 'jamsostekdropdownclass'])
+											?>
 											<?php Pjax::end() ?>
-                                        </div>
+										</div>
 
-                                        <div class="col-md-6">
-                                            <?=
-                                                    $form->field($model, 'bpjskNo')->textInput(['maxlength' => true, 'placeholder' => 'ex: 7371000000000004'])
-                                                    ->widget(\yii\widgets\MaskedInput::classname(), [
-                                                        'mask' => '9',
-                                                        'clientOptions' => ['repeat' => 15, 'greedy' => false]
-                                                    ])
-                                            ?> 
-                                            <?=
-                                                    $form->field($model, 'bpkstkNo')->textInput(['maxlength' => true, 'placeholder' => 'ex: 0001311223344'])
-                                                    ->widget(\yii\widgets\MaskedInput::classname(), [
-                                                        'mask' => '9',
-                                                        'clientOptions' => ['repeat' => 15, 'greedy' => false]
-                                                    ])
-                                            ?> 
+										<div class="col-md-6">
+											<?=
+												$form->field($model, 'bpjskNo')->textInput(['maxlength' => true, 'placeholder' => 'ex: 7371000000000004'])
+													->widget(\yii\widgets\MaskedInput::classname(), [
+														'mask' => '9',
+														'clientOptions' => ['repeat' => 15, 'greedy' => false]
+													])
+											?>
+											<?=
+												$form->field($model, 'bpkstkNo')->textInput(['maxlength' => true, 'placeholder' => 'ex: 0001311223344'])
+													->widget(\yii\widgets\MaskedInput::classname(), [
+														'mask' => '9',
+														'clientOptions' => ['repeat' => 15, 'greedy' => false]
+													])
+											?>
 
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading"><b>Fill based on Family Identity Card</b></div>
-                                        <div class="panel-body">
-                                            <div class="row" id="familydetail">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <div class="table-responsive">
-                                                            <table class="table table-bordered Family-Detail-Table" style="border-collapse: inherit;">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th style="width: 15%;">First Name</th>
-                                                                        <th style="width: 15%;">Last Name</th>
-                                                                        <th style="width: 15%;">Relationship</th>
-                                                                        <th style="width: 15%;">ID Number</th>
-                                                                        <th style="width: 15%;">Birth Place</th>
-                                                                        <th style="width: 15%;">Birth Date</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody class="actionBody">
-                                                                    <?= Html::hiddenInput('MsPersonnelHead[joinPersonnelfamily][0][firstName]', '', ['class' => 'firstName-hidden']) ?>
-                                                                    <?= Html::hiddenInput('MsPersonnelHead[joinPersonnelfamily][0][lastName]', '', ['class' => 'lastName-hidden']) ?>
-                                                                    <?= Html::hiddenInput('MsPersonnelHead[joinPersonnelfamily][0][relationship]', '', ['class' => 'relationship-hidden']) ?>
-                                                                    <?= Html::hiddenInput('MsPersonnelHead[joinPersonnelfamily][0][idNumber]', '', ['class' => 'idNumber-hidden']) ?>
-                                                                    <?= Html::hiddenInput('MsPersonnelHead[joinPersonnelfamily][0][birthPlace]', '', ['class' => 'birthPlace-hidden']) ?>
-                                                                    <?= Html::hiddenInput('MsPersonnelHead[joinPersonnelfamily][0][birthDate]', '', ['class' => 'birthDate-hidden']) ?>
-                                                                </tbody>
+										</div>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-heading"><b>Fill based on Family Identity Card</b></div>
+										<div class="panel-body">
+											<div class="row" id="familydetail">
+												<div class="col-md-12">
+													<div class="form-group">
+														<div class="table-responsive">
+															<table class="table table-bordered Family-Detail-Table" style="border-collapse: inherit;">
+																<thead>
+																	<tr>
+																		<th style="width: 15%;">First Name</th>
+																		<th style="width: 15%;">Last Name</th>
+																		<th style="width: 15%;">Relationship</th>
+																		<th style="width: 15%;">ID Number</th>
+																		<th style="width: 15%;">Birth Place</th>
+																		<th style="width: 15%;">Birth Date</th>
+																	</tr>
+																</thead>
+																<tbody class="actionBody">
+																	<?= Html::hiddenInput('MsPersonnelHead[joinPersonnelfamily][0][firstName]', '', ['class' => 'firstName-hidden']) ?>
+																	<?= Html::hiddenInput('MsPersonnelHead[joinPersonnelfamily][0][lastName]', '', ['class' => 'lastName-hidden']) ?>
+																	<?= Html::hiddenInput('MsPersonnelHead[joinPersonnelfamily][0][relationship]', '', ['class' => 'relationship-hidden']) ?>
+																	<?= Html::hiddenInput('MsPersonnelHead[joinPersonnelfamily][0][idNumber]', '', ['class' => 'idNumber-hidden']) ?>
+																	<?= Html::hiddenInput('MsPersonnelHead[joinPersonnelfamily][0][birthPlace]', '', ['class' => 'birthPlace-hidden']) ?>
+																	<?= Html::hiddenInput('MsPersonnelHead[joinPersonnelfamily][0][birthDate]', '', ['class' => 'birthDate-hidden']) ?>
+																</tbody>
 
-                                                                <tfoot class="table-detail">
-                                                                    <tr>
-                                                                        <td class="td-input">
-                                                                            <?=
-                                                                            Html::textInput('firstName', '', [
-                                                                                'class' => 'form-control firstName-1',
-                                                                                'maxlength' => 50, 'placeholder' => 'ex. Gaby'
-                                                                            ])
-                                                                            ?>
-                                                                        </td>
-                                                                        <td class="td-input">
-                                                                            <?=
-                                                                            Html::textInput('lastName', '', [
-                                                                                'class' => 'form-control lastName-1',
-                                                                                'maxlength' => 50, 'placeholder' => 'ex. Gaby'
-                                                                            ])
-                                                                            ?>
-                                                                        </td>
-                                                                        <td class="td-input">
-                                                                            <?=
-                                                                            Html::textInput('relationship', '', [
-                                                                                'class' => 'form-control relationship-1',
-                                                                                'maxlength' => 50, 'placeholder' => 'ex. Wife/Child'
-                                                                            ])
-                                                                            ?>
-                                                                        </td>                                                
-                                                                        <td class="td-input">
-                                                                            <?=
-                                                                            Html::textInput('idNumber', '', [
-                                                                                'class' => 'form-control idNumber-1',
-                                                                                'maxlength' => 50, 'placeholder' => 'ex. 311111111'
-                                                                            ])
-                                                                            ?>
-                                                                        </td>
-                                                                        <td class="td-input">
-                                                                            <?=
-                                                                            Html::textInput('birthPlace', '', [
-                                                                                'class' => 'form-control birthPlace-1',
-                                                                                'maxlength' => 50, 'placeholder' => 'ex. Jakarta'
-                                                                            ])
-                                                                            ?>
-                                                                        </td>                                            
-                                                                        <td class="td-input">
-                                                                            <?=
-                                                                            DatePicker::widget([
-                                                                                'removeButton' => false,
-                                                                                'name' => 'birthDate',
-                                                                                'options' => ['class' => 'form-control birthDate-1', 'placeholder' => 'ex: 01-01-1990'],
-                                                                                'pluginOptions' => ['autoclose' => True, 'format' => 'dd-mm-yyyy']
-                                                                            ]);
-                                                                            ?>
-                                                                        </td>   
-                                                                        <td class="td-input text-center">
-                                                                            <?= Html::a('<i class="glyphicon glyphicon-plus">&nbsp;Add</i>', '#', ['class' => 'btn btn-primary btn-sm btnAdd']) ?>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tfoot>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>    
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+																<tfoot class="table-detail">
+																	<tr>
+																		<td class="td-input">
+																			<?=
+																				Html::textInput('firstName', '', [
+																					'class' => 'form-control firstName-1',
+																					'maxlength' => 50, 'placeholder' => 'ex. Gaby'
+																				])
+																			?>
+																		</td>
+																		<td class="td-input">
+																			<?=
+																				Html::textInput('lastName', '', [
+																					'class' => 'form-control lastName-1',
+																					'maxlength' => 50, 'placeholder' => 'ex. Gaby'
+																				])
+																			?>
+																		</td>
+																		<td class="td-input">
+																			<?=
+																				Html::textInput('relationship', '', [
+																					'class' => 'form-control relationship-1',
+																					'maxlength' => 50, 'placeholder' => 'ex. Wife/Child'
+																				])
+																			?>
+																		</td>
+																		<td class="td-input">
+																			<?=
+																				Html::textInput('idNumber', '', [
+																					'class' => 'form-control idNumber-1',
+																					'maxlength' => 50, 'placeholder' => 'ex. 311111111'
+																				])
+																			?>
+																		</td>
+																		<td class="td-input">
+																			<?=
+																				Html::textInput('birthPlace', '', [
+																					'class' => 'form-control birthPlace-1',
+																					'maxlength' => 50, 'placeholder' => 'ex. Jakarta'
+																				])
+																			?>
+																		</td>
+																		<td class="td-input">
+																			<?=
+																				DatePicker::widget([
+																					'removeButton' => false,
+																					'name' => 'birthDate',
+																					'options' => ['class' => 'form-control birthDate-1', 'placeholder' => 'ex: 01-01-1990'],
+																					'pluginOptions' => ['autoclose' => True, 'format' => 'dd-mm-yyyy']
+																				]);
+																			?>
+																		</td>
+																		<td class="td-input text-center">
+																			<?= Html::a('<i class="glyphicon glyphicon-plus">&nbsp;Add</i>', '#', ['class' => 'btn btn-primary btn-sm btnAdd']) ?>
+																		</td>
+																	</tr>
+																</tfoot>
+															</table>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 						<div class="panel-footer">
 							<div class="pull-right">
 								<a class='btn btn-success btnNext3' href='#'><i class='glyphicon glyphicon-step-forward'></i>&nbsp;Next</a>
 							</div>
-							<div class="clearfix"></div> 
+							<div class="clearfix"></div>
 						</div>
-                    </div>
+					</div>
 
-                    <div id="menu4" class="tab-pane fade">
-                        <div class="npwp-form">
-                            <div class="panel panel-default">
-                                <div class="panel-heading"><b>NPWP Information</b></div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <?= $form->field($model, 'npwpName')->textInput(['maxlength' => true, 'placeholder' => 'Enter Last Name...']) ?>
-                                            <?= $form->field($model, 'npwpAddress')->textArea(['style' => 'padding-bottom: 2px !important;', 'rows' => '5', 'placeholder' => 'ex: Jalan Manokwari 10 No 15 Rt.002 Rw.008 Kec. Tanjung Pandan']) ?>
-                                            <a class='btn btn-warning  btnSameAsId pull-right' href='#'><i class='glyphicon glyphicon-refresh'></i> Same As Id</a>
-                                        </div>
+					<div id="menu4" class="tab-pane fade">
+						<div class="npwp-form">
+							<div class="panel panel-default">
+								<div class="panel-heading"><b>NPWP Information</b></div>
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-md-6">
+											<?= $form->field($model, 'npwpName')->textInput(['maxlength' => true, 'placeholder' => 'Enter Last Name...']) ?>
+											<?= $form->field($model, 'npwpAddress')->textArea(['style' => 'padding-bottom: 2px !important;', 'rows' => '5', 'placeholder' => 'ex: Jalan Manokwari 10 No 15 Rt.002 Rw.008 Kec. Tanjung Pandan']) ?>
+											<a class='btn btn-warning  btnSameAsId pull-right' href='#'><i class='glyphicon glyphicon-refresh'></i> Same As Id</a>
+										</div>
 
-                                        <div class="col-md-6">
-                                            <?=
-                                                    $form->field($model, 'npwpNo')->textInput(['maxlength' => true, 'placeholder' => 'ex: 02.414.520.3-056.000'])
-                                                    ->widget(\yii\widgets\MaskedInput::classname(), [
-                                                        'mask' => '9[9].9[9][9].9[9][9].9-[9][9][9].9[9][9]',
-                                                        'class' => 'npwp',
-                                                    ])
-                                            ?>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <?=
-                                                            $form->field($model, 'maritalStatus')
-                                                            ->dropDownList(ArrayHelper::map(MsSetting::find()
-                                                                            ->where('key1="MaritalStatus"')->all(), 'value1', 'key2'), ['prompt' => 'Select ' . $model->getAttributeLabel('maritalStatus')])
-                                                    ?>
-                                                </div>
-                                                <div class="col-md-6">
-												<?=
-                                                    $form->field($model, 'dependent')->textInput(['maxlength' => true, 'placeholder' => 'ex: 3'])
-                                                    ->widget(\yii\widgets\MaskedInput::classname(), [
-                                                        'mask' => '9',
-                                                        'clientOptions' => ['repeat' => 1, 'greedy' => false]
-                                                    ])
-                                            ?> 
-                                                </div>    
-                                            </div>
+										<div class="col-md-6">
+											<?=
+												$form->field($model, 'npwpNo')->textInput(['maxlength' => true, 'placeholder' => 'ex: 02.414.520.3-056.000'])
+													->widget(\yii\widgets\MaskedInput::classname(), [
+														'mask' => '9[9].9[9][9].9[9][9].9-[9][9][9].9[9][9]',
+														'class' => 'npwp',
+													])
+											?>
+											<div class="row">
+												<div class="col-md-6">
+													<?=
+														$form->field($model, 'maritalStatus')
+															->dropDownList(ArrayHelper::map(MsSetting::find()
+																->where('key1="MaritalStatus"')->all(), 'value1', 'key2'), ['prompt' => 'Select ' . $model->getAttributeLabel('maritalStatus')])
+													?>
+												</div>
+												<div class="col-md-6">
+													<?=
+														$form->field($model, 'dependent')->textInput(['maxlength' => true, 'placeholder' => 'ex: 3'])
+															->widget(\yii\widgets\MaskedInput::classname(), [
+																'mask' => '9',
+																'clientOptions' => ['repeat' => 1, 'greedy' => false]
+															])
+													?>
+												</div>
+											</div>
 
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <?=
-                                                            $form->field($model, 'nationality')
-                                                            ->dropDownList(ArrayHelper::map(MsSetting::find()
-                                                                            ->where('key1="Nationality"')->all(), 'value1', 'key2'), ['prompt' => 'Select ' . $model->getAttributeLabel('nationality')])
-                                                    ?>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <?= $form->field($model, 'country')->textInput(['maxlength' => true, 'placeholder' => 'ex: Indonesia']) ?>
-                                                </div>    
-                                            </div>
+											<div class="row">
+												<div class="col-md-6">
+													<?=
+														$form->field($model, 'nationality')
+															->dropDownList(ArrayHelper::map(MsSetting::find()
+																->where('key1="Nationality"')->all(), 'value1', 'key2'), ['prompt' => 'Select ' . $model->getAttributeLabel('nationality')])
+													?>
+												</div>
+												<div class="col-md-6">
+													<?= $form->field($model, 'country')->textInput(['maxlength' => true, 'placeholder' => 'ex: Indonesia']) ?>
+												</div>
+											</div>
 											<?php Pjax::begin(['id' => 'taxdropdown']) ?>
-                                            <?=
-                                                    $form->field($model, 'taxId',
+											<?=
+												$form->field(
+													$model,
+													'taxId',
 													[
-                                                                'addon' => [
-                                                                    'append' => [
-                                                                        'content' =>
-                                                                        Html::a('<i class="glyphicon glyphicon-plus"></i>', ['tax-location/browse'], [
-                                                                            'type' => 'button',
-                                                                            'title' => 'Add Tax Location',
-                                                                            'data-toggle' => 'tooltip',
-                                                                            'data-target-width' => '1140',
-                                                                            'data-target-height' => '584',
-                                                                            'data-target-value' => '.taxHiddenInput',
-                                                                            'class' => 'btn btn-primary WindowDialogBrowse'
-                                                                        ]) . ' ' .
-                                                                        Html::a('<i class="glyphicon glyphicon-pencil"></i>', ['tax-location/browse'], [
-                                                                            'type' => 'button',
-                                                                            'title' => 'Edit Tax Location',
-                                                                            'data-toggle' => 'tooltip',
-                                                                            'data-filter-Input' => '.taxdropdownclass',
-                                                                            'data-target-width' => '1140',
-                                                                            'data-target-height' => '584',
-                                                                            'data-target-value' => '.taxHiddenInput',
-                                                                            'class' => 'btn btn-primary WindowDialogBrowse btneditTax'
-                                                                        ]),
-                                                                        'asButton' => true
-                                                                    ],
-                                                                ]
-                                                            ])
-                                                    ->dropDownList(ArrayHelper::map(MsTaxLocation::find()->where('flagActive="1"')
-                                                                    ->orderBy('id')->all(), 'id', 'officeName'), ['prompt' => 'Select ' . $model->getAttributeLabel('taxId'),'class' => 'taxdropdownclass'])
-                                            ?>
+														'addon' => [
+															'append' => [
+																'content' =>
+																Html::a('<i class="glyphicon glyphicon-plus"></i>', ['tax-location/browse'], [
+																	'type' => 'button',
+																	'title' => 'Add Tax Location',
+																	'data-toggle' => 'tooltip',
+																	'data-target-width' => '1140',
+																	'data-target-height' => '584',
+																	'data-target-value' => '.taxHiddenInput',
+																	'class' => 'btn btn-primary WindowDialogBrowse'
+																]) . ' ' .
+																	Html::a('<i class="glyphicon glyphicon-pencil"></i>', ['tax-location/browse'], [
+																		'type' => 'button',
+																		'title' => 'Edit Tax Location',
+																		'data-toggle' => 'tooltip',
+																		'data-filter-Input' => '.taxdropdownclass',
+																		'data-target-width' => '1140',
+																		'data-target-height' => '584',
+																		'data-target-value' => '.taxHiddenInput',
+																		'class' => 'btn btn-primary WindowDialogBrowse btneditTax'
+																	]),
+																'asButton' => true
+															],
+														]
+													]
+												)
+													->dropDownList(ArrayHelper::map(MsTaxLocation::find()->where('flagActive="1"')
+														->orderBy('id')->all(), 'id', 'officeName'), ['prompt' => 'Select ' . $model->getAttributeLabel('taxId'), 'class' => 'taxdropdownclass'])
+											?>
 											<?php Pjax::end() ?>
-											
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 						<div class="panel-footer">
 							<div class="pull-right">
 								<a class='btn btn-success btnNext4' href='#'><i class='glyphicon glyphicon-step-forward'></i>&nbsp;Next</a>
 							</div>
-							<div class="clearfix"></div> 
+							<div class="clearfix"></div>
 						</div>
-                    </div>
+					</div>
 
-                    <div id="menu5" class="tab-pane fade">
-                        <div class="emergencycall-form">
-                            <div class="panel panel-default">
-                                <div class="panel-heading"><b>Contact Person in case of emergency</b></div>
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <?= $form->field($model, 'ecFirstName')->textInput(['maxlength' => true, 'placeholder' => 'Enter First Name...']) ?>
-                                            <?= $form->field($model, 'ecLastName')->textInput(['maxlength' => true, 'placeholder' => 'Enter Last Name...']) ?>
+					<div id="menu5" class="tab-pane fade">
+						<div class="emergencycall-form">
+							<div class="panel panel-default">
+								<div class="panel-heading"><b>Contact Person in case of emergency</b></div>
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-md-6">
+											<?= $form->field($model, 'ecFirstName')->textInput(['maxlength' => true, 'placeholder' => 'Enter First Name...']) ?>
+											<?= $form->field($model, 'ecLastName')->textInput(['maxlength' => true, 'placeholder' => 'Enter Last Name...']) ?>
 
-                                        </div>
+										</div>
 
-                                        <div class="col-md-6">
-                                            <?= $form->field($model, 'ecRelationShip')->textInput(['maxlength' => true, 'placeholder' => 'ex: wife...']) ?>
-                                            <?=
-                                                    $form->field($model, 'ecPhone1')->textInput(['maxlength' => true, 'placeholder' => 'ex: +021-9094567'])
-                                                    ->widget(\yii\widgets\MaskedInput::classname(), [
-                                                        'mask' => '+9[9]-[9][9][9]-[9][9][9][9][9][9][9][9][9][9][9]',
-                                                    ])
-                                            ?>
-                                            <?=
-                                                    $form->field($model, 'ecPhone2')->textInput(['maxlength' => true, 'placeholder' => 'ex: +021-9094567'])
-                                                    ->widget(\yii\widgets\MaskedInput::classname(), [
-                                                        'mask' => '+9[9]-[9][9][9]-[9][9][9][9][9][9][9][9][9][9][9]',
-                                                    ])
-                                            ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+										<div class="col-md-6">
+											<?= $form->field($model, 'ecRelationShip')->textInput(['maxlength' => true, 'placeholder' => 'ex: wife...']) ?>
+											<?=
+												$form->field($model, 'ecPhone1')->textInput(['maxlength' => true, 'placeholder' => 'ex: +021-9094567'])
+													->widget(\yii\widgets\MaskedInput::classname(), [
+														'mask' => '+9[9]-[9][9][9]-[9][9][9][9][9][9][9][9][9][9][9]',
+													])
+											?>
+											<?=
+												$form->field($model, 'ecPhone2')->textInput(['maxlength' => true, 'placeholder' => 'ex: +021-9094567'])
+													->widget(\yii\widgets\MaskedInput::classname(), [
+														'mask' => '+9[9]-[9][9][9]-[9][9][9][9][9][9][9][9][9][9][9]',
+													])
+											?>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 						<div class="panel-footer">
 							<div class="pull-right">
 								<a class='btn btn-success btnNext5' href='#'><i class='glyphicon glyphicon-step-forward'></i>&nbsp;Next</a>
 							</div>
-							<div class="clearfix"></div> 
+							<div class="clearfix"></div>
 						</div>
-                    </div>
+					</div>
 
-                    <div id="menu6" class="tab-pane fade">
-                        <div class="document-form">
-                            <div class="panel panel-default">
-                                <div class="panel-heading"><b>Identity Card</b></div>
-                                <div class="panel-body">
-									<div class = "actionImageKTP">
+					<div id="menu6" class="tab-pane fade">
+						<div class="document-form">
+							<div class="panel panel-default">
+								<div class="panel-heading"><b>Identity Card</b></div>
+								<div class="panel-body">
+									<div class="actionImageKTP">
 										<?= Html::activeHiddenInput($model, 'imageGalleryKTPMode', ['class' => 'imageGalleryKTPMode']) ?>
 										<?=
-										$form->field($model, 'imageGalleryKTP')->widget(\kartik\file\FileInput::classname(), [
-											'options' => [
-												'accept' => 'image/*',
-												'class' => 'imageGalleryKTP',
-											],
-											'pluginOptions' => [
-												'removeLabel' => 'Hapus',
-												'cancelLabel' => 'Batal',
-												'showUpload' => false,
-												'showCancel' => false,
-												'showRemove' => true,
-												'showCaption' => false,
-												'initialPreview' => $initialPreviewKTP,
-												'layoutTemplates' => [
-													'main1' => '{preview}' .
-													'<div class="kv-upload-progress hide"></div>' .
-													'<div class="input-group {class}">' .
-													'   {caption}' .
-													'   <div class="input-group-btn">' .
-													'       {browse}' .
-													'   </div>' .
-													'</div>',
-													'preview' => '<div class="file-preview {class}">' .
-													'    <div class="{dropClass}">' .
-													'    <div class="file-preview-thumbnails">' .
-													'    </div>' .
-													'    <div class="clearfix"></div>' .
-													'    <div class="file-preview-status text-center text-success"></div>' .
-													'    <div class="kv-fileinput-error"></div>' .
-													'    </div>' .
-													'</div>']
-											],
-										])->hint('Rekomendasi Ukuran: 268 x 268 px')
+											$form->field($model, 'imageGalleryKTP')->widget(\kartik\file\FileInput::classname(), [
+												'options' => [
+													'accept' => 'image/*',
+													'class' => 'imageGalleryKTP',
+												],
+												'pluginOptions' => [
+													'removeLabel' => 'Hapus',
+													'cancelLabel' => 'Batal',
+													'showUpload' => false,
+													'showCancel' => false,
+													'showRemove' => true,
+													'showCaption' => false,
+													'initialPreview' => $initialPreviewKTP,
+													'layoutTemplates' => [
+														'main1' => '{preview}' .
+															'<div class="kv-upload-progress hide"></div>' .
+															'<div class="input-group {class}">' .
+															'   {caption}' .
+															'   <div class="input-group-btn">' .
+															'       {browse}' .
+															'   </div>' .
+															'</div>',
+														'preview' => '<div class="file-preview {class}">' .
+															'    <div class="{dropClass}">' .
+															'    <div class="file-preview-thumbnails">' .
+															'    </div>' .
+															'    <div class="clearfix"></div>' .
+															'    <div class="file-preview-status text-center text-success"></div>' .
+															'    <div class="kv-fileinput-error"></div>' .
+															'    </div>' .
+															'</div>'
+													]
+												],
+											])->hint('Rekomendasi Ukuran: 268 x 268 px')
 										?>
 									</div>
-                                </div>
-                            </div>
+								</div>
+							</div>
 
-                            <div class="panel panel-default">
-                                <div class="panel-heading"><b>Photo</b></div>
-                                <div class="panel-body">
-									<div class = "actionImagePhoto">
+							<div class="panel panel-default">
+								<div class="panel-heading"><b>Photo</b></div>
+								<div class="panel-body">
+									<div class="actionImagePhoto">
 										<?= Html::activeHiddenInput($model, 'imageGalleryPhotoMode', ['class' => 'imageGalleryPhotoMode']) ?>
 										<?=
-										$form->field($model, 'imageGalleryPhoto')->widget(\kartik\file\FileInput::classname(), [
-											'options' => [
-												'accept' => '*',
-												'class' => 'imageGalleryPhoto',
-											],
-											'pluginOptions' => [
-												'removeLabel' => 'Hapus',
-												'cancelLabel' => 'Batal',
-												'showUpload' => false,
-												'showCancel' => false,
-												'showRemove' => true,
-												'showCaption' => false,
-												'initialPreview' => $initialPreviewPhoto,
-												'layoutTemplates' => [
-													'main1' => '{preview}' .
-													'<div class="kv-upload-progress hide"></div>' .
-													'<div class="input-group {class}">' .
-													'   {caption}' .
-													'   <div class="input-group-btn">' .
-													'       {browse}' .
-													'   </div>' .
-													'</div>',
-													'preview' => '<div class="file-preview {class}">' .
-													'    <div class="{dropClass}">' .
-													'    <div class="file-preview-thumbnails">' .
-													'    </div>' .
-													'    <div class="clearfix"></div>' .
-													'    <div class="file-preview-status text-center text-success"></div>' .
-													'    <div class="kv-fileinput-error"></div>' .
-													'    </div>' .
-													'</div>']
-											],
-										])->hint('Rekomendasi Ukuran: 268 x 268 px')
+											$form->field($model, 'imageGalleryPhoto')->widget(\kartik\file\FileInput::classname(), [
+												'options' => [
+													'accept' => '*',
+													'class' => 'imageGalleryPhoto',
+												],
+												'pluginOptions' => [
+													'removeLabel' => 'Hapus',
+													'cancelLabel' => 'Batal',
+													'showUpload' => false,
+													'showCancel' => false,
+													'showRemove' => true,
+													'showCaption' => false,
+													'initialPreview' => $initialPreviewPhoto,
+													'layoutTemplates' => [
+														'main1' => '{preview}' .
+															'<div class="kv-upload-progress hide"></div>' .
+															'<div class="input-group {class}">' .
+															'   {caption}' .
+															'   <div class="input-group-btn">' .
+															'       {browse}' .
+															'   </div>' .
+															'</div>',
+														'preview' => '<div class="file-preview {class}">' .
+															'    <div class="{dropClass}">' .
+															'    <div class="file-preview-thumbnails">' .
+															'    </div>' .
+															'    <div class="clearfix"></div>' .
+															'    <div class="file-preview-status text-center text-success"></div>' .
+															'    <div class="kv-fileinput-error"></div>' .
+															'    </div>' .
+															'</div>'
+													]
+												],
+											])->hint('Rekomendasi Ukuran: 268 x 268 px')
 										?>
 									</div>
-                                </div>
-                            </div>
+								</div>
+							</div>
 
-                            <div class="panel panel-default">
-                                <div class="panel-heading"><b>NPWP</b></div>
-                                <div class="panel-body">
-									<div class = "actionImageNpwp">
+							<div class="panel panel-default">
+								<div class="panel-heading"><b>NPWP</b></div>
+								<div class="panel-body">
+									<div class="actionImageNpwp">
 										<?= Html::activeHiddenInput($model, 'imageGalleryNPWPMode', ['class' => 'imageGalleryNPWPMode']) ?>
 										<?=
-										$form->field($model, 'imageGalleryNPWP')->widget(\kartik\file\FileInput::classname(), [
-											'options' => [
-												'accept' => 'image/*',
-												'class' => 'imageGalleryNPWP',
-											],
-											'pluginOptions' => [
-												'removeLabel' => 'Hapus',
-												'cancelLabel' => 'Batal',
-												'showUpload' => false,
-												'showCancel' => false,
-												'showRemove' => true,
-												'showCaption' => false,
-												'initialPreview' => $initialPreviewNPWP,
-												'layoutTemplates' => [
-													'main1' => '{preview}' .
-													'<div class="kv-upload-progress hide"></div>' .
-													'<div class="input-group {class}">' .
-													'   {caption}' .
-													'   <div class="input-group-btn">' .
-													'       {browse}' .
-													'   </div>' .
-													'</div>',
-													'preview' => '<div class="file-preview {class}">' .
-													'    <div class="{dropClass}">' .
-													'    <div class="file-preview-thumbnails">' .
-													'    </div>' .
-													'    <div class="clearfix"></div>' .
-													'    <div class="file-preview-status text-center text-success"></div>' .
-													'    <div class="kv-fileinput-error"></div>' .
-													'    </div>' .
-													'</div>']
-											],
-										])->hint('Rekomendasi Ukuran: 268 x 268 px')
+											$form->field($model, 'imageGalleryNPWP')->widget(\kartik\file\FileInput::classname(), [
+												'options' => [
+													'accept' => 'image/*',
+													'class' => 'imageGalleryNPWP',
+												],
+												'pluginOptions' => [
+													'removeLabel' => 'Hapus',
+													'cancelLabel' => 'Batal',
+													'showUpload' => false,
+													'showCancel' => false,
+													'showRemove' => true,
+													'showCaption' => false,
+													'initialPreview' => $initialPreviewNPWP,
+													'layoutTemplates' => [
+														'main1' => '{preview}' .
+															'<div class="kv-upload-progress hide"></div>' .
+															'<div class="input-group {class}">' .
+															'   {caption}' .
+															'   <div class="input-group-btn">' .
+															'       {browse}' .
+															'   </div>' .
+															'</div>',
+														'preview' => '<div class="file-preview {class}">' .
+															'    <div class="{dropClass}">' .
+															'    <div class="file-preview-thumbnails">' .
+															'    </div>' .
+															'    <div class="clearfix"></div>' .
+															'    <div class="file-preview-status text-center text-success"></div>' .
+															'    <div class="kv-fileinput-error"></div>' .
+															'    </div>' .
+															'</div>'
+													]
+												],
+											])->hint('Rekomendasi Ukuran: 268 x 268 px')
 										?>
-									</div>	
-                                </div>
-                            </div>
-						</div>
-						
-						<div class="panel panel-default">
-                                <div class="panel-heading"><b>Other</b></div>
-                                <div class="panel-body">
-									<?= $form->field($model, 'notes')->textArea(['style' => 'padding-bottom: 2px !important; height: 100px !important;', 'rows' => '5', 'placeholder' => 'ex: Surat Peringatan']) ?>   
+									</div>
 								</div>
+							</div>
+						</div>
+
+						<div class="panel panel-default">
+							<div class="panel-heading"><b>Other</b></div>
+							<div class="panel-body">
+								<?= $form->field($model, 'notes')->textArea(['style' => 'padding-bottom: 2px !important; height: 100px !important;', 'rows' => '5', 'placeholder' => 'ex: Surat Peringatan']) ?>
+							</div>
 						</div>
 
 						<div class="panel-footer">
 							<div class="pull-right">
 								<?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 							</div>
-							<div class="clearfix"></div> 
-						</div>  
-                    </div>
-                </div>
-            </div>
-        </div>
-</div>
-<?php ActiveForm::end(); ?>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php ActiveForm::end(); ?>
 </div>
 <?php
 $familyDetail = \yii\helpers\Json::encode($model->joinPersonnelfamily);
@@ -1082,10 +1104,10 @@ $contractDetail = \yii\helpers\Json::encode($model->joinPersonnelContract);
 $positionDetail = \yii\helpers\Json::encode($model->joinPersonnelPosition);
 $statusDetail = \yii\helpers\Json::encode($model->joinPersonnelStatus);
 $url_position = Yii::$app->urlManager->createUrl('personnel-head/get-position');
-$getDepAjaxURL = Yii::$app->request->baseUrl. '/personnel-head/lists';
+$getDepAjaxURL = Yii::$app->request->baseUrl . '/personnel-head/lists';
 $deleteRow = '';
 if (!isset($isView)) {
-    $deleteRow = <<< DELETEROW
+	$deleteRow = <<< DELETEROW
 			"   <td class='text-center'>" +
 			"       <a class='btn btn-danger btn-sm btnDelete' href='#'><i class='glyphicon glyphicon-remove'></i>Delete</a>" +
 			"   </td>" +
