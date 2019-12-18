@@ -621,6 +621,28 @@ use app\models\MsAttendanceShift;
 													->dropDownList(ArrayHelper::map(MsLate::find()->all(), 'lateId', 'value'), ['prompt' => 'Select ' . $model->getAttributeLabel('lateId')])
 											?>
 										</div>
+
+										<div class="col-md-6">
+											<?= $form->field($model, 'minuteLate')->textInput(['maxlength' => true, 'placeholder' => 'ex: 30']) ?>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-6">
+											<?= $form->field($model, 'minuteVlate')->textInput(['maxlength' => true, 'placeholder' => 'ex: 30']) ?>
+										</div>
+										<div class="col-md-6">
+											<?= $form->field($model, 'minuteOvertime')->textInput(['maxlength' => true, 'placeholder' => 'ex: 30']) ?>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-6">
+											<?= $form->field($model, 'overTime21')->textInput(['maxlength' => true, 'placeholder' => 'ex: 30']) ?>
+										</div>
+										<div class="col-md-6">
+											<?= $form->field($model, 'overTime24')->textInput(['maxlength' => true, 'placeholder' => 'ex: 30']) ?>
+										</div>
 									</div>
 								</div>
 							</div>

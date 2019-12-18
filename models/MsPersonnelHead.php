@@ -51,7 +51,7 @@ class MsPersonnelHead extends \yii\db\ActiveRecord {
 			[['imageGalleryKTP','imageGalleryNPWP'], 'file', 'extensions'=>'jpg, gif, png, pdf'],
 			[['imageGalleryKTPMode','imageGalleryNPWPMode','imageGalleryPhotoMode','notes'], 'safe'],
 			[['fullName', 'position', 'divisionId', 'email', 'departmentId', 'phoneNo','positionID'], 'safe','on'=>'search'],
-			
+			[['lateId','minuteLate','minuteVlate','minuteOvertime','overTime21','overTime24'], 'integer']
         ];
     }
 
@@ -114,7 +114,13 @@ class MsPersonnelHead extends \yii\db\ActiveRecord {
             'shiftCode' => 'Shift Code',
             'idNo' => 'Identity Number',
             'locationID' => 'Location',
-            'positionID' => 'Position'
+            'positionID' => 'Position',
+            'lateId' => 'Late Value',
+            'minuteLate' => 'Minute Late',
+            'minuteVlate' => 'Minute Start Overlate' ,
+            'minuteOvertime' => 'Overtime Minute Start',
+            'overTime21' => 'Overtime Value Above 21',
+            'overTime24' => 'Overtime Value Above 24'
         ];
     }
 
