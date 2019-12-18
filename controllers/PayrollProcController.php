@@ -396,9 +396,10 @@ class PayrollProcController extends ControllerUAC
         b.bankNo,
         COALESCE(h.Schedule,0) 'Scheduled',
         h.Actual 'Hadir',
+        COALESCE(i.late,0) 'Telat',
         COALESCE(i.vlate,0) 'Mangkir',
         h.Schedule - h.Actual 'absen',
-        f.A01 'GajiPokok',
+        f.A99 'GajiPokok',
         f.A02 'Transportasi',
         f.A03 'TunjanganKehadiran',
         f.A04 'TunjanganJabatan',
@@ -465,29 +466,31 @@ class PayrollProcController extends ControllerUAC
         $activeSheet->setCellValue('H1', 'bankNo');
         $activeSheet->setCellValue('I1', 'Scheduled');
         $activeSheet->setCellValue('J1', 'Hadir');
-        $activeSheet->setCellValue('K1', 'Mangkir');
-        $activeSheet->setCellValue('L1', 'absen');
-        $activeSheet->setCellValue('M1', 'GajiPokok');
-        $activeSheet->setCellValue('N1', 'Transportasi');
-        $activeSheet->setCellValue('O1', 'TunjanganKehadiran');
-        $activeSheet->setCellValue('P1', 'TunjanganJabatan');
-        $activeSheet->setCellValue('Q1', 'GajiTotal');
-        $activeSheet->setCellValue('R1', 'Pinjaman');
-        $activeSheet->setCellValue('S1', 'PotonganBaju');
-        $activeSheet->setCellValue('T1', 'PotonganTelat');
-        $activeSheet->setCellValue('U1', 'PotonganMangkir');
-        $activeSheet->setCellValue('V1', 'JHTEmployee');
-        $activeSheet->setCellValue('W1', 'JPNEmployee');
-        $activeSheet->setCellValue('X1', 'JPKEmployee');
-        $activeSheet->setCellValue('Y1', 'THP');
-        $activeSheet->setCellValue('Z1', 'Jamsostek624');
-        $activeSheet->setCellValue('AA1', 'BPJSK');
-        $activeSheet->setCellValue('AB1', 'Overtime');
-        $activeSheet->setCellValue('AC1', 'Overtime24');
-        $activeSheet->setCellValue('AD1', 'KomisiSPGSPV');
-        $activeSheet->setCellValue('AE1', 'KomisiPaket');
-        $activeSheet->setCellValue('AF1', 'KomisiTeknisi');
-        $activeSheet->setCellValue('AG1', 'Total');
+        $activeSheet->setCellValue('K1', 'Telat');
+        $activeSheet->setCellValue('L1', 'Mangkir');
+        $activeSheet->setCellValue('M1', 'absen');
+        $activeSheet->setCellValue('N1', 'GajiPokok');
+        $activeSheet->setCellValue('O1', 'Transportasi');
+        $activeSheet->setCellValue('P1', 'TunjanganKehadiran');
+        $activeSheet->setCellValue('Q1', 'TunjanganJabatan');
+        $activeSheet->setCellValue('R1', 'GajiTotal');
+        $activeSheet->setCellValue('S1', 'Pinjaman');
+        $activeSheet->setCellValue('T1', 'PotonganBaju');
+        $activeSheet->setCellValue('U1', 'PotonganTelat');
+        $activeSheet->setCellValue('V1', 'PotonganMangkir');
+        $activeSheet->setCellValue('W1', 'JHTEmployee');
+        $activeSheet->setCellValue('X1', 'JPNEmployee');
+        $activeSheet->setCellValue('Y1', 'JPKEmployee');
+        $activeSheet->setCellValue('Z1', 'THP');
+        $activeSheet->setCellValue('AA1', 'Jamsostek624');
+        $activeSheet->setCellValue('AB1', 'BPJSK');
+        $activeSheet->setCellValue('AC1', 'Overtime');
+        $activeSheet->setCellValue('AD1', 'Overtime24');
+        $activeSheet->setCellValue('AE1', 'KomisiSPGSPV');
+        $activeSheet->setCellValue('AF1', 'KomisiPaket');
+        $activeSheet->setCellValue('AG1', 'KomisiTeknisi');
+        $activeSheet->setCellValue('AH1', 'Total');
+
 
 
 
@@ -503,29 +506,31 @@ class PayrollProcController extends ControllerUAC
             $activeSheet->setCellValue('H' . $baseRow, $value['bankNo']);
             $activeSheet->setCellValue('I' . $baseRow, $value['Scheduled']);
             $activeSheet->setCellValue('J' . $baseRow, $value['Hadir']);
-            $activeSheet->setCellValue('K' . $baseRow, $value['Mangkir']);
-            $activeSheet->setCellValue('L' . $baseRow, $value['absen']);
-            $activeSheet->setCellValue('M' . $baseRow, $value['GajiPokok']);
-            $activeSheet->setCellValue('N' . $baseRow, $value['Transportasi']);
-            $activeSheet->setCellValue('O' . $baseRow, $value['TunjanganKehadiran']);
-            $activeSheet->setCellValue('P' . $baseRow, $value['TunjanganJabatan']);
-            $activeSheet->setCellValue('Q' . $baseRow, $value['GajiTotal']);
-            $activeSheet->setCellValue('R' . $baseRow, $value['Pinjaman']);
-            $activeSheet->setCellValue('S' . $baseRow, $value['PotonganBaju']);
-            $activeSheet->setCellValue('T' . $baseRow, $value['PotonganTelat']);
-            $activeSheet->setCellValue('U' . $baseRow, $value['PotonganMangkir']);
-            $activeSheet->setCellValue('V' . $baseRow, $value['JHTEmployee']);
-            $activeSheet->setCellValue('W' . $baseRow, $value['JPNEmployee']);
-            $activeSheet->setCellValue('X' . $baseRow, $value['JPKEmployee']);
-            $activeSheet->setCellValue('Y' . $baseRow, $value['THP']);
-            $activeSheet->setCellValue('Z' . $baseRow, $value['Jamsostek624']);
-            $activeSheet->setCellValue('AA' . $baseRow, $value['BPJSK']);
-            $activeSheet->setCellValue('AB' . $baseRow, $value['Overtime']);
-            $activeSheet->setCellValue('AC' . $baseRow, $value['Overtime24']);
-            $activeSheet->setCellValue('AD' . $baseRow, $value['KomisiSPGSPV']);
-            $activeSheet->setCellValue('AE' . $baseRow, $value['KomisiPaket']);
-            $activeSheet->setCellValue('AF' . $baseRow, $value['KomisiTeknisi']);
-            $activeSheet->setCellValue('AG' . $baseRow, $value['Total']);
+            $activeSheet->setCellValue('K' . $baseRow, $value['Telat']);
+            $activeSheet->setCellValue('L' . $baseRow, $value['Mangkir']);
+            $activeSheet->setCellValue('M' . $baseRow, $value['absen']);
+            $activeSheet->setCellValue('N' . $baseRow, $value['GajiPokok']);
+            $activeSheet->setCellValue('O' . $baseRow, $value['Transportasi']);
+            $activeSheet->setCellValue('P' . $baseRow, $value['TunjanganKehadiran']);
+            $activeSheet->setCellValue('Q' . $baseRow, $value['TunjanganJabatan']);
+            $activeSheet->setCellValue('R' . $baseRow, $value['GajiTotal']);
+            $activeSheet->setCellValue('S' . $baseRow, $value['Pinjaman']);
+            $activeSheet->setCellValue('T' . $baseRow, $value['PotonganBaju']);
+            $activeSheet->setCellValue('U' . $baseRow, $value['PotonganTelat']);
+            $activeSheet->setCellValue('V' . $baseRow, $value['PotonganMangkir']);
+            $activeSheet->setCellValue('W' . $baseRow, $value['JHTEmployee']);
+            $activeSheet->setCellValue('X' . $baseRow, $value['JPNEmployee']);
+            $activeSheet->setCellValue('Y' . $baseRow, $value['JPKEmployee']);
+            $activeSheet->setCellValue('Z' . $baseRow, $value['THP']);
+            $activeSheet->setCellValue('AA' . $baseRow, $value['Jamsostek624']);
+            $activeSheet->setCellValue('AB' . $baseRow, $value['BPJSK']);
+            $activeSheet->setCellValue('AC' . $baseRow, $value['Overtime']);
+            $activeSheet->setCellValue('AD' . $baseRow, $value['Overtime24']);
+            $activeSheet->setCellValue('AE' . $baseRow, $value['KomisiSPGSPV']);
+            $activeSheet->setCellValue('AF' . $baseRow, $value['KomisiPaket']);
+            $activeSheet->setCellValue('AG' . $baseRow, $value['KomisiTeknisi']);
+            $activeSheet->setCellValue('AH' . $baseRow, $value['Total']);
+
             $baseRow++;
             $no++;
         }
@@ -562,7 +567,7 @@ class PayrollProcController extends ControllerUAC
         $activeSheet->getColumnDimension('AE')->setAutoSize(true);
         $activeSheet->getColumnDimension('AF')->setAutoSize(true);
         $activeSheet->getColumnDimension('AG')->setAutoSize(true);
-
+        $activeSheet->getColumnDimension('AH')->setAutoSize(true);
 
 
         $filename = 'Data-' . Date('YmdGis') . '-Export.xls';
@@ -592,9 +597,10 @@ class PayrollProcController extends ControllerUAC
         b.bankNo,
         COALESCE(h.Schedule,0) 'Scheduled',
         h.Actual 'Hadir',
+        COALESCE(i.late,0) 'Telat',
         COALESCE(i.vlate,0) 'Mangkir',
         h.Schedule - h.Actual 'absen',
-        f.A01 'GajiPokok',
+        f.A99 'GajiPokok',
         f.A02 'Transportasi',
         f.A03 'TunjanganKehadiran',
         f.A04 'TunjanganJabatan',
@@ -645,21 +651,23 @@ class PayrollProcController extends ControllerUAC
         $activeSheet->setCellValue('H1', 'bankNo');
         $activeSheet->setCellValue('I1', 'Scheduled');
         $activeSheet->setCellValue('J1', 'Hadir');
-        $activeSheet->setCellValue('K1', 'Mangkir');
-        $activeSheet->setCellValue('L1', 'absen');
-        $activeSheet->setCellValue('M1', 'GajiPokok');
-        $activeSheet->setCellValue('N1', 'Transportasi');
-        $activeSheet->setCellValue('O1', 'TunjanganKehadiran');
-        $activeSheet->setCellValue('P1', 'TunjanganJabatan');
-        $activeSheet->setCellValue('Q1', 'GajiTotal');
-        $activeSheet->setCellValue('R1', 'Pinjaman');
-        $activeSheet->setCellValue('S1', 'PotonganBaju');
-        $activeSheet->setCellValue('T1', 'PotonganTelat');
-        $activeSheet->setCellValue('U1', 'PotonganMangkir');
-        $activeSheet->setCellValue('V1', 'JHTEmployee');
-        $activeSheet->setCellValue('W1', 'JPNEmployee');
-        $activeSheet->setCellValue('X1', 'JPKEmployee');
-        $activeSheet->setCellValue('Y1', 'THP');
+        $activeSheet->setCellValue('K1', 'Telat');
+        $activeSheet->setCellValue('L1', 'Mangkir');
+        $activeSheet->setCellValue('M1', 'absen');
+        $activeSheet->setCellValue('N1', 'GajiPokok');
+        $activeSheet->setCellValue('O1', 'Transportasi');
+        $activeSheet->setCellValue('P1', 'TunjanganKehadiran');
+        $activeSheet->setCellValue('Q1', 'TunjanganJabatan');
+        $activeSheet->setCellValue('R1', 'GajiTotal');
+        $activeSheet->setCellValue('S1', 'Pinjaman');
+        $activeSheet->setCellValue('T1', 'PotonganBaju');
+        $activeSheet->setCellValue('U1', 'PotonganTelat');
+        $activeSheet->setCellValue('V1', 'PotonganMangkir');
+        $activeSheet->setCellValue('W1', 'JHTEmployee');
+        $activeSheet->setCellValue('X1', 'JPNEmployee');
+        $activeSheet->setCellValue('Y1', 'JPKEmployee');
+        $activeSheet->setCellValue('Z1', 'THP');
+
 
 
         $baseRow = 2;
@@ -674,21 +682,23 @@ class PayrollProcController extends ControllerUAC
             $activeSheet->setCellValue('H' . $baseRow, $value['bankNo']);
             $activeSheet->setCellValue('I' . $baseRow, $value['Scheduled']);
             $activeSheet->setCellValue('J' . $baseRow, $value['Hadir']);
-            $activeSheet->setCellValue('K' . $baseRow, $value['Mangkir']);
-            $activeSheet->setCellValue('L' . $baseRow, $value['absen']);
-            $activeSheet->setCellValue('M' . $baseRow, $value['GajiPokok']);
-            $activeSheet->setCellValue('N' . $baseRow, $value['Transportasi']);
-            $activeSheet->setCellValue('O' . $baseRow, $value['TunjanganKehadiran']);
-            $activeSheet->setCellValue('P' . $baseRow, $value['TunjanganJabatan']);
-            $activeSheet->setCellValue('Q' . $baseRow, $value['GajiTotal']);
-            $activeSheet->setCellValue('R' . $baseRow, $value['Pinjaman']);
-            $activeSheet->setCellValue('S' . $baseRow, $value['PotonganBaju']);
-            $activeSheet->setCellValue('T' . $baseRow, $value['PotonganTelat']);
-            $activeSheet->setCellValue('U' . $baseRow, $value['PotonganMangkir']);
-            $activeSheet->setCellValue('V' . $baseRow, $value['JHTEmployee']);
-            $activeSheet->setCellValue('W' . $baseRow, $value['JPNEmployee']);
-            $activeSheet->setCellValue('X' . $baseRow, $value['JPKEmployee']);
-            $activeSheet->setCellValue('Y' . $baseRow, $value['THP']);
+            $activeSheet->setCellValue('K' . $baseRow, $value['Telat']);
+            $activeSheet->setCellValue('L' . $baseRow, $value['Mangkir']);
+            $activeSheet->setCellValue('M' . $baseRow, $value['absen']);
+            $activeSheet->setCellValue('N' . $baseRow, $value['GajiPokok']);
+            $activeSheet->setCellValue('O' . $baseRow, $value['Transportasi']);
+            $activeSheet->setCellValue('P' . $baseRow, $value['TunjanganKehadiran']);
+            $activeSheet->setCellValue('Q' . $baseRow, $value['TunjanganJabatan']);
+            $activeSheet->setCellValue('R' . $baseRow, $value['GajiTotal']);
+            $activeSheet->setCellValue('S' . $baseRow, $value['Pinjaman']);
+            $activeSheet->setCellValue('T' . $baseRow, $value['PotonganBaju']);
+            $activeSheet->setCellValue('U' . $baseRow, $value['PotonganTelat']);
+            $activeSheet->setCellValue('V' . $baseRow, $value['PotonganMangkir']);
+            $activeSheet->setCellValue('W' . $baseRow, $value['JHTEmployee']);
+            $activeSheet->setCellValue('X' . $baseRow, $value['JPNEmployee']);
+            $activeSheet->setCellValue('Y' . $baseRow, $value['JPKEmployee']);
+            $activeSheet->setCellValue('Z' . $baseRow, $value['THP']);
+
             $baseRow++;
             $no++;
         }
@@ -717,7 +727,7 @@ class PayrollProcController extends ControllerUAC
         $activeSheet->getColumnDimension('W')->setAutoSize(true);
         $activeSheet->getColumnDimension('X')->setAutoSize(true);
         $activeSheet->getColumnDimension('Y')->setAutoSize(true);
-
+        $activeSheet->getColumnDimension('Y')->setAutoSize(true);
 
         $filename = 'Data-' . Date('YmdGis') . '-Export.xls';
 
