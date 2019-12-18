@@ -73,7 +73,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 DatePicker::widget([
                 'id' => 'period',
                 'name' => 'period', 
-                'value' => date('Y/m'),
                 'options' => ['placeholder' => 'Select Period ...'],
                 'pluginOptions' => [
                     'autoclose' => true,
@@ -91,11 +90,19 @@ $this->params['breadcrumbs'][] = $this->title;
 $js = <<< SCRIPT
         
 $(document).ready(function () {
-    
     $('#period').change(function(){
        var period = $('#period').val();
-       $("#btnDownload").attr("href", "attendance-w-calc-head/generate-schedule?period="+period);
+       $("#btnGenerate").attr("href", "attendance-w-calc-head/generate-schedule?period="+period);
     }); 
+
+    $('#btnGenerate').click(function(){
+        var period = $('.period').val();
+        if(period=="" || period==undefined){
+            bootbox.alert("Fill Period");
+            return false;
+        }
+     }); 
+             
                 
 });
 SCRIPT;

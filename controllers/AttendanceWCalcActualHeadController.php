@@ -298,14 +298,15 @@ protected function saveModel($model) {
         }
     }
 
-    public function actionGenerateSchedule() {
+    public function actionGenerateSchedule($period = '') {
+        $period = $period = '' ? date('Y/m') : $period;
+
 		$connection = Yii::$app->db;
-		$command = $connection->createCommand('call spa_generatescheduleactual');
+		$command = $connection->createCommand("call spa_generatescheduleactual ('$period')");
 		$command->execute();
 		AppHelper::insertTransactionLog('Generate Schedule', '');
 		return $this->redirect(['index']);
     }
-
 
     public function actionDownload($period = '') {
         ini_set('memory_limit', '-1');

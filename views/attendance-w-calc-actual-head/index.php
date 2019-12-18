@@ -73,12 +73,20 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]) 
             ?>
         </div>
+        <div class="col-md-1 pull-right">            
+            <?=  Html::a('Generate', ['generate-schedule'], [
+                        'type' => 'button',
+                        'title' => 'Generate Schedule Schedule',
+                        'class' => 'btn btn-default',
+                        'id' => 'btnGenerate'
+                    ]) 
+            ?>
+        </div>
         <div class="col-md-2 pull-right">
             <?=
                 DatePicker::widget([
                 'id' => 'period',
                 'name' => 'period', 
-                'value' => date('Y/m'),
                 'options' => ['placeholder' => 'Select Period ...'],
                 'pluginOptions' => [
                     'autoclose' => true,
@@ -97,11 +105,19 @@ $this->params['breadcrumbs'][] = $this->title;
 $js = <<< SCRIPT
         
 $(document).ready(function () {
-    
     $('#period').change(function(){
        var period = $('#period').val();
        $("#btnDownload").attr("href", "attendance-w-calc-actual-head/download?period="+period);
+       $("#btnGenerate").attr("href", "attendance-w-calc-actual-head/generate-schedule?period="+period);
     }); 
+
+    $('#btnGenerate').click(function(){
+        var period = $('.period').val();
+        if(period=="" || period==undefined){
+            bootbox.alert("Fill Period");
+            return false;
+        }
+     }); 
                 
 });
 SCRIPT;
