@@ -757,7 +757,82 @@ class PayrollProcController extends ControllerUAC
         JOIN ms_personneldepartment c ON c.departmentCode = b.departmentId
         JOIN ms_personneldivision d ON d.divisionId = c.divisionId
         JOIN tr_payroll e ON e.nik = a.nik AND e.payrollCode = 'A05' AND e.period = '" . $model->period . "'
-        WHERE a.period = '" . $model->period . "';";
+        WHERE e.amount > 0 AND a.period = '" . $model->period . "';";
+        $model = $connection->createCommand($sql);
+        $download = $model->queryAll();
+
+
+
+        $objReader = \PHPExcel_IOFactory::createReader('Excel2007');
+        $template = Yii::getAlias('@app/assets_b/uploads/template') . '/template.xlsx';
+
+        $objPHPExcel = $objReader->load($template);
+        $activeSheet = $objPHPExcel->getActiveSheet();
+
+        $activeSheet->getPageSetup()
+            ->setOrientation(\PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE)
+            ->setPaperSize(\PHPExcel_Worksheet_PageSetup::PAPERSIZE_FOLIO);
+
+        $activeSheet->setCellValue('A1', 'No');
+        $activeSheet->setCellValue('B1', 'nik');
+        $activeSheet->setCellValue('C1', 'fullName');
+        $activeSheet->setCellValue('D1', 'departmentDesc');
+        $activeSheet->setCellValue('E1', 'bankName');
+        $activeSheet->setCellValue('F1', 'bankNo');
+        $activeSheet->setCellValue('G1', 'amount');
+
+
+        $baseRow = 2;
+        $no = 1;
+        foreach ($download as $value) {
+            $activeSheet->setCellValue('A' . $baseRow, $no);
+            $activeSheet->setCellValue('B' . $baseRow, $value['nik']);
+            $activeSheet->setCellValue('C' . $baseRow, $value['fullName']);
+            $activeSheet->setCellValue('D' . $baseRow, $value['departmentDesc']);
+            $activeSheet->setCellValue('E' . $baseRow, $value['bankName']);
+            $activeSheet->setCellValue('F' . $baseRow, $value['bankNo']);
+            $activeSheet->setCellValue('G' . $baseRow, $value['amount']);
+
+            $baseRow++;
+            $no++;
+        }
+
+        $activeSheet->getColumnDimension('B')->setAutoSize(true);
+        $activeSheet->getColumnDimension('C')->setAutoSize(true);
+        $activeSheet->getColumnDimension('D')->setAutoSize(true);
+        $activeSheet->getColumnDimension('E')->setAutoSize(true);
+        $activeSheet->getColumnDimension('F')->setAutoSize(true);
+        $activeSheet->getColumnDimension('G')->setAutoSize(true);
+
+        $filename = 'Data-' . Date('YmdGis') . '-Export.xls';
+
+
+        header('Content-Type: application/vnd-ms-excel');
+        header("Content-Disposition: attachment; filename=" . $filename);
+        header('Cache-Control: max-age=0');
+        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, "Excel2007");
+        $objWriter->save('php://output');
+        exit;
+    }
+
+    public function actionReportInsentive($id)
+    {
+        $model = $this->findModel($id);
+
+        $connection = \Yii::$app->db;
+        $sql = "
+        SELECT a.nik,
+        b.fullName,
+        c.departmentDesc,
+        b.bankName,
+        b.bankNo,
+        e.amount 
+        FROM tr_payrolltaxmonthlyproc a
+        JOIN ms_personnelhead b ON a.nik = b.id
+        JOIN ms_personneldepartment c ON c.departmentCode = b.departmentId
+        JOIN ms_personneldivision d ON d.divisionId = c.divisionId
+        JOIN tr_payroll e ON e.nik = a.nik AND e.payrollCode = 'A11' AND e.period = '" . $model->period . "'
+        WHERE e.amount > 0 AND a.period = '" . $model->period . "';";
         $model = $connection->createCommand($sql);
         $download = $model->queryAll();
 

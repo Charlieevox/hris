@@ -57,6 +57,7 @@ $headResult = $temp->queryOne();
 					<ul>
 						<li><?= Html::a('Report Payroll', ['payroll-proc/download', 'id' => $model->period], ['class' => 'reportItem']);?></li>
 						<li><?= Html::a('Report Overtime', ['payroll-proc/report-overtime', 'id' => $model->period], ['class' => 'reportItem']);?></li>
+						<li><?= Html::a('Report Insentive', ['payroll-proc/report-insentive', 'id' => $model->period], ['class' => 'reportItem']);?></li>
 						<li><?= Html::a('Report Payroll Draft', ['payroll-proc/report-payroll-draft', 'id' => $model->period], ['class' => 'reportItem']);?></li>
 						<li><?= Html::a('Report Payroll Draft All', ['payroll-proc/report-payroll-draft-all', 'id' => $model->period], ['class' => 'reportItem']);?></li>
 						<li><?= Html::a('Report Print', ['payroll-proc/print', 'id' => $model->period], ['class' => 'reportItem']);?></li>
