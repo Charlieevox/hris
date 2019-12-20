@@ -161,6 +161,9 @@ class ControllerUAC extends \yii\web\Controller{
 				UNION ALL
 				SELECT accessID, 'report-overtime' AS 'action'                        
 				FROM ms_useraccess 
+				UNION ALL
+				SELECT accessID, 'report-insentive' AS 'action'                        
+				FROM ms_useraccess 
 			) c on a.accessID = c.accessID
 			WHERE a.userRoleID = " . $roleID . " AND b.node = '" . $url . "' AND c.action = '". $action->id ."'
 			ORDER BY a.accessID ";
