@@ -112,7 +112,7 @@ $(document).ready(function () {
     }); 
 
     $('#btnGenerate').click(function(){
-        var period = $('.period').val();
+        var period = $(#period').val();
         if(period=="" || period==undefined){
             bootbox.alert("Fill Period");
             return false;
