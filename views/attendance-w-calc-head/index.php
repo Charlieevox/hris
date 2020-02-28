@@ -29,11 +29,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     'title' => 'Add Working Schedule',
                     'class' => 'btn btn-primary open-modal-btn'
                 ]) . ' ' .
-                Html::a('<i class="glyphicon glyphicon-file"></i>', ['upload'], [
-                    'type' => 'button',
-                    'title' => 'Upload Working Schedule',
-                    'class' => 'btn btn-default open-modal-btn'
-                ]) . '&nbsp;' .
                 Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['index'], [
                     'class' => 'btn btn-default',
                     'title' => 'Reset Grid'
