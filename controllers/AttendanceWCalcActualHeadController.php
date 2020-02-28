@@ -56,12 +56,15 @@ class AttendanceWCalcActualHeadController extends ControllerUAC {
      */
     public function actionIndex()
     {
+        preg_match("/dbname=([^;]*)/", Yii::$app->db->dsn, $matches); 
+		$dbName = $matches[1];
+		
         $model = new MsAttendanceWCalcActualHead();
         $model->period = date('Y/m');
         $model->load(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-                    'model' => $model
+                    'model' => $model, 'dbName' => $dbName
         ]);
     }
 

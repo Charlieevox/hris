@@ -63,6 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <div class="panel-footer">
+<?php if($dbName == 'hris_promotor') { ?>
     <div class="row">
         <div class="col-md-1 pull-right">            
             <?=  Html::a('Download', ['download'], [
@@ -97,7 +98,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ?>
         </div>
     </div>
-    <div class="clearfix"></div>           
+    <div class="clearfix"></div>          
+    <?php }; ?> 
 </div>
 
 
