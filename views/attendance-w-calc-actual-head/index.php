@@ -63,7 +63,6 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <div class="panel-footer">
-<?php if($dbName == 'hris_promotor') { ?>
     <div class="row">
         <div class="col-md-1 pull-right">            
             <?=  Html::a('Download', ['download'], [
@@ -74,15 +73,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]) 
             ?>
         </div>
-        <div class="col-md-1 pull-right">            
-            <?=  Html::a('Generate', ['generate-schedule'], [
-                        'type' => 'button',
-                        'title' => 'Generate Schedule Schedule',
-                        'class' => 'btn btn-default',
-                        'id' => 'btnGenerate'
-                    ]) 
-            ?>
-        </div>
+        <?php if($dbName == 'hris_promotor') { ?>
+            <div class="col-md-1 pull-right">            
+                <?=  Html::a('Generate', ['generate-schedule'], [
+                            'type' => 'button',
+                            'title' => 'Generate Schedule Schedule',
+                            'class' => 'btn btn-default',
+                            'id' => 'btnGenerate'
+                        ]) 
+                ?>
+            </div>
+        <?php }; ?> 
         <div class="col-md-2 pull-right">
             <?=
                 DatePicker::widget([
@@ -98,8 +99,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ?>
         </div>
     </div>
-    <div class="clearfix"></div>          
-    <?php }; ?> 
+    <div class="clearfix"></div>
 </div>
 
 
