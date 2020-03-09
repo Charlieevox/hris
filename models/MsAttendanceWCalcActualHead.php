@@ -92,7 +92,7 @@ class MsAttendanceWCalcActualHead extends \yii\db\ActiveRecord {
         parent::afterFind();
         $this->joinPersonnelwCalcActualDetail = [];
         $i = 0;
-        foreach ($this->getWCalActualdetails()->all() as $joinPersonnelwCalcActualDetail) {
+        foreach ($this->getWCalActualdetails()->orderBy('date')->all()   as $joinPersonnelwCalcActualDetail) {
             $this->joinPersonnelwCalcActualDetail[$i]["actionDate"] = AppHelper::convertDateTimeFormat($joinPersonnelwCalcActualDetail->date, 'Y-m-d', 'd-m-Y');
             $this->joinPersonnelwCalcActualDetail[$i]["actionIn"] = $joinPersonnelwCalcActualDetail->inTime;
             $this->joinPersonnelwCalcActualDetail[$i]["actionOut"] = $joinPersonnelwCalcActualDetail->outTime;

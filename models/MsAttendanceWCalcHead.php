@@ -91,7 +91,7 @@ class MsAttendanceWCalcHead extends \yii\db\ActiveRecord
         parent::afterFind();
         $this->joinPersonnelwCalcDetail = [];
         $i = 0;
-        foreach ($this->getWCaldetails()->all() as $joinPersonnelwCalcDetail) {
+        foreach ($this->getWCaldetails()->orderBy('date')->all() as $joinPersonnelwCalcDetail) {
             $this->joinPersonnelwCalcDetail[$i]["actionDate"] = AppHelper::convertDateTimeFormat($joinPersonnelwCalcDetail->date, 'Y-m-d', 'd-m-Y');
             $this->joinPersonnelwCalcDetail[$i]["actionSchedule"] = $joinPersonnelwCalcDetail->shiftCode;
             $i += 1;

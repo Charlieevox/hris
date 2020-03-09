@@ -387,7 +387,8 @@ class PayrollProcController extends ControllerUAC
 
         $connection = \Yii::$app->db;
         $sql = "
-        SELECT a.nik,
+        SELECT a.employeeCode,
+        a.nik,
         b.fullName,
         e.positionDescription,
         c.departmentDesc,
@@ -456,7 +457,7 @@ class PayrollProcController extends ControllerUAC
             ->setOrientation(\PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE)
             ->setPaperSize(\PHPExcel_Worksheet_PageSetup::PAPERSIZE_FOLIO);
 
-
+        $activeSheet->setCellValue('A1', 'employeeCode');
         $activeSheet->setCellValue('B1', 'nik');
         $activeSheet->setCellValue('C1', 'fullName');
         $activeSheet->setCellValue('D1', 'positionDescription');
@@ -497,6 +498,7 @@ class PayrollProcController extends ControllerUAC
         $baseRow = 2;
         $no = 1;
         foreach ($download as $value) {
+            $activeSheet->setCellValue('B' . $baseRow, $value['employeeCode']);
             $activeSheet->setCellValue('B' . $baseRow, $value['nik']);
             $activeSheet->setCellValue('C' . $baseRow, $value['fullName']);
             $activeSheet->setCellValue('D' . $baseRow, $value['positionDescription']);
@@ -535,6 +537,7 @@ class PayrollProcController extends ControllerUAC
             $no++;
         }
 
+        $activeSheet->getColumnDimension('A')->setAutoSize(true);
         $activeSheet->getColumnDimension('B')->setAutoSize(true);
         $activeSheet->getColumnDimension('C')->setAutoSize(true);
         $activeSheet->getColumnDimension('D')->setAutoSize(true);
@@ -642,6 +645,7 @@ class PayrollProcController extends ControllerUAC
             ->setOrientation(\PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE)
             ->setPaperSize(\PHPExcel_Worksheet_PageSetup::PAPERSIZE_FOLIO);
 
+        $activeSheet->setCellValue('A1', 'employeeCode');
         $activeSheet->setCellValue('B1', 'nik');
         $activeSheet->setCellValue('C1', 'fullName');
         $activeSheet->setCellValue('D1', 'positionDescription');
@@ -673,6 +677,7 @@ class PayrollProcController extends ControllerUAC
         $baseRow = 2;
         $no = 1;
         foreach ($download as $value) {
+            $activeSheet->setCellValue('B' . $baseRow, $value['employeeCode']);
             $activeSheet->setCellValue('B' . $baseRow, $value['nik']);
             $activeSheet->setCellValue('C' . $baseRow, $value['fullName']);
             $activeSheet->setCellValue('D' . $baseRow, $value['positionDescription']);
@@ -703,6 +708,7 @@ class PayrollProcController extends ControllerUAC
             $no++;
         }
 
+        $activeSheet->getColumnDimension('A')->setAutoSize(true);
         $activeSheet->getColumnDimension('B')->setAutoSize(true);
         $activeSheet->getColumnDimension('C')->setAutoSize(true);
         $activeSheet->getColumnDimension('D')->setAutoSize(true);
@@ -747,6 +753,7 @@ class PayrollProcController extends ControllerUAC
         $connection = \Yii::$app->db;
         $sql = "
         SELECT a.nik,
+        a.employeeNo,
         b.fullName,
         c.departmentDesc,
         b.bankName,
@@ -773,7 +780,7 @@ class PayrollProcController extends ControllerUAC
             ->setOrientation(\PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE)
             ->setPaperSize(\PHPExcel_Worksheet_PageSetup::PAPERSIZE_FOLIO);
 
-        $activeSheet->setCellValue('A1', 'No');
+        $activeSheet->setCellValue('A1', 'employeeCode');
         $activeSheet->setCellValue('B1', 'nik');
         $activeSheet->setCellValue('C1', 'fullName');
         $activeSheet->setCellValue('D1', 'departmentDesc');
@@ -785,7 +792,7 @@ class PayrollProcController extends ControllerUAC
         $baseRow = 2;
         $no = 1;
         foreach ($download as $value) {
-            $activeSheet->setCellValue('A' . $baseRow, $no);
+            $activeSheet->setCellValue('A' . $baseRow, $value['employeeCode']);
             $activeSheet->setCellValue('B' . $baseRow, $value['nik']);
             $activeSheet->setCellValue('C' . $baseRow, $value['fullName']);
             $activeSheet->setCellValue('D' . $baseRow, $value['departmentDesc']);
@@ -797,6 +804,7 @@ class PayrollProcController extends ControllerUAC
             $no++;
         }
 
+        $activeSheet->getColumnDimension('A')->setAutoSize(true);
         $activeSheet->getColumnDimension('B')->setAutoSize(true);
         $activeSheet->getColumnDimension('C')->setAutoSize(true);
         $activeSheet->getColumnDimension('D')->setAutoSize(true);
