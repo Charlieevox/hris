@@ -678,7 +678,7 @@ class PayrollProcController extends ControllerUAC
         $baseRow = 2;
         $no = 1;
         foreach ($download as $value) {
-            $activeSheet->setCellValue('B' . $baseRow, $value['employeeNo']);
+            $activeSheet->setCellValue('A' . $baseRow, $value['employeeNo']);
             $activeSheet->setCellValue('B' . $baseRow, $value['nik']);
             $activeSheet->setCellValue('C' . $baseRow, $value['fullName']);
             $activeSheet->setCellValue('D' . $baseRow, $value['positionDescription']);
