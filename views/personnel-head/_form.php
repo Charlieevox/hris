@@ -644,6 +644,12 @@ use app\models\MsAttendanceShift;
 											<?= $form->field($model, 'overTime24')->textInput(['maxlength' => true, 'placeholder' => 'ex: 30']) ?>
 										</div>
 									</div>
+
+									<div class="row">
+										<div class="col-md-6">
+											<?= $form->field($model, 'overTime21H')->textInput(['maxlength' => true, 'placeholder' => 'ex: 21']) ?>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
