@@ -387,7 +387,7 @@ class PayrollProcController extends ControllerUAC
 
         $connection = \Yii::$app->db;
         $sql = "
-        SELECT a.employeeNo,
+        SELECT b.employeeNo,
         a.nik,
         b.fullName,
         e.positionDescription,
@@ -498,7 +498,7 @@ class PayrollProcController extends ControllerUAC
         $baseRow = 2;
         $no = 1;
         foreach ($download as $value) {
-            $activeSheet->setCellValue('B' . $baseRow, $value['employeeCode']);
+            $activeSheet->setCellValue('A' . $baseRow, $value['employeeNo']);
             $activeSheet->setCellValue('B' . $baseRow, $value['nik']);
             $activeSheet->setCellValue('C' . $baseRow, $value['fullName']);
             $activeSheet->setCellValue('D' . $baseRow, $value['positionDescription']);
@@ -592,6 +592,7 @@ class PayrollProcController extends ControllerUAC
         $connection = \Yii::$app->db;
         $sql = "
         SELECT a.nik,
+        b.employeeNo,
         b.fullName,
         e.positionDescription,
         c.departmentDesc,
@@ -677,7 +678,7 @@ class PayrollProcController extends ControllerUAC
         $baseRow = 2;
         $no = 1;
         foreach ($download as $value) {
-            $activeSheet->setCellValue('B' . $baseRow, $value['employeeCode']);
+            $activeSheet->setCellValue('B' . $baseRow, $value['employeeNo']);
             $activeSheet->setCellValue('B' . $baseRow, $value['nik']);
             $activeSheet->setCellValue('C' . $baseRow, $value['fullName']);
             $activeSheet->setCellValue('D' . $baseRow, $value['positionDescription']);
@@ -753,7 +754,7 @@ class PayrollProcController extends ControllerUAC
         $connection = \Yii::$app->db;
         $sql = "
         SELECT a.nik,
-        a.employeeNo,
+        b.employeeNo,
         b.fullName,
         c.departmentDesc,
         b.bankName,
@@ -780,7 +781,7 @@ class PayrollProcController extends ControllerUAC
             ->setOrientation(\PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE)
             ->setPaperSize(\PHPExcel_Worksheet_PageSetup::PAPERSIZE_FOLIO);
 
-        $activeSheet->setCellValue('A1', 'employeeCode');
+        $activeSheet->setCellValue('A1', 'employeeNo');
         $activeSheet->setCellValue('B1', 'nik');
         $activeSheet->setCellValue('C1', 'fullName');
         $activeSheet->setCellValue('D1', 'departmentDesc');
@@ -792,7 +793,7 @@ class PayrollProcController extends ControllerUAC
         $baseRow = 2;
         $no = 1;
         foreach ($download as $value) {
-            $activeSheet->setCellValue('A' . $baseRow, $value['employeeCode']);
+            $activeSheet->setCellValue('A' . $baseRow, $value['employeeNo']);
             $activeSheet->setCellValue('B' . $baseRow, $value['nik']);
             $activeSheet->setCellValue('C' . $baseRow, $value['fullName']);
             $activeSheet->setCellValue('D' . $baseRow, $value['departmentDesc']);
