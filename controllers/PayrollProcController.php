@@ -387,7 +387,7 @@ class PayrollProcController extends ControllerUAC
 
         $connection = \Yii::$app->db;
         $sql = "
-        SELECT a.employeeCode,
+        SELECT a.employeeNo,
         a.nik,
         b.fullName,
         e.positionDescription,
@@ -457,7 +457,7 @@ class PayrollProcController extends ControllerUAC
             ->setOrientation(\PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE)
             ->setPaperSize(\PHPExcel_Worksheet_PageSetup::PAPERSIZE_FOLIO);
 
-        $activeSheet->setCellValue('A1', 'employeeCode');
+        $activeSheet->setCellValue('A1', 'employeeNo');
         $activeSheet->setCellValue('B1', 'nik');
         $activeSheet->setCellValue('C1', 'fullName');
         $activeSheet->setCellValue('D1', 'positionDescription');
@@ -645,7 +645,7 @@ class PayrollProcController extends ControllerUAC
             ->setOrientation(\PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE)
             ->setPaperSize(\PHPExcel_Worksheet_PageSetup::PAPERSIZE_FOLIO);
 
-        $activeSheet->setCellValue('A1', 'employeeCode');
+        $activeSheet->setCellValue('A1', 'employeeNo');
         $activeSheet->setCellValue('B1', 'nik');
         $activeSheet->setCellValue('C1', 'fullName');
         $activeSheet->setCellValue('D1', 'positionDescription');
