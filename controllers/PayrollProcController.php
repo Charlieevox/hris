@@ -420,7 +420,7 @@ class PayrollProcController extends ControllerUAC
         f.A08 'KomisiSPGSPV',
         f.A09 'KomisiPaket',
         f.A10 'KomisiTeknisi',
-        (f.A01 + f.A02 + f.A03) - (f.D05 + f.D02 + f.jhtEmp+ f.jpnEmp + f.jpkEmp) + 
+        (f.A99 + f.A02 + f.A03) - (f.D05 + f.D02 + f.jhtEmp+ f.jpnEmp + f.jpkEmp) + 
         (f.jhtEmp + f.jkkCom + f.jkmCom) + f.jhtCom + 
         f.jpkCom + f.jpkEmp +
         f.A05 +
@@ -616,7 +616,7 @@ class PayrollProcController extends ControllerUAC
         f.jhtEmp 'JHTEmployee',
         f.jpnEmp 'JPNEmployee',
         f.jpkEmp 'JPKEmployee',
-        (f.A01 + f.A02 + f.A03 + f.A04) - (COALESCE(g.principalPaid,0) + f.D02 + f.D03 + f.D04 + f.jhtEmp+ f.jpnEmp + f.jpkEmp) 'THP'
+        (f.A99 + f.A02 + f.A03 + f.A04) - (COALESCE(g.principalPaid,0) + f.D02 + f.D03 + f.D04 + f.jhtEmp+ f.jpnEmp + f.jpkEmp) 'THP'
         FROM tr_payrolltaxmonthlyproc a
         JOIN ms_personnelhead b ON a.nik = b.id
         JOIN ms_personneldepartment c ON c.departmentCode = b.departmentId
