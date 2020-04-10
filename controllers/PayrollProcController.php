@@ -574,7 +574,7 @@ class PayrollProcController extends ControllerUAC
         $activeSheet->getColumnDimension('AF')->setAutoSize(true);
         $activeSheet->getColumnDimension('AG')->setAutoSize(true);
         $activeSheet->getColumnDimension('AH')->setAutoSize(true);
-
+        $activeSheet->getColumnDimension('AI')->setAutoSize(true);
 
         $filename = 'Data-' . Date('YmdGis') . '-Export.xls';
 
@@ -740,7 +740,8 @@ class PayrollProcController extends ControllerUAC
         $activeSheet->getColumnDimension('W')->setAutoSize(true);
         $activeSheet->getColumnDimension('X')->setAutoSize(true);
         $activeSheet->getColumnDimension('Y')->setAutoSize(true);
-        $activeSheet->getColumnDimension('Y')->setAutoSize(true);
+        $activeSheet->getColumnDimension('Z')->setAutoSize(true);
+        $activeSheet->getColumnDimension('AA')->setAutoSize(true);
 
         $filename = 'Data-' . Date('YmdGis') . '-Export.xls';
 
