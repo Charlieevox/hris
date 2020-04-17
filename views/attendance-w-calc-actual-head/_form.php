@@ -205,15 +205,15 @@ $(document).ready(function () {
 
 							
     
-            var periodYear = actionPeriod.substr(0,4);
-            var periodMonth = actionPeriod.substr(5,2);        
-            var ActionDateMonth = actionDate.substr(3,2);
-            var ActionDateYear = actionDate.substr(6,4);
+            // var periodYear = actionPeriod.substr(0,4);
+            // var periodMonth = actionPeriod.substr(5,2);        
+            // var ActionDateMonth = actionDate.substr(3,2);
+            // var ActionDateYear = actionDate.substr(6,4);
             
-            if(periodYear != ActionDateYear || ActionDateMonth != periodMonth){
-                bootbox.alert("Wrong Period");
-                return false;
-            }
+            // if(periodYear != ActionDateYear || ActionDateMonth != periodMonth){
+            //     bootbox.alert("Wrong Period");
+            //     return false;
+            // }
 
 			addRow(actionDate, actionIn,actionOut);
                 $('.actionDateInput').val('');
