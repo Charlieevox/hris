@@ -40,7 +40,14 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'columns' => [
                 ['class' => 'kartik\grid\SerialColumn'],
-                'nik',
+                [
+                    'attribute' => 'employeeNo',
+                    'value' => 'personnelHead.employeeNo',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        return $model->personnelHead->employeeNo;
+                    },
+                ],
                 [
                     'attribute' => 'fullNameEmployee',
                     'value' => 'personnelHead.fullName',

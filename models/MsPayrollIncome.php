@@ -18,6 +18,7 @@ class MsPayrollIncome extends \yii\db\ActiveRecord {
     public $joinPayrollIncomeDetail2;
     public $flag;
     public $joindate;
+    public $employeeNo;
 
     /**
      * @inheritdoc
@@ -33,7 +34,7 @@ class MsPayrollIncome extends \yii\db\ActiveRecord {
         return [
             [['nik'], 'required'],
             [['nik'], 'string', 'max' => 20],
-            [['joinPayrollIncomeDetail','joinPayrollIncomeDetail2', 'fullNameEmployee', 'flag', 'joindate'], 'safe']
+            [['joinPayrollIncomeDetail','joinPayrollIncomeDetail2', 'fullNameEmployee', 'flag', 'joindate','employeeNo'], 'safe']
         ];
     }
 
@@ -44,27 +45,28 @@ class MsPayrollIncome extends \yii\db\ActiveRecord {
         return [
             'nik' => 'Nik',
             'fullNameEmployee' => 'FullName',
-            'joindate' => 'Join Date'
+            'joindate' => 'Join Date',
+            'employeeNo' => 'Employee No',
         ];
     }
 
     public function search() {
         $query = self::find()
                 ->joinWith('personnelHead')
-                ->andFilterWhere(['LIKE', 'ms_payrollincome.nik', $this->nik])
+                ->andFilterWhere(['LIKE', 'ms_personnelHead.employeeNo', $this->employeeNo])
                 ->andFilterWhere(['LIKE', 'ms_personnelHead.fullname', $this->fullNameEmployee]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
-                'defaultOrder' => ['nik' => SORT_ASC],
-                'attributes' => ['nik']
+                'defaultOrder' => ['employeeNo' => SORT_ASC],
+                'attributes' => ['employeeNo']
             ],
         ]);
 
-        $dataProvider->sort->attributes['nik'] = [
-            'asc' => [self::tableName() . '.nik' => SORT_ASC],
-            'desc' => [self::tableName() . '.nik' => SORT_DESC],
+        $dataProvider->sort->attributes['employeeNo'] = [
+            'asc' => ['ms_personnelHead.employeeNo' => SORT_ASC],
+            'desc' => ['ms_personnelHead.employeeNo' => SORT_DESC],
         ];
 
         $dataProvider->sort->attributes['fullNameEmployee'] = [
