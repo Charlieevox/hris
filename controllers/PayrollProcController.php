@@ -387,8 +387,8 @@ class PayrollProcController extends ControllerUAC
 
         $connection = \Yii::$app->db;
         $sql = "
-        SELECT a.nik,
-        b.employeeNo,
+        SELECT b.employeeNo,
+        a.nik,
         b.fullName,
         e.positionDescription,
         c.departmentDesc,
@@ -405,7 +405,7 @@ class PayrollProcController extends ControllerUAC
         f.A02 'Transportasi',
         f.A03 'TunjanganKehadiran',
         f.A04 'TunjanganJabatan',
-        f.A99 + f.A02 + f.A03 + f.A04 'GajiTotal',
+        f.A01 + f.A02 + f.A03 + f.A04 'GajiTotal',
         COALESCE(g.principalPaid,0) 'Pinjaman',
         f.D01 'Potongan',
         f.D02 'PotonganBaju',
@@ -414,7 +414,7 @@ class PayrollProcController extends ControllerUAC
         f.jhtEmp 'JHTEmployee',
         f.jpnEmp 'JPNEmployee',
         f.jpkEmp 'JPKEmployee',
-        (f.A01 + f.A02 + f.A03 + f.A04) - (COALESCE(g.principalPaid,0) + f.D02 + f.D03 + f.D04 + f.jhtEmp+ f.jpnEmp + f.jpkEmp) 'THP',
+        (f.A01 + f.A02 + f.A03 + f.A04) - (COALESCE(g.principalPaid,0) + f.D01 + f.D02 + f.D03 + f.D04 + f.jhtEmp+ f.jpnEmp + f.jpkEmp) 'THP',
         (f.jhtEmp + f.jkkCom + f.jkmCom) + f.jhtCom 'Jamsostek624',
         f.jpkCom + f.jpkEmp 'BPJSK',
         f.A05 'Overtime',
@@ -442,7 +442,7 @@ class PayrollProcController extends ControllerUAC
         WHERE a.paymentPeriod = '" . $model->period . "'
         ) g ON g.nik = a.nik
         LEFT JOIN tr_working h ON h.nik = a.nik AND h.period = '" . $model->period . "'
-        LEFT JOIN tr_overtimecalc i ON i.nik = a.nik AND i.period = '" . $model->period . "' ORDER BY a.employeeNo";
+        LEFT JOIN tr_overtimecalc i ON i.nik = a.nik AND i.period = '" . $model->period . "' ORDER BY b.employeeNo";
 
         $model = $connection->createCommand($sql);
         $download = $model->queryAll();
